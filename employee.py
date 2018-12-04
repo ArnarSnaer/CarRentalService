@@ -1,20 +1,25 @@
 #from Order import Order
-class Employee(object):
-    def __init__(self,name):
-        self.name = []
-        self.name.append(name)
+class Employee():
+    def __init__(self, textfile):
+        self.textfile = textfile
+        self.employee_list = []
+
+    def new_list(self):
+        open_file = open(self.textfile, "r")
+        for name in open_file:
+            name = name.replace("\n","")
+            self.employee_list.append(name)
+
+        open_file.close()
+        
+        return self.employee_list
+
+  #  def __repr__(self):
+   #     return
     
     def __str__(self):
-        return "{}".format(self.name[1:])
-    
-    def get_name(self):
-        return "{}".format(self.name[0])
-    
-    def add_sale(self,other): #Þetta færir order, gerð bílsins eða bílnumer...
-        return self.name.append(other)
-
-gunnar = Employee("Gunnar")
-gunnar.add_sale("Honda civic 2014")
-print(gunnar)
-nafn = gunnar.get_name()
-print(nafn)
+        return str(self.employee_list)
+        
+test = Employee("employees.txt")
+employee_list = test.new_list()
+print(employee_list)
