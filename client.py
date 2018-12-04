@@ -31,8 +31,8 @@ class Client(object):
     def __iter__(self):
         return iter(self.info)
     
-vinur = Client("Jón", "Geysir 7", 5885522,"17 Júní", "1234 5678", "USA", "779")
+# vinur = Client("Jón", "Geysir 7", 5885522,"17 Júní", "1234 5678", "USA", "779")
 
-print(vinur.get_client())
-vinur.update_registration()
-print(vinur)
+# print(vinur.get_client())
+# vinur.update_registration()
+# print(vinur)
