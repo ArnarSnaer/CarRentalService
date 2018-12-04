@@ -62,11 +62,10 @@ def vehicle():
         list_of_plates = []
         for i in range(300):
             my_plate = create_plate()
-            
             if my_plate not in list_of_plates:
                 my_car = random_car()
-                final = "{}, {}, {}, {}, {}, {}, {}, {}, {}".format(my_car[0],my_car[1], my_plate, drive(), is_avail(), Manual(), length(), fuel(), price() )
-                print(final)
+                final = "{},{},{},{},{},{},{},{},{}".format(my_car[0],my_car[1], my_plate, drive(), is_avail(), Manual(), length(), fuel(), price() )
+                # print(final)
                 my_text.write(final)
                 my_text.write("\n")
             list_of_plates.append(my_plate)
