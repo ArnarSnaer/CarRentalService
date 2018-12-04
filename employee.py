@@ -1,7 +1,7 @@
 #from Order import Order
 class Employee():
-    def __init__(self, textfile):
-        self.textfile = textfile
+    def __init__(self):
+        self.textfile = "employees.txt"
         self.employee_list = []
 
     def new_list(self):
@@ -20,6 +20,6 @@ class Employee():
     def __str__(self):
         return str(self.employee_list)
         
-test = Employee("employees.txt")
+test = Employee()
 employee_list = test.new_list()
 print(employee_list)
