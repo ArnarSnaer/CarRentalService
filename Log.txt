@@ -1,0 +1,21 @@
+4.12.2018
+    Gerði insurance klassann, hann virkar og prentar út réttar tölur. 
+    Vantar aðeins þau gildi sem eiga að vera á tryggingunum í alvöru.
+    -BBB
+
+    Gerði Employee klassann, fannst get_employee_list eiga helst að vera
+    fall fyrir utan klassann frekar en í honum. Datt í hug að gera fall
+    sem bætir pöntun við í listann þannig að hægt væri að halda utan um
+    pöntunirnar fyrir get_sale_history gerð af falli.
+    -BBB
+
+    Gerði Creditcard klassann. Helsta málið með hann er að prenta hann
+    sem lista. Úr listanum er hægt að prenta alla item sem iterable og
+    hægt er að index-a úr honum. Lærði að nota __getitem__ og __iter__
+    source: https://www.reddit.com/r/learnpython/comments/70p7xf/object_does_not_support_indexing/
+    p.s. "Guð blessi reddit"
+    -BBB
+
+    Gerði klassann fyrir Client. Remove client fallið ætti ekki að vera þarna inni
+    heldur ætti það fall að vera annarstaðar (hjá client eða í main fallinu).
+    -BBB
