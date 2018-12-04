@@ -13,5 +13,5 @@ class Insurance(object):
     def __str__(self):
         return "{}".format(self.price)
 
-tala = Insurance("t1")
-print(tala)
+#tala = Insurance("t1")
+#print(tala)

@@ -3,6 +3,7 @@ class Employee(object):
     def __init__(self,name):
         self.name = []
         self.name.append(name)
+        #self.file = open("employee_list.txt", r+)
     
     def __str__(self):
         return "{}".format(self.name[1:])
