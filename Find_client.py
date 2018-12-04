@@ -1,9 +1,10 @@
 def Find_client(name):
-    client_text = open(client_list.txt, r)
+    client_text = open("client_list.txt", r)
     client_list = client_text.split("\n")
     for person in client_list:
         if person[0] == name:
             found_client = person
+    close("client_list.txt")
     return person
     
 #Tekur inn nafn af viðskiptavin, rennur því nafni í gegnum skránna með öllum
