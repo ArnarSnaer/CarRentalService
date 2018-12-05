@@ -14,8 +14,8 @@ class Employee(object):
     def add_sale(self,other): #Þetta færir order, gerð bílsins eða bílnumer...
         return self.name.append(other)
 
-gunnar = Employee("Gunnar")
-gunnar.add_sale("Honda civic 2014")
-print(gunnar)
-nafn = gunnar.get_name()
-print(nafn)
+#gunnar = Employee("Gunnar")
+#gunnar.add_sale("Honda civic 2014")
+#print(gunnar)
+#nafn = gunnar.get_name()
+#print(nafn)
