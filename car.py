@@ -6,7 +6,7 @@
 
 
 class Car(object):
-    def __init__(self, veh_type, brand, plate, wheel_drive, status, is_manual, driven, fuel_type, price): #Kannski records
+    def __init__(self, veh_type, brand, plate, wheel_drive, status, is_manual, driven, fuel_type, price = 0): #Kannski records
         self.veh_type = veh_type
         self.brand = brand
         self.plate = plate
@@ -26,8 +26,34 @@ class Car(object):
         return self.info[index_num]
     
     def __iter__(self):
-        return iter(self.info)    
-    
+        return iter(self.info)
+
+    def add_car(self):
+        open_file = open("cars.txt", "a")
+
+        for item in self.info:
+            to_write = str(item)
+            open_file.write(to_write)
+            if item != self.info[-1]:
+                open_file.write(",")
+
+        open_file.write("\n")
+
+        open_file.close()
+
+    def remove_car(plate):
+        open_file = open("vehicle.txt", "r")
+        old_file = open_file.readlines()
+        open_file.close()
+
+        new_file = open("vehicle.txt", "w")
+        for line in old_file:
+            if plate not in line:
+                new_file.write(line)
+
+        new_file.close()
+
+
     def rent(self):
         self.status = False
     
@@ -43,12 +69,48 @@ class Car(object):
     
     def return_vehicle(self):
         self.status = True
-    
+
+    def get_type(self):
+        return self.info[1]
+
+    def get_plate(self):
+        return self.info[2]
+
     def get_price(self):
         return self.price
+       
+    def check_price(self):
+        price_dict = {"suv": 100000, "hatchback": 50000, "sedan": 50000, "sport": 200000,"mpv": 75000, "crossover": 75000, "convertible": 200000}
+        self.veh_type = self.veh_type.lower() 
+        self.price = 0
+        for key, value in price_dict.items(): 
+            if key == self.veh_type in price_dict:
+                self.price = value
+                self.info[-1] = value
+        
+        return self.price
+            
     
-    
-bill = Car("Jeppi","Toyota Land Cruiser","ER C01","4x4",True,False,60000,"diesel",14000)
+bill = Car("MPV","Toyota Land Cruiser","ER C01","4x4",True,False,60000,"diesel")
+value = bill.check_price()
+print(value)
+print(bill)
 print(bill.get_info())
 print(bill.get_status())
-print(bill)
+# veh_type, brand, plate, wheel_drive, status, is_manual, driven, fuel_type
+# Attempting to add a car to a .txt file
+vehicle_type = input("Vehicle type: ")
+car_brand = input("Car brand: ")
+car_plate = input("Car plate: ")
+car_drive = input("Car wheel drive: ")
+car_status = True
+car_manual = False
+car_driven = input("How much has the car been driven? Answer with an integer: ")
+car_fuel_type = input("What is the car's fuel type? ")
+new_car = Car(vehicle_type, car_brand, car_plate, car_drive, car_status, car_manual, car_driven, car_fuel_type)
+new_car.check_price()
+new_car.add_car()
+new_car.add_car()
+
+old_car = input("Enter the plate of the car you wish to remove: ")
+Car.remove_car(old_car)
