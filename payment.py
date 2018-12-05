@@ -9,9 +9,11 @@ class Payment(object):
         self.client = client
         self.total_price = self.base_price + self.price
         self.insurances = []
+        self.car = car
 
-    def calc_rental_cost(self):
-        total_price = self.price + self.base_price
+    def calc_rental_cost(self,duration,car):
+        total_price = (car.price * duration) + self.price
+        #total_price = self.price + self.base_price
         return total_price
     
     def add_insurance(self,other):
@@ -32,14 +34,14 @@ class Payment(object):
         return "Payment: {}\nClient: {}".format(str(self.total_price),self.client.get_name())
     
 
-person = Client("Jón", "Geysir 7", 5885522,"17 Júní", "1234 5678", "USA", "779")
-car = Car("Jeppi","Toyota Land Cruiser","ER C01","4x4",True,False,60000,"diesel",14000)
-money = Payment(person,car)
-print(money)
-money.add_insurance("t3")
-print(money)
-money.add_insurance("t1")
-print(money)
-money.add_insurance("t1")
-cost = money.calc_rental_cost()
-print(cost)
+#person = Client("Jón", "Geysir 7", 5885522,"17 Júní", "1234 5678", "USA", "779")
+#car = Car("Jeppi","Toyota Land Cruiser","ER C01","4x4",True,False,60000,"diesel",14000)
+#money = Payment(person,car)
+#print(money)
+#money.add_insurance("t3")
+#print(money)
+#money.add_insurance("t1")
+#print(money)
+#money.add_insurance("t1")
+#cost = money.calc_rental_cost()
+#print(cost)

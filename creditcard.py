@@ -16,6 +16,7 @@ class Creditcard(object):
     
     def __iter__(self):
         return iter(self.info)
+    
 
 #thing = Creditcard("Ari","Gullfoss 2", 5812345, "5555 5555 5555 5555", "10/21", "123")
 #print(thing[3])

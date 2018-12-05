@@ -11,10 +11,11 @@ class Insurance(object):
              self.price = 5000
     
     def __str__(self):
-        return "{}".format(self.price)
-
+        return "{}".format(int(self.price))
+    
     def __radd__(self,other):
         return int(self.price + other)
 
-tala = Insurance("t1")
-print(tala)
+#tala = Insurance("t1")
+#print(tala)
+# __radd__ er add fyrir tvær gerðir af mismunandi gerðum

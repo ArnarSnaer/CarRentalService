@@ -14,8 +14,9 @@ class Client(object):
 
     def get_name(self):
         return "{}".format(self.info[0])
+
     def update_registration(self):
-        print("What would you like to update?")
+        print("What would you like to update? (Please input integer choice)")
         print("1. Name\n2. Address\n3. Phone number\n4. Birthday\n5. Drivers license number\n6.Country\n7. Zip")
         
         choice = int(input(""))
@@ -27,14 +28,14 @@ class Client(object):
     def __str__(self):
         return str(self.info)
     
-    def __getitem__(self,index):
-        return self.info[index]
+    def __getitem__(self,index_num):
+        return self.info[index_num]
     
     def __iter__(self):
         return iter(self.info)
     
-# vinur = Client("Jón", "Geysir 7", 5885522,"17 Júní", "1234 5678", "USA", "779")
+#vinur = Client("Jón", "Geysir 7", 5885522,"17 Júní", "1234 5678", "USA", "779")
 
-# print(vinur.get_client())
-# vinur.update_registration()
-# print(vinur)
+#print(vinur.get_client())
+#vinur.update_registration()
+#print(vinur)
