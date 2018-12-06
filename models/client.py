@@ -47,7 +47,7 @@ class Client(object):
 
         open_file.close()
 
-    def remove_customer(name):
+    def remove_customer(self,name):
         open_file = open("clients.txt", "r")
         old_file = open_file.readlines()
         open_file.close()

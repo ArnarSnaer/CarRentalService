@@ -76,7 +76,7 @@ class Car(object):
 
         open_file.close()
 
-    def remove_car(plate):
+    def remove_car(self, plate):
         open_file = open("cars.txt", "r")
         old_file = open_file.readlines()
         open_file.close()

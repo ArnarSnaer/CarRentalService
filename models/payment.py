@@ -11,10 +11,6 @@ class Payment(object):
         self.base_insurance = Insurance("base")
         self.total_price = (car.price * duration) +  self.base_insurance
         self.car = car
-
-    #def calc_rental_cost(self,duration,car):
-     #   self.total_price = (car.price * duration) + self.price
-      #  return self.total_price
     
     def add_insurance(self,other):
         choice = other

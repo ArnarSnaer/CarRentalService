@@ -74,7 +74,7 @@ class Order(object):
     def __getitem__(self,index_num):
         return self.info[index_num]
 
-
+'''
 card = Creditcard("Ari","Gullfoss 2", 5812345, "5555 5555 5555 5555", "10/21", "123")
 bill = Car("Jeppi","Toyota Land Cruiser","ER C01","4x4",True,False,60000,"diesel")
 vinur = Client("Jón Gústafsson", "Geysir 7", 5885522,"17 Júní", "1234 5678", "USA", "779")
@@ -85,3 +85,4 @@ first_order = Order("AC 101",card,"1 1 2014","1 1 2015",bill,vinur,gunnar)
 #first_order.order_payment.add_insurance("t2")
 print(first_order)
 #def __init__(self,order_id,credit_info, date_start, date_end,car,client,employee):
+'''
