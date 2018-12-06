@@ -53,6 +53,7 @@ class Car(object):
             return "This car is available."
         else:
             return "This car is not available"
+            
     def get_info(self):
         return "Vehicle type: {}\nBrand: {}\nPlate number: {}\nWheel drive: {}\nStatus: {}\nGear box: {}\nDriven {}\nFuel type: {}\nPrice: {}".format(self.veh_type, self.brand, self.plate,self.wheel_drive, self.status, self.is_manual, self.driven, self.fuel_type, self.price)
     
