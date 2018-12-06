@@ -21,12 +21,26 @@ class Order(object):
         self.min_duration = 1
         self.info= [self.credit_info,date_start,date_end,self.car,self.employee]
 
+        #Þetta reiknar heildarkostnað (total_price)
+        # 1. Reiknar fjölda daga sem pöntunin stendur yfir
+        # 2. Býr til payment og skilartölugildi hennar
+        day1,month1,year1 = self.date_start.split(" ")
+        day2,month2,year2 = self.date_end.split(" ")
+        date1 = datetime(int(year1),int(month1),int(day1))
+        date2 = datetime(int(year2),int(month2),int(day2))
+        duration = date2 - date1
+        days_num = duration.days
+
+        self.order_payment = Payment(self.client,self.car,days_num)
+        self.total_cost = self.order_payment
+        
+
     def get_status(self):
         return self.car.get_status()
         #Þarf að impliment-a þetta öðruvísi
     
     def get_base_price(self):
-        return self.payment.base_price
+        return self.order_payment.base_price
 
     def calc_duration(self,date_start,date_end):
         day1,month1,year1 = date_start.split(" ")
@@ -36,23 +50,6 @@ class Order(object):
         duration = date2 - date1
         days = duration.days
         return days
-
-    def create_payment(self):
-        #Reikna daga
-        day1,month1,year1 = self.date_start.split(" ")
-        day2,month2,year2 = self.date_end.split(" ")
-        date1 = datetime(int(year1),int(month1),int(day1))
-        date2 = datetime(int(year2),int(month2),int(day2))
-        duration = date2 - date1
-        days_num = duration.days
-
-        payment_cost = Payment(self.client, self.car)
-        payment_val = payment_cost.calc_rental_cost(days_num,self.car)
-
-        self.total_cost = self.price + payment_val
-        return self.total_cost
-
-
     
     def add_insurance(self,price,other):
         self.price.add_insurance(other)
@@ -89,7 +86,7 @@ vinur = Client("Jón Gústafsson", "Geysir 7", 5885522,"17 Júní", "1234 5678",
 gunnar = Employee("Gunnar")
 
 
-first_order = Order("A1",card,"1 1 2014","1 6 2014",bill,vinur,gunnar)
-first_order.create_payment()
+first_order = Order("AC 101",card,"1 1 2014","1 1 2015",bill,vinur,gunnar)
+#first_order.order_payment.add_insurance("t2")
 print(first_order)
 #def __init__(self,order_id,credit_info, date_start, date_end,car,client,employee):

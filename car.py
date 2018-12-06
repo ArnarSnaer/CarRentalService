@@ -19,6 +19,15 @@ class Car(object):
         self.price = price
         self.info = [self.veh_type, self.brand, self.plate, self.wheel_drive, self.status, self.is_manual, self.driven, self.fuel_type, self.price]
     
+        price_dict = {"jeppi": 100000, "smábíll": 10000, "smárúta": 50000, "sportbíll": 200000,"fólksbíll": 75000}
+        self.veh_type = self.veh_type.lower() 
+        self.price = 0
+        for key, value in price_dict.items(): 
+            if key == self.veh_type in price_dict:
+                self.price = value
+                self.info[-1] = value
+        
+
     def __str__(self):
         return str(self.info)
     
@@ -53,16 +62,7 @@ class Car(object):
     def get_price(self):
         return self.price
        
-    def check_price(self):
-        price_dict = {"jeppi": 100000, "smábíll": 10000, "smárúta": 50000, "sportbíll": 200000,"fólksbíll": 75000}
-        self.veh_type = self.veh_type.lower() 
-        self.price = 0
-        for key, value in price_dict.items(): 
-            if key == self.veh_type in price_dict:
-                self.price = value
-                self.info[-1] = value
-        
-        return self.price#, self.info
+
             
     
 #bill = Car("Jeppi","Toyota Land Cruiser","ER C01","4x4",True,False,60000,"diesel")
