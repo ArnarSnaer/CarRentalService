@@ -25,6 +25,31 @@ class Client(object):
         self.info[choice-1] = change
         return self.info
 
+    def new_customer(self):
+        open_file = open("clients.txt", "a")
+
+        for item in self.info:
+            to_write = str(item)
+            open_file.write(to_write)
+            if item != self.info[-1]:
+                open_file.write(",")
+
+        open_file.write("\n")
+
+        open_file.close()
+
+    def remove_customer(name):
+        open_file = open("clients.txt", "r")
+        old_file = open_file.readlines()
+        open_file.close()
+
+        new_file = open("clients.txt", "w")
+        for line in old_file:
+            if name not in line:
+                new_file.write(line)
+
+        new_file.close()
+
     def __str__(self):
         return str(self.info)
     
@@ -34,8 +59,10 @@ class Client(object):
     def __iter__(self):
         return iter(self.info)
     
-#vinur = Client("Jón", "Geysir 7", 5885522,"17 Júní", "1234 5678", "USA", "779")
+vinur = Client("John", "Geysir 7", 5885522,"17 June", "1234 5678", "USA", "779")
 
-#print(vinur.get_client())
-#vinur.update_registration()
-#print(vinur)
+vinur.update_registration()
+vinur.get_client
+vinur.new_customer()
+rude_guy = input("Enter name of person you want to remove from list: ")
+Client.remove_customer(rude_guy)
