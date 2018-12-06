@@ -73,11 +73,6 @@ class Order(object):
     
     def __getitem__(self,index_num):
         return self.info[index_num]
-    
-    #def calc_total_cost(self):
-     #   payment_val = create_payment() 
-      #  self.total_cost = self.price + payment_val
-       # return self.total_cost
 
 
 card = Creditcard("Ari","Gullfoss 2", 5812345, "5555 5555 5555 5555", "10/21", "123")

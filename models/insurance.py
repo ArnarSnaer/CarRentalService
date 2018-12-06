@@ -3,7 +3,9 @@ class Insurance(object):
         self.ins_type = ins_type
         self.price = 0
 
-        if self.ins_type == "t1":
+        if self.ins_type == "base":
+            self.price = 12000
+        elif self.ins_type == "t1":
             self.price = 10000
         elif self.ins_type == "t2":
              self.price = 20000
