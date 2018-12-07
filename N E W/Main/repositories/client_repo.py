@@ -29,7 +29,7 @@ class ClientRepo():
 
         new_file.close()
 
-    def find_car(searchword):
+    def find_client(searchword):
         open_file = open("./data/clients.txt", "r")
 
         for line in open_file:
