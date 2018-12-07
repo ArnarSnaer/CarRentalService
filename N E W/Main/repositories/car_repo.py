@@ -5,7 +5,7 @@ class CarRepo():
         self.info = []
 
     def add_car(self):
-        open_file = open("./data/cars.txt", "a")
+        open_file = open("./data/vehicle.txt", "a")
 
         for item in self.info:
             to_write = str(item)
