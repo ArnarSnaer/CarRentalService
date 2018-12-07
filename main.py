@@ -4,6 +4,7 @@ from functions.shutting_down import shutting_down
 from functions.lookup_client import lookup_client
 from functions.redirect_user import redirect_user
 
+
 go_again = True
 
 while go_again:

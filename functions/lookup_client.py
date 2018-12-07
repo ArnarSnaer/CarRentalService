@@ -2,7 +2,7 @@ from functions.models.client import Client
 from functions.lookup_client_prompt import lookup_client_prompt
 
 def lookup_client():
-    with open("clients.txt", "r") as text_file:
+    with open("functions/databases/clients.txt", "r") as text_file:
         info = lookup_client_prompt()
         for line in text_file:
             info_list = line.split(",")
