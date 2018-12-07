@@ -1,4 +1,4 @@
-from functions.lookup_client import lookup_client
+from UI.lookup_client import lookup_client
 
 def redirect_user(choice):
     if choice == "1":
