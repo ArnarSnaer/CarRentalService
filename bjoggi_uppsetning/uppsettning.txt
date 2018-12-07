@@ -1,0 +1,12 @@
+ui
+	allir klasar sem sjá um prentun og input frá notanda
+
+models
+	klasar sem tákna gögn t.d Car, Customer ....
+
+Sercives
+	Lógíkin, filtering gagna og fl.
+
+Repositories
+	samskipti við .txt skrár
+	lesa og skrifa í skrár
