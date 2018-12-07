@@ -1,7 +1,7 @@
-from functions.print_GUI import print_GUI
-from functions.user_input import user_input
-from functions.shutting_down import shutting_down
-from functions.lookup_client import lookup_client
+from func_print_GUI import print_GUI
+from func_user_input import user_input
+from func_shutting_down import shutting_down
+from func_lookup_client import lookup_client
 
 go_again = True
 

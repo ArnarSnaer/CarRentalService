@@ -1,9 +1,9 @@
-from client import Client
-from creditcard import Creditcard
+from class_client import Client
+from class_creditcard import Creditcard
 from datetime import datetime
-from car import Car
-from employee import Employee
-from payment import Payment
+from class_car import Car
+from class_employee import Employee
+from class_payment import Payment
 
 class Order(object):
     def __init__(self,order_id,credit_info, date_start, date_end,car,client,employee):

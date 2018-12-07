@@ -1,6 +1,6 @@
-from client import Client
-from insurance import Insurance
-from car import Car
+from class_client import Client
+from class_insurance import Insurance
+from class_car import Car
 
 class Payment(object):
     def __init__(self,client,car,duration=1):
