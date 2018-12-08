@@ -9,14 +9,14 @@ class Employee_services(object):
         try:
             return self.employee.name.append(other)
         except ValueError:
-            print("> Sale not found, try again")
+            return "> Sale not found, try again"
         
 
     def remove_sale(self,other):
         try:
             return self.employee.name.remove(other)
         except ValueError:
-            print("> Plate not found in sales")
+            return "> Plate not found in sales"
 
     def get_sales(self):
         employee_order = ""

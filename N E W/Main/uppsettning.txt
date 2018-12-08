@@ -1,12 +1,12 @@
 ui
-	allir klasar sem sjá um prentun og input frá notanda
+	allir klasar sem sja um prentun og input frï¿½ notanda
 
 models
-	klasar sem tákna gögn t.d Car, Customer ....
+	klasar sem takna gogn t.d Car, Customer ....
 
 Sercives
-	Lógíkin, filtering gagna og fl.
+	Logikin, filtering gagna og fl.
 
 Repositories
-	samskipti við .txt skrár
-	lesa og skrifa í skrár
+	samskipti vid .txt skrar
+	lesa og skrifa i skrar

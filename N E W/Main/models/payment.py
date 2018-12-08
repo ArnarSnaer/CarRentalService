@@ -2,6 +2,8 @@ from class_client import Client
 from class_insurance import Insurance
 from class_car import Car
 
+#EKKI TILBÚIÐ
+
 class Payment(object):
     def __init__(self,client,car,duration=1):
         self.price = 0
@@ -12,16 +14,6 @@ class Payment(object):
         self.total_price = (car.price * duration) +  self.base_insurance
         self.car = car
     
-    def add_insurance(self,other):
-        choice = other
-        if choice not in self.insurances:
-            self.insurances.append(choice)
-            print("Insurances: ", self.insurances)
-            self.price = int(self.price + Insurance(choice))
-            self.total_price += self.price
-            return self.price
-        else:
-            return "This insurance is already applied to your order"
     
     def get_full_price(self):
         return self.total_price
