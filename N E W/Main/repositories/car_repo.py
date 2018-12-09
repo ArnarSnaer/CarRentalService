@@ -17,7 +17,7 @@ class CarRepo():
 
         open_file.close()
 
-    def remove_car(plate):
+    def remove_car(self, plate):
         open_file = open("./data/cars.txt", "r")
         old_file = open_file.readlines()
         open_file.close()
@@ -29,7 +29,7 @@ class CarRepo():
 
         new_file.close()
 
-    def find_car(searchword):
+    def find_car(self, searchword):
         open_file = open("./data/cars.txt", "r")
         
         for line in open_file:

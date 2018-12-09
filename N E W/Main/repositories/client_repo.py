@@ -17,7 +17,7 @@ class ClientRepo():
 
         open_file.close()
 
-    def remove_customer(name):
+    def remove_customer(self, name):
         open_file = open("./data/clients.txt", "r")
         old_file = open_file.readlines()
         open_file.close()
@@ -29,7 +29,7 @@ class ClientRepo():
 
         new_file.close()
 
-    def find_client(searchword):
+    def find_client(self, searchword):
         open_file = open("./data/clients.txt", "r")
 
         for line in open_file:

@@ -17,7 +17,7 @@ class CreditcardRepo():
 
         open_file.close()
 
-    def remove_creditcard(plate):
+    def remove_creditcard(self, plate):
         open_file = open("./data/creditcard.txt", "r")
         old_file = open_file.readlines()
         open_file.close()
@@ -29,7 +29,7 @@ class CreditcardRepo():
 
         new_file.close()
 
-    def find_card(searchword):
+    def find_card(self, searchword):
         open_file = open("./data/creditcard.txt", "r")
         
         for line in open_file:
