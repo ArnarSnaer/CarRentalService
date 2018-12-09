@@ -1,8 +1,8 @@
-from models.client import Client
+from client import Client
 
 class ClientRepo():
     def __init__(self):
-    self.info = []
+        self.info = []
 
     def new_customer(self):
         open_file = open("./data/clients.txt", "a")
