@@ -1,5 +1,7 @@
-from repositories.car_repo import CarRepo
+class Car_services(object):
+    pass
 
+<<<<<<< HEAD
 class Car_services:
     def __init__(self):
         self.__car_repo = CarRepo()
@@ -13,3 +15,5 @@ class Car_services:
         self.__car_repo.remove_car(car)
     
     
+=======
+>>>>>>> 6435afc58e4e266871ded234d09d0d644ab7df93

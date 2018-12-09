@@ -30,6 +30,9 @@ class Employee_UI(object):
             elif choice == "3":
                 self.print_sales()
             
+            else:
+                print("Please insert valid choice.")
+            
             
 
 Gunnar = Employee_UI("Gunnar")
