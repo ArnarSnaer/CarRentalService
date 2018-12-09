@@ -18,19 +18,19 @@ class CarRepo():
         open_file.close()
 
     def remove_car(self, plate):
-        open_file = open("./data/cars.txt", "r")
-        old_file = open_file.readlines()
+        open_file = open("./data/vehicle.txt", "r")
+        lines = open_file.readlines()
         open_file.close()
 
-        new_file = open("./data/cars.txt", "w")
-        for line in old_file:
+        open_file = open("./data/vehicle.txt", "w")
+        for line in lines:
             if plate not in line:
-                new_file.write(line)
+                open_file.write(line)
 
-        new_file.close()
+        open_file.close()
 
     def find_car(self, searchword):
-        open_file = open("./data/cars.txt", "r")
+        open_file = open("./data/vehicle.txt", "r")
         
         for line in open_file:
             if searchword in line:

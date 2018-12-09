@@ -60,6 +60,7 @@ class Car(object):
                 self.info[-1] = value
         
         return self.price
+
             
 '''    
 bill = Car("MPV","Toyota Land Cruiser","ER C01","4x4",True,False,60000,"diesel")
