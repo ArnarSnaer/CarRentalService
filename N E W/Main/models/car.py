@@ -26,20 +26,12 @@ class Car(object):
     def __iter__(self):
         return iter(self.info)
 
-    def rent(self):
-        self.status = False
+
     #def get_rent_history(self): Vinna í seinna, vantar .txt 
     
-    def get_status(self):
-        if self.status == True:
-            return "This car is available."
-        else:
-            return "This car is not available"
     def get_info(self):
         return "Vehicle type: {}\nBrand: {}\nPlate number: {}\nWheel drive: {}\nStatus: {}\nGear box: {}\nDriven {}\nFuel type: {}\nPrice: {}".format(self.veh_type, self.brand, self.plate,self.wheel_drive, self.status, self.is_manual, self.driven, self.fuel_type, self.price)
     
-    def return_vehicle(self):
-        self.status = True
 
     def get_type(self):
         return self.info[1]
@@ -50,16 +42,7 @@ class Car(object):
     def get_price(self):
         return self.price
        
-    def check_price(self):
-        price_dict = {"suv": 100000, "hatchback": 50000, "sedan": 50000, "sport": 200000,"mpv": 75000, "crossover": 75000, "convertible": 200000}
-        self.veh_type = self.veh_type.lower() 
-        self.price = 0
-        for key, value in price_dict.items(): 
-            if key == self.veh_type in price_dict:
-                self.price = value
-                self.info[-1] = value
-        
-        return self.price
+
             
 '''    
 bill = Car("MPV","Toyota Land Cruiser","ER C01","4x4",True,False,60000,"diesel")
