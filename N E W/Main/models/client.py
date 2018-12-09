@@ -8,22 +8,33 @@ class Client(object):
         self.country = country
         self.zip = zip
         self.info = [self.name, self.address, self.phone, self.birthday, self.driver_num, self.country, self.zip]
+<<<<<<< HEAD
+=======
 
     def __str__(self):
-        return str(self.info)
+        return "{},{},{},{},{},{},{}".format(self.name, self.address, self.phone, self.birthday, self.driver_num, self.country, self.zip)
     
-    def __getitem__(self,index):
-        return self.info[index]
-    
-    def __iter__(self):
-        return iter(self.info)
+    def __repr__(self):
+        return self.__str__()
 
-'''
-vinur = Client("John", "Geysir 7", 5885522,"17 June", "1234 5678", "USA", "779")
+    def get_name(self):
+        return self.name
 
-vinur.update_registration()
-vinur.get_client
-vinur.new_customer()
-rude_guy = input("Enter name of person you want to remove from list: ")
-Client.remove_customer(rude_guy)
-'''
+    def get_address(self):
+        return self.address
+
+    def get_phone(self):
+        return self.phone
+
+    def get_birthday(self):
+        return self.birthday
+>>>>>>> a49268ecc52f7e37c72758ca8f41b711e53f46e1
+
+    def get_driver_num(self):
+        return self.driver_num
+
+    def get_country(self):
+        return self.country
+
+    def get_zip(self):
+        return self.zip

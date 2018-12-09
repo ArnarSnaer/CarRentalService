@@ -24,7 +24,7 @@ class Employee_UI(object):
                 self.employee_ser.add_sale(sale)
             
             elif choice == "2":
-                sale = input("Inpur license plate of rented car: ")
+                sale = input("Input license plate of rented car: ")
                 self.employee_ser.remove_sale(sale)
             
             elif choice == "3":

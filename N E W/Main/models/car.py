@@ -42,6 +42,19 @@ class Car(object):
     def get_price(self):
         return self.price
        
+<<<<<<< HEAD
+=======
+    def check_price(self):
+        price_dict = {"suv": 100000, "hatchback": 50000, "sedan": 50000, "sport": 200000,"mpv": 75000, "crossover": 75000, "convertible": 200000}
+        self.veh_type = self.veh_type.lower() 
+        self.price = 0
+        for key, value in price_dict.items(): 
+            if key == self.veh_type in price_dict:
+                self.price = value
+                self.info[-1] = value
+        
+        return self.price
+>>>>>>> a49268ecc52f7e37c72758ca8f41b711e53f46e1
 
             
 '''    
