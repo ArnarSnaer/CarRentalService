@@ -8,17 +8,16 @@ class Car_services(object):
         self.keywords = []
 
     def create_car(self,car_info):
-        #car_list = []
-        created_car = Car(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
-        #car_list.append(created_car)
+        created_car = self.car_repo.Car(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
         return created_car
 
     def list_to_formated_str(self,list):
         result_str = ""
         for item in list:
-            result_str += item
-            if item != list[-1]:
+            if len(list) != 0:
                 result_str += "\n"
+            result_str += item
+
         return result_str
     
     def create_keyword_list(self):
@@ -27,13 +26,14 @@ class Car_services(object):
     def add_keyword(self,keyword):
         return self.keywords.append(keyword)
     
-    def rent_car(self,car):
-        if car.status == True:
-            car.sstatus = False
+    def rent_car(self,car_object):
+        if car_object.get_status() == True:
+            car_object.status = False
+            
 
-    def return_car(self,car):
-        if car.status == False:
-            car.status  = True
+    def return_car(self,car_object):
+        if car_object.get_status() == False:
+            car_object.status  = True
     
     def get_available_cars(self):
         available_cars = self.car_repo.sort_cars(0)

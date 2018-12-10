@@ -1,5 +1,4 @@
 from services.car_services import Car_services
-#from repositories.car_repo import Car_Repository
 
 class Car_UI(object):
 
@@ -12,6 +11,7 @@ class Car_UI(object):
         number = 1
         for item in results:
             print("{}. {}".format(number,item))
+            number += 1
         choice = int(input("Select a car: "))
         chosen_car = results[choice-1]
         return chosen_car
@@ -27,21 +27,27 @@ class Car_UI(object):
                 print(self.car_serv.get_available_cars())
                 plate = input("Enter the license plate of desired car: ")
                 results = self.car_repo.find_car(plate)
-                chosen_car = self.choose_car(results)
-                created_car = self.car_serv.create_car(chosen_car)
-                self.car_repo.remove_car(created_car.plate)
-                created_car.rent_car()
-                self.car_repo.add_car(created_car)
+                if len(results) != 0:
+                    chosen_car = self.choose_car(results)
+                    created_car = self.car_serv.create_car(chosen_car)
+                    self.car_repo.remove_car(created_car.plate)
+                    self.car_serv.rent_car(created_car)
+                    self.car_repo.add_car(created_car)
+                else:
+                    print("No match.\n")
 
             elif choice == "2":
                 print(self.car_serv.get_rented_cars())
                 plate = input("Enter the license plate of desired car: ")
                 results = self.car_repo.find_car(plate)
-                chosen_car = self.choose_car(results)
-                created_car = self.car_serv.create_car(chosen_car)
-                self.car_repo.remove_car(created_car.plate)
-                created_car.return_car()
-                self.car_repo.add_car(created_car)
+                if len(results) != 0:
+                    chosen_car = self.choose_car(results)
+                    created_car = self.car_serv.create_car(chosen_car)
+                    self.car_repo.remove_car(created_car.plate)
+                    self.car_serv.return_car(created_car)
+                    self.car_repo.add_car(created_car)
+                else:
+                    print("No match.\n")
 
             elif choice == "3":
                 keywords = self.car_serv.create_keyword_list()                
