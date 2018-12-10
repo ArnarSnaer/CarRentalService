@@ -1,6 +1,6 @@
  #ATH að velja kostnað fyrir veh_type
 class Car(object):
-    def __init__(self, veh_type, brand, plate, wheel_drive, status, is_manual, driven, fuel_type, price = 0): #Kannski records
+    def __init__(self, veh_type="", brand="", plate="", wheel_drive="", status="", is_manual="", driven="", fuel_type="", price = 0): #Kannski records
         self.veh_type = veh_type
         self.brand = brand
         self.plate = plate
