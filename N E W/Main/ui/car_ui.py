@@ -1,7 +1,9 @@
+from services.car_services import Car_services
+
 class Car_UI(object):
 
     def __init__(self):
-        pass
+        self.car_serv = Car_services()
     
     def choose_car(self,results):
         number = 1
@@ -19,11 +21,15 @@ class Car_UI(object):
             choice = input("What would you like to do? ").lower()
             
             if choice == "1":
-                plate = input("Input license plate: ")
-
-            elif choice == "2":
+                print(self.car_serv.get_available_cars())
                 
+            elif choice == "2":
+                print(self.car_serv.get_rented_cars())
+
             elif choice == "3":
-
+                pass
             elif choice == "4":
+                pass
 
+car1 = Car_UI()
+car1.car_menu()

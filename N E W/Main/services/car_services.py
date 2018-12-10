@@ -4,7 +4,7 @@ from models.car import Car
 
 class Car_services(object):
     def __init__(self):
-        self.__car_repo = Car_repository()
+        self.car_repo = Car_repository()
 
     def create_car(self,car_info):
         car_list = []
@@ -29,9 +29,14 @@ class Car_services(object):
             car.status  = True
     
     def get_available_cars(self):
-        
-
-
+        available_cars = self.car_repo.sort_cars(0)
+        restults_str = self.list_to_formated_str(available_cars)
+        return restults_str
+    
+    def get_rented_cars(self):
+        rented_cars = self.car_repo.sort_cars(1)
+        results_str = self.list_to_formated_str(rented_cars)
+        return results_str
 
 #hér vantar fall til að sjá hvort þessi bíll sé "VALID"
     def add_car(self, car):

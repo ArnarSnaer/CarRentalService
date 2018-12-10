@@ -18,11 +18,11 @@ class Car_repository():
         open_file.close()
 
     def remove_car(self,plate):
-        open_file = open("./data/cars.txt", "r")
+        open_file = open("./data/vehicle.txt", "r")
         old_file = open_file.readlines()
         open_file.close()
 
-        new_file = open("./data/cars.txt", "w")
+        new_file = open("./data/vehicle.txt", "w")
         for line in old_file:
             if plate not in line:
                 new_file.write(line)
@@ -30,7 +30,7 @@ class Car_repository():
         new_file.close()
 
     def find_car(self,searchword):
-        open_file = open("./data/cars.txt", "r")
+        open_file = open("./data/vehicle.txt", "r")
         car_list = []
         for line in open_file:
             if searchword in line:
@@ -38,8 +38,8 @@ class Car_repository():
                 car_list.append(found_list)
         return car_list
     
-    def sort_cars(self):
-        open_file = open("./data/cars.txt", "r")
+    def sort_cars(self,choice): #setur inn 0 eða 1 og færð út þann lista (0 = lausir, 1 = leigðir)
+        open_file = open("./data/vehicle.txt", "r")
         avilable_cars = []
         rented_cars = []
         for line in open_file:
@@ -48,6 +48,5 @@ class Car_repository():
                 avilable_cars.append(line)
             else:
                 rented_cars.append(line)
-
-        return avilable_cars,rented_cars
- 
+        all_lists = [avilable_cars,rented_cars]
+        return all_lists[choice]
