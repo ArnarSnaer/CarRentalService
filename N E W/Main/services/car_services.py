@@ -10,7 +10,7 @@ class Car_services(object):
     def create_car(self,car_info):
         #car_list = []
         created_car = Car(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
-        car_list.append(created_car)
+        #car_list.append(created_car)
         return created_car
 
     def list_to_formated_str(self,list):
@@ -44,6 +44,16 @@ class Car_services(object):
         rented_cars = self.car_repo.sort_cars(1)
         results_str = self.list_to_formated_str(rented_cars)
         return results_str
+
+    def get_all_cars(self):
+        results_txt = ""
+        file_text = self.car_repo.get_all_cars()
+        for line in file_text:
+            if line == file_text[-1]:
+                line = line.strip("\n")
+            results_txt += line
+        
+        return results_txt
 
 #hér vantar fall til að sjá hvort þessi bíll sé "VALID"
     def add_car(self, car):

@@ -20,7 +20,7 @@ class Car_UI(object):
         choice = ""
 
         while choice != "q":
-            print("What would you like to do?\n1. Rent car\n2. Return car\n3. Find a cars information\4. Get a list of cars\nq. Quit")
+            print("What would you like to do?\n1. Rent car\n2. Return car\n3. Find a cars information\n4. Get a list of cars\nq. Quit")
             choice = input("What would you like to do? ").lower()
             
             if choice == "1":
@@ -53,7 +53,7 @@ class Car_UI(object):
                 print(results)
 
             elif choice == "4":
-                print(self.car_repo.get_all_cars())
+                print(self.car_serv.get_all_cars())
 
 car1 = Car_UI()
 car1.car_menu()

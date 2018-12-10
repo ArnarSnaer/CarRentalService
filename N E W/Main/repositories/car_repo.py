@@ -56,7 +56,7 @@ class Car_repository():
         return all_cars[choice]
 
     def get_all_cars(self):
-        open_file = open("./data/vehicle.txt", "r")
+        open_file = open("~/data/vehicle.txt", "r")
         list_of_cars = open_file.readlines()
         open_file.close()
 
