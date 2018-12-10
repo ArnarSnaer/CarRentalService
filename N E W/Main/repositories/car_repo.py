@@ -53,3 +53,10 @@ class Car_repository():
                 rented_cars.append(line)
 
         return avilable_cars, rented_cars
+
+    def get_all_cars(self):
+        open_file = open("./data/vehicle.txt", "r")
+        list_of_cars = open_file.readlines()
+        open_file.close()
+
+        return list_of_cars
