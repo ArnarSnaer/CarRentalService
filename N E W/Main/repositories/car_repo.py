@@ -4,16 +4,19 @@ class Car_repository():
     def __init__(self):
         self.info = []
 
-    def add_car(self):
+    def add_car(self, car):
         open_file = open("./data/vehicle.txt", "a")
 
-        for item in self.info:
-            to_write = str(item)
-            open_file.write(to_write)
-            if item != self.info[-1]:
-                open_file.write(",")
-
-        open_file.write("\n")
+        veh_type = car.get_veh_type()
+        brand = car.get_brand()
+        plate = car.get_plate()
+        wheel_drive = car.get_wheel_drive()
+        status = car.get_status()
+        is_manual = car.get_is_manual()
+        driven = car.get_driven()
+        fuel_type = car.get_fuel_type()
+        price = car.get_price()
+        open_file.write("{},{},{},{},{},{},{},{},{}\n".format(veh_type, brand, plate, wheel_drive, status, is_manual, driven, fuel_type, price))
 
         open_file.close()
 
@@ -38,7 +41,7 @@ class Car_repository():
                 car_list.append(found_list)
         return car_list
     
-    def sort_cars(self,choice): #setur inn 0 eða 1 og færð út þann lista (0 = lausir, 1 = leigðir)
+    def sort_cars(self):
         open_file = open("./data/vehicle.txt", "r")
         avilable_cars = []
         rented_cars = []
@@ -48,5 +51,5 @@ class Car_repository():
                 avilable_cars.append(line)
             else:
                 rented_cars.append(line)
-        all_lists = [avilable_cars,rented_cars]
-        return all_lists[choice]
+
+        return avilable_cars, rented_cars
