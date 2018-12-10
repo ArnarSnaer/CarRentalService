@@ -1,8 +1,4 @@
-''' A car's status is in Boolean-form
-    A car's available if status is True and is out in rent when status =             
-    False'''
-    
-#ATH að velja kostnað fyrir veh_type
+ #ATH að velja kostnað fyrir veh_type
 class Car(object):
     def __init__(self, veh_type, brand, plate, wheel_drive, status, is_manual, driven, fuel_type, price = 0): #Kannski records
         self.veh_type = veh_type
