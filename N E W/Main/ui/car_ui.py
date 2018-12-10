@@ -10,7 +10,8 @@ class Car_UI(object):
     def choose_car(self,results):
         number = 1
         for item in results:
-            print("{}. {}".format(number,item))
+            car_object = self.car_serv.create_car(item)
+            print("{}. {}".format(number,car_object))
             number += 1
         choice = int(input("Select a car: "))
         chosen_car = results[choice-1]
@@ -27,9 +28,11 @@ class Car_UI(object):
                 print(self.car_serv.get_available_cars())
                 plate = input("Enter the license plate of desired car: ")
                 results = self.car_repo.find_car(plate)
+
                 if len(results) != 0:
                     chosen_car = self.choose_car(results)
                     created_car = self.car_serv.create_car(chosen_car)
+
                     self.car_repo.remove_car(created_car.plate)
                     self.car_serv.rent_car(created_car)
                     self.car_repo.add_car(created_car)
@@ -40,9 +43,11 @@ class Car_UI(object):
                 print(self.car_serv.get_rented_cars())
                 plate = input("Enter the license plate of desired car: ")
                 results = self.car_repo.find_car(plate)
+
                 if len(results) != 0:
                     chosen_car = self.choose_car(results)
                     created_car = self.car_serv.create_car(chosen_car)
+
                     self.car_repo.remove_car(created_car.plate)
                     self.car_serv.return_car(created_car)
                     self.car_repo.add_car(created_car)
