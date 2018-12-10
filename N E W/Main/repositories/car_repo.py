@@ -41,6 +41,7 @@ class Car_repository():
             if searchword in line:
                 found_list = line.split(",")
                 car_list.append(found_list)
+        
         return car_list
     
     def sort_cars(self,choice):
