@@ -1,4 +1,5 @@
 from models.car_model import Car
+import os
 
 class Car_repository():
     def __init__(self):

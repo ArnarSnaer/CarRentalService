@@ -55,5 +55,5 @@ class Car_UI(object):
             elif choice == "4":
                 print(self.car_serv.get_all_cars())
 
-car1 = Car_UI()
-car1.car_menu()
+#car1 = Car_UI()
+#car1.car_menu()
