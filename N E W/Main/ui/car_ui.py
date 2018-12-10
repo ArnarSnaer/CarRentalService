@@ -11,60 +11,81 @@ class Car_UI(object):
         number = 1
         for item in results:
             car_object = self.car_serv.create_car(item)
-            print("{}. {}".format(number,car_object))
+            veh_type = self.car_repo.Car.get_veh_type(car_object)
+            brand = self.car_repo.Car.get_brand(car_object)
+            plate = self.car_repo.Car.get_plate(car_object)
+            if self.car_repo.Car.get_status(car_object) == "True":
+                status = "Available."
+            else:
+                status = "Unavailable."
+            print("{}. Type: {} Brand: {} License plate: {} Current status: {}".format(number,veh_type, brand, plate, status))
             number += 1
-        choice = int(input("Select a car: "))
-        chosen_car = results[choice-1]
-        return chosen_car
+        print("Complete! Here are all the results of the search.")
     
     def car_menu(self):
         choice = ""
 
         while choice != "q":
-            print("What would you like to do?\n1. Rent car\n2. Return car\n3. Find a cars information\n4. Get a list of cars\nq. Quit")
-            choice = input("What would you like to do? ").lower()
+            print("Current section: Cars\n1. Rent car\n2. Return car\n3. Search car database\n4. See all cars\nq. Quit")
+            choice = input("> What would you like to do? ").lower()
             
             if choice == "1":
-                print(self.car_serv.get_available_cars())
-                plate = input("Enter the license plate of desired car: ")
+                #print(self.car_serv.get_available_cars())
+                plate = input("> Enter the license plate of desired car: ")
                 results = self.car_repo.find_car(plate)
 
                 if len(results) != 0:
-                    chosen_car = self.choose_car(results)
+                    self.choose_car(results)
+                    choice = int(input("> Select a car: "))
+                    chosen_car = results[choice-1]
                     created_car = self.car_serv.create_car(chosen_car)
+                    rent_status = self.car_repo.Car.get_status(created_car)
 
-                    self.car_repo.remove_car(created_car.plate)
-                    self.car_serv.rent_car(created_car)
-                    self.car_repo.add_car(created_car)
+                    if rent_status == "False":
+                        print("This car is not available for renting. Please find another.\n")
+                    elif rent_status == "True":
+                        result = self.car_serv.rent_car(created_car)
+                        self.car_repo.remove_car(plate)
+                        changed_status = self.car_serv.create_car_from_list(result)
+                        self.car_repo.add_car(changed_status)
+                        print("Complete! The car has been updated to an 'unavailable' status!\n")
+
                 else:
                     print("No match.\n")
 
             elif choice == "2":
-                print(self.car_serv.get_rented_cars())
-                plate = input("Enter the license plate of desired car: ")
+                plate = input("> Enter the license plate of desired car: ")
                 results = self.car_repo.find_car(plate)
 
                 if len(results) != 0:
-                    chosen_car = self.choose_car(results)
+                    self.choose_car(results)
+                    choice = int(input("> Select a car: "))
+                    chosen_car = results[choice-1]
                     created_car = self.car_serv.create_car(chosen_car)
+                    rent_status = self.car_repo.Car.get_status(created_car)
 
-                    self.car_repo.remove_car(created_car.plate)
-                    self.car_serv.return_car(created_car)
-                    self.car_repo.add_car(created_car)
+                    if rent_status == "True":
+                        print("This car is available and doesn't need returning.\n")
+                    elif rent_status == "False":
+                        result = self.car_serv.rent_car(created_car)
+                        self.car_repo.remove_car(plate)
+                        changed_status = self.car_serv.create_car_from_list(result)
+                        self.car_repo.add_car(changed_status)
+                        print("Complete! The car has been returned and is 'available' again!\n")
+
                 else:
                     print("No match.\n")
 
-            elif choice == "3":
-                keywords = self.car_serv.create_keyword_list()                
-                while choice != "s":
-                    choice = input("Insert information as searchkey and type 's' to search ")
-                    if choice != "s":                    
-                        self.car_serv.add_keyword(choice)
-                results = self.car_repo.find_car(keywords)
-                print(results)
+            elif choice == "3":                
+                searchword = input("> Insert information as search word; Vehicle type, Brand, License plate, etc\nPlease only enter a single item:  ")
+                results = self.car_repo.find_car(searchword)
+                if len(results) == 0:
+                    print("No results for this search word.")
+                else:
+                    self.choose_car(results)
 
             elif choice == "4":
                 print(self.car_serv.get_all_cars())
-
-#car1 = Car_UI()
-#car1.car_menu()
+            
+            elif choice != "q":
+                print("Invalid input! Please enter the number/letter in front of each operation!")
