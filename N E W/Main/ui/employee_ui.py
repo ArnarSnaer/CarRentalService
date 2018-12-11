@@ -32,8 +32,12 @@ class Employee_UI(object):
             
             else:
                 print("Please insert valid choice.")
-            
-            
 
+
+    def order_menu(self):
+        employee_name = input("Enter employee name: ")
+        working_employee = Employee(employee_name)
+        return working_employee
+        
 Gunnar = Employee_UI("Gunnar")
 Gunnar.employee_menu()

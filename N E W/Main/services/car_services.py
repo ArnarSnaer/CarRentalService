@@ -68,6 +68,10 @@ class Car_services(object):
         restults_str = self.list_to_formated_str(available_cars)
         return restults_str
     
+    def get_available_cars_list(self):
+        available_cars = self.car_repo.sort_cars(0)
+        return available_cars
+    
     def get_rented_cars(self):
         rented_cars = self.car_repo.sort_cars(1)
         results_str = self.list_to_formated_str(rented_cars)
@@ -88,5 +92,4 @@ class Car_services(object):
                 status = "Unavailable."
             print("{}. Type: {} Brand: {} License plate: {} Current status: {}".format(number,veh_type, brand, plate, status))
             number += 1
-        
         return results_txt

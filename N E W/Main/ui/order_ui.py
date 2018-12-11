@@ -1,10 +1,11 @@
 from services.order_services import Order_service
 from ui.car_ui import Car_UI
+from ui.employee_ui import Employee_UI
 
 class Service_UI(object):
     def __init__(self):
         self.order_ser = Order_service()
-        self.car_ui = Car_UI.choose_car()
+        self.car_ui = Car_UI
     
 
     def service_menu(self):
@@ -17,7 +18,9 @@ class Service_UI(object):
                 print("Please enter the neccesery information for the order: ")
                 start_date = ("Starting date: ")
                 end_date = ("Return date: ")
-                plate = self.car_ui
+                chosen_car = self.car_ui.order_menu()
+                client = 
+                employee = self.Employee_UI.order_menu()
             elif choice == "2":
                 pass
             elif choice == "3":

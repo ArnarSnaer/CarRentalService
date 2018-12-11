@@ -136,7 +136,11 @@ class Client_ui():
             else:
                 print("Please input either the letter 'y' or the letter 'n'")
 
+<<<<<<< HEAD
 
 
 
 Client_ui().order_menu()
+=======
+Client_ui().main_menu()
+>>>>>>> d7d2c367178e5d8b2d6d0481a3dd87f9877e0344

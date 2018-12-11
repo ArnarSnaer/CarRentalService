@@ -8,6 +8,9 @@ class Order_service(object):
 
     def add_insurance(self,ins_type):
         self.order_repo.price.add_insurance(ins_type)
+<<<<<<< HEAD
+        return self.order_repo.price   
+=======
         return self.order_repo.price
     
     def get_status(self):
@@ -31,3 +34,4 @@ class Order_service(object):
         return id
 
     def create_order(self,info_list):
+>>>>>>> 4170a64e484d72f540f19a95d19bc2234f86250a

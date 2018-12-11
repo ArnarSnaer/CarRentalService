@@ -65,6 +65,26 @@ class ClientRepo():
             return False
 
     def update_registration(self, client_info, option):
+<<<<<<< HEAD
+        # open_file = open("clist.txt", "r")
+        # the_client = ClientRepo().find_client(searchword)
+        #client_found = False
+        if type(client_info) == list:
+        #    client_found = True
+            # print("Client found")
+            # while True:
+            client_update = self.get_from_list(client_info, option)
+            # self.remove_client(client_info)
+            open_file = open("clist.txt", "a+")
+            client_update = Client(client_update[self.NAME], client_update[self.ADDRESS], client_update[self.PHONE], client_update[self.BIRTHDAY], client_update[self.LICENSE_NUM],
+                                        client_update[self.COUNTRY], client_update[self.THE_ZIP])
+            self.new_client(client_update)
+            open_file.close()
+            print("Update complete!")
+
+        else:
+            print("Client not found")
+=======
         updated = False
         # if type(client_info) == list:
         client_update = self.change_element(client_info, option)
@@ -75,6 +95,7 @@ class ClientRepo():
         open_file.close()
         updated = True
         return updated
+>>>>>>> 4170a64e484d72f540f19a95d19bc2234f86250a
 
 
     def change_element(self, the_client, update_choice):
@@ -87,7 +108,6 @@ class ClientRepo():
         
         return the_client
 
-        
 
 # mysearch = ClientRepo().new_customer()
 # Jann Kounias,Seahaven 176,546-799-42066,17. Oktober,4011148563,USA,159
