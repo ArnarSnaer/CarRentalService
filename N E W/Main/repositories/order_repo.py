@@ -2,8 +2,13 @@ from models.order_model import Order
 
 class Order_repository(object):
     def __init__(self):
-        self.Order = Order
-        self.order_payment = self.Order.order_payment
+        self.info = []
+        # # self.Order = Order()
+        # '''Möguleiki á að importa order_payment öðruvísi'''
+        # self.order_payment = self.Order.order_payment
+
+    def the_pay(self):
+        self.Order = Order() 
          
 
     def add_order(self,order):
@@ -55,6 +60,7 @@ class Order_repository(object):
         return all_cars
 
     def update_order(self):
+        '''hafa print og input í service'''
         print("What would you like to update? (Please input integer choice)")
         print("1. Credit information\n2. Starting date\n3. Retrun date\n4. Car\n5. Employee name")
         

@@ -1,10 +1,12 @@
 from repositories.order_repo import Order_repository
+#from models.order_model import Order
 import random
 import string
 
 class Order_service(object):
     def __init__(self):
-        self.order_repo = Order_repository
+        # self.order_repo = Order_repository
+        self.order_repo = Order_repository()
 
     def add_insurance(self,ins_type):
         self.order_repo.price.add_insurance(ins_type)
@@ -31,6 +33,7 @@ class Order_service(object):
         return id
 
     def create_order(self,info_list):
+        
         new_order = self.order_repo.order(info_list[0],info_list[1],info_list[2],info_list[3],info_list[4],info_list[5])
         return new_order
     

@@ -1,14 +1,19 @@
 from services.order_services import Order_service
 from ui.car_ui import Car_UI
 from ui.employee_ui import Employee_UI
-from ui.client_ui import client_ui
-
+from ui.client_ui import Client_ui
+''' hér ætti allt flæði af upplýsingum að fara í geng, en order service og order_repo skulu ekki hafa import frá öðrum klössum en þeim sem eru fyrir neðan þá'''
 class Service_UI(object):
     def __init__(self):
         self.order_ser = Order_service()
-        self.car_ui = Car_UI
-        self.client_ui = client_ui
-        self.employee_ui = Employee_UI
+        # self.car_ui = Car_UI
+        # self.client_ui = client_ui
+        # self.employee_ui = Employee_UI
+        self.car_ui = Car_UI()
+        self.client_ui = Client_ui()
+        '''EMPLOYEE_UI, þarf að gefa fallinu nafn í _init_'''
+        employee_name = input("> Input employee's name: ")
+        self.employee_ui = Employee_UI(employee_name)
     
 
     def service_menu(self):

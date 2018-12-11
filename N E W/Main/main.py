@@ -1,6 +1,11 @@
 from ui.calc_ui import Calc_UI
 from ui.car_ui import Car_UI
-from ui.order_ui import order_ui
+# from ui.order_ui import order_ui
+from ui.order_ui import Service_UI
+from ui.client_ui import Client_ui
+
+# if __name__ == '__main__':
+#     main()
 
 def main():
     print("Welcome, User")
@@ -10,13 +15,18 @@ def main():
         print("Available sections:\n1. Order\n2. Cars\n3. Client\n4. Calculator\n5. Exit program")
         choice = input("> Choose a section: ")
         if choice == "1":
-            order_UserInterface = order_ui
-            order_UserInterface
+            # order_UserInterface = order_ui()
+            # order_UserInterface
+            order_UserInterface = Service_UI()
+            order_UserInterface.service_menu()
         elif choice == "2":
             car_UserInterface = Car_UI()
             car_UserInterface.car_menu()
         elif choice == "3":
-            print("work in progress, please hold")
+            # print("work in progress, please hold")
+            client_UserInterface = Client_ui()
+            client_UserInterface.main_menu()
+
         elif choice == "4":
             calc_UserInterface = Calc_UI()
             calc_UserInterface.calc_menu()      
