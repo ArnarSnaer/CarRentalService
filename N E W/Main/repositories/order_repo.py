@@ -7,26 +7,22 @@ class Order_repository(object):
          
 
     def add_order(self,order):
-        open_file = open("./data/orders.txt","r")
+        open_file = open("./data/order.txt","r")
 
-        self.order_id = self.Order.order_id
-        self.credit_info = self.Order.credit_info
-        self.date_start = self.Order.date_start
-        self.date_end = self.Order.date_end
-        self.car = self.Order.car
-        self.client = self.Order.client
-        self.driver = self.Order.client.get_name()
-        self.employee = self.Order.employee.get_name()
-        self.licence_plate = self.Order.car.plate
-        self.price = self.Order.car.price
-        self.total_cost = self.Order.total_cost
-        self.min_duration = self.Order.min_duration
+        # self.order_id = self.Order.order_id
+        # self.date_start = self.Order.date_start
+        # self.date_end = self.Order.date_end
+        # self.car = self.Order.car
+        # self.driver = self.Order.client.get_name()
+        # self.employee = self.Order.employee.get_name()
+        # self.licence_plate = self.Order.car.plate
+        # self.total_cost = self.Order.total_cost
 
-        open_file.write("{},{},{},{},{},{},{},{},{},{},{},{}".format(self.order_id,self.credit_info,self.date_start,self.date_end,self.car,self.client,self.driver,self.employee,self.licence_plate,self.price,self.total_cost,self.min_duration))
+        open_file.write("{}".format(str(self.Order))
         open_file.close
 
     def remove_order(self,order_id):
-        open_file = open("./data/orders.txt","w")
+        open_file = open("./data/order.txt","w")
         old_file = open_file.readlines()
         open_file.close()
 
@@ -38,7 +34,7 @@ class Order_repository(object):
         new_file.close()
     
     def find_order(self, searchword):
-        open_file = open("./data/orders.txt","r")
+        open_file = open("./data/order.txt","r")
         order_list = []
         for line in open_file:
             if searchword in line:
@@ -47,7 +43,7 @@ class Order_repository(object):
         return order_list
     
     def get_all_orders(self):
-        open_file = open("./data/orders.txt","r")
+        open_file = open("./data/order.txt","r")
         list_of_orders = open_file.readlines()
         open_file.close()
         return list_of_orders
@@ -61,3 +57,11 @@ class Order_repository(object):
         
         self.info[choice-1] = change
         return self.info
+    
+    def check_order_id(self):
+        open_file = open("./data/order.txt","r")
+        id_list = []
+        for line in open_file:
+            info_list = line.split(",")
+            id_list.append(info_list[0])
+        return id_list

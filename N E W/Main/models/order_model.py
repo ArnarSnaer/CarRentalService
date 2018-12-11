@@ -1,5 +1,4 @@
 from models.client_model import Client
-from models.creditcard_model import Creditcard
 from datetime import datetime
 from models.car_model import Car
 from models.employee import Employee #Endurskýra
@@ -8,7 +7,6 @@ from models.payment_model import Payment
 class Order(object):
     def __init__(self,order_id, date_start, date_end,car,client,employee):
         self.order_id = order_id
-        self.credit_info = credit_info
         self.date_start = date_start
         self.date_end = date_end
         self.car = car
@@ -19,7 +17,6 @@ class Order(object):
         self.price = car.price
         self.total_cost = 0
         self.min_duration = 1
-        self.info= [self.credit_info,date_start,date_end,self.car,self.employee]
 
         #Þetta reiknar heildarkostnað (total_price) út frá tímanum sem er gefinn
         day1,month1,year1 = self.date_start.split(" ")
@@ -31,22 +28,22 @@ class Order(object):
 
         self.order_payment = Payment(self.client,self.car,days_num)
         self.total_cost = self.order_payment
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 4170a64e484d72f540f19a95d19bc2234f86250a
     def get_status(self):
-        return self.car.get_status()
+        return self.car.status
         #Þarf að impliment-a þetta öðruvísi
     
     def get_base_price(self):
         return self.order_payment.base_price
     
     def __str__(self):
-        return "Order id: {}\nClient: {}\nCar: {}\nLicense plate: {}\nStarting Date: {}\nReturn date: {}\nPrice: {}\nEmployee: {}".format(self.order_id,self.client.get_name(),self.car.get_type(),self.car.get_plate(),self.date_start,self.date_end,self.total_cost,self.employee)
+        return "{},{},{},{},{},{},{}".format(self.order_id,self.client.get_name(),self.car.get_plate(),self.date_start,self.date_end,self.total_cost,self.employee)
     
-    def __iter__(self):
-        return iter(self.info)
-    
-    def __getitem__(self,index_num):
-        return self.info[index_num]
+
 
 '''
 card = Creditcard("Ari","Gullfoss 2", 5812345, "5555 5555 5555 5555", "10/21", "123")

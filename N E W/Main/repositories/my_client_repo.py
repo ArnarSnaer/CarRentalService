@@ -1,9 +1,12 @@
-from client import Client
+from models.client_model import Client
 import string
+'''vantar að breyta nafni txt skjala'''
+'''villucheck fyrir alla liði'''
 
 class ClientRepo():
     def __init__(self):
-        self.info = []
+        # self.info = []
+        
         self.NAME = 0
         self.ADDRESS = 1
         self.PHONE = 2
@@ -11,6 +14,7 @@ class ClientRepo():
         self.LICENSE_NUM = 4
         self.COUNTRY = 5
         self.THE_ZIP = 6
+        self.INFO = 7
     
     def new_client(self, client):
         ''' þarf að implementa að það geti ekki verið hægt að bæta við einstakling sem er núþegar í listanum'''
@@ -26,20 +30,7 @@ class ClientRepo():
         open_file.write("{},{},{},{},{},{},{}".format(fullname, address, phone, birthday, license_num, country, the_zip))
         open_file.write("\n")
         open_file.close()
-        # for item in self.info
-
-    ''' þetta forrit gefur Client object is not iterable    
-    for item in client:
-                print(item)
-                to_write = str(item)
-                open_file.write(to_write)
-                if item != self.info[-1]:
-                    open_file.write(",")
-
-            open_file.write("\n")
-
-            open_file.close()'''
-
+       
     def remove_client(self, searchword):
         '''vantar að villu-checka'''
         # client_found = False
@@ -74,6 +65,7 @@ class ClientRepo():
             return False
 
     def update_registration(self, client_info, option):
+<<<<<<< HEAD
         # open_file = open("clist.txt", "r")
         # the_client = ClientRepo().find_client(searchword)
         #client_found = False
@@ -92,12 +84,24 @@ class ClientRepo():
 
         else:
             print("Client not found")
+=======
+        updated = False
+        # if type(client_info) == list:
+        client_update = self.change_element(client_info, option)
+        open_file = open("clist.txt", "a+")
+        client_update = Client(client_update[self.NAME], client_update[self.ADDRESS], client_update[self.PHONE], client_update[self.BIRTHDAY], client_update[self.LICENSE_NUM],
+                                    client_update[self.COUNTRY], client_update[self.THE_ZIP])
+        self.new_client(client_update)
+        open_file.close()
+        updated = True
+        return updated
+>>>>>>> 4170a64e484d72f540f19a95d19bc2234f86250a
 
 
-    def get_from_list(self, the_client, update_choice):
-        '''searches in a list and changes the value and returns the list'''
+    def change_element(self, the_client, update_choice):
+        '''searches in a list and changes a selected value and returns the list'''
         
-        the_change = input("New info is: ")
+        the_change = input("Insert new info: ")
 
         '''vantar villu-check'''
         the_client[update_choice -1] = the_change
