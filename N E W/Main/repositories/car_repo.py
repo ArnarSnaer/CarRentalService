@@ -1,16 +1,15 @@
 from models.car_model import Car
 import os
 
-class Car_repository(object):
+class Car_repository():
     def __init__(self):
         self.info = []
-        self.car_model = Car()
+        self.car_model = Car
 
     def add_car(self, car):
-    '''insance af bíl en ekki element af lista'''
         open_file = open("./data/vehicle.txt", "a")
 
-        veh_type = car.veh_type
+        veh_type = car.get_veh_type()
         brand = car.get_brand()
         plate = car.get_plate()
         wheel_drive = car.get_wheel_drive()
@@ -19,7 +18,7 @@ class Car_repository(object):
         driven = car.get_driven()
         fuel_type = car.get_fuel_type()
         price = car.get_price()
-        open_file.write("{},{},{},{},{},{},{},{},{}".format(veh_type, brand, plate, wheel_drive, status, is_manual, driven, fuel_type, price))
+        open_file.write("{},{},{},{},{},{},{},{},{}\n".format(veh_type, brand, plate, wheel_drive, status, is_manual, driven, fuel_type, price))
 
         open_file.close()
 
@@ -57,7 +56,6 @@ class Car_repository(object):
             else:
                 rented_cars.append(line)
         all_cars = [avilable_cars,rented_cars]
-        
         return all_cars[choice]
 
     def get_all_cars(self):
