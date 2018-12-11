@@ -7,7 +7,7 @@ class Client(object):
         self.license_num = license_num
         self.country = country
         self.the_zip = the_zip
-        self.info = [self.name, self.address, self.phone, self.birthday, self.license_num, self.country, self.the_zip]
+        #self.info = [self.name, self.address, self.phone, self.birthday, self.license_num, self.country, self.the_zip]
 
     def __str__(self):
         return "{},{},{},{},{},{},{}".format(self.name, self.address, self.phone, self.birthday, self.license_num, self.country, self.the_zip)

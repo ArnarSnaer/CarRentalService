@@ -4,13 +4,7 @@ Gonzalo Kounias,Litenway 211,546-799-21872,17. November,2575712483,DK,493
 Corrine Sade,Seahaven 206,546-799-34857,9. September,8249626247,DK,524
 Josette Viveros-aguilera,Long Way 214,555-632-81371,3. May,5328129444,DL,222
 
-Corrine Casarez,Long Way 125,554-578-19291,1. September,5054937612,FR,467
-
-
-
-Batungi,GW2,554-578-05627,3. January,9153446685,DK,359
-
-
-
-Ragnar,Funafold 87,555-632-38930,17. November,1033976326,FR,155
-
+Ragnar,fannafold 112,8984211,13 july,lz 223,isl,112
+Katrin,Rimar,1234566,11 january,sd 443,isl,112
+Ragnar,fannafold 112,8984211,13 july,lz 223,isl,112
+Ragnar,fannafold 112,8984211,13 july,isl,isl,112
