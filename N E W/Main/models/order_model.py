@@ -38,7 +38,7 @@ class Order(object):
     
     
     def __str__(self):
-        return "{},{},{},{},{},{},{},{}".format(self.order_id,self.client.get_name(),self.car.get_plate(),self.date_start,self.date_end,self.total_cost,self.employee)
+        return "{},{},{},{},{},{},{}".format(self.order_id,self.client.get_name(),self.car.get_plate(),self.date_start,self.date_end,self.total_cost,self.employee)
     
 
 

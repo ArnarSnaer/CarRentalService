@@ -1,27 +1,27 @@
 from repositories.car_repo import Car_repository
-#from models.car import Car
 
 class Car_services(object):
     def __init__(self):
         self.car_repo = Car_repository()
+        self.car_model = self.car_repo.car_model
         self.keywords = []
-        self.veh_type = self.car_repo.Car.get_veh_type()
+        self.veh_type = self.car_model.veh_type #Finnur ekki veh_type
 
-        price_dict = {"jeppi": 100000, "smábíll": 10000, "smárúta": 50000, "sportbíll": 200000,"fólksbíll": 75000}
+        price_dict = {"suv": 100000, "mini": 10000, "mpv": 50000, "sport": 200000,"sedan": 75000}
         self.veh_type = self.veh_type.lower() 
         self.price = 0
         for key, value in price_dict.items(): 
             if key == self.veh_type in price_dict:
                 self.price = value
-                self.car_repo.Car.price = value #Verð verður að tölu
+                self.car_repo.car_model.price = value #Verð verður að tölu
 
     def create_car(self,car_info):
-        created_car = self.car_repo.Car(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
+        created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
         return created_car
 
     def create_car_from_list(self, car_list): #Frá streng? afh er split()??
         car_info = car_list.split(",")
-        created_car = self.car_repo.Car(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
+        created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
         return created_car
 
     def list_to_formated_str(self,list):
@@ -79,10 +79,10 @@ class Car_services(object):
         number = 1
         for line in file_text:
             car = self.create_car_from_list(line)
-            veh_type = self.car_repo.Car.get_veh_type(car)
-            brand = self.car_repo.Car.get_brand(car)
-            plate = self.car_repo.Car.get_plate(car)
-            if self.car_repo.Car.get_status(car) == "True":
+            veh_type = self.car_repo.car_model.get_veh_type(car)
+            brand = self.car_repo.car_model.get_brand(car)
+            plate = self.car_repo.car_model.get_plate(car)
+            if self.car_repo.car_model.get_status(car) == "True":
                 status = "Available."
             else:
                 status = "Unavailable."

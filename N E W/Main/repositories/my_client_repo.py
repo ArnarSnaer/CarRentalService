@@ -1,4 +1,4 @@
-from client import Client
+from models.client_model import Client
 import string
 
 class ClientRepo():

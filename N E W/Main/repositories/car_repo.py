@@ -1,15 +1,15 @@
 from models.car_model import Car
 import os
 
-class Car_repository():
+class Car_repository(object):
     def __init__(self):
         self.info = []
-        self.Car = Car
+        self.car_model = Car
 
     def add_car(self, car):
         open_file = open("./data/vehicle.txt", "a")
 
-        veh_type = car.get_veh_type()
+        veh_type = car.veh_type
         brand = car.get_brand()
         plate = car.get_plate()
         wheel_drive = car.get_wheel_drive()

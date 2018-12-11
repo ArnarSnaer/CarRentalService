@@ -9,4 +9,7 @@ class Order_service(object):
         return self.order_repo.price
     
     def get_status(self):
-        status = sel
+        status = self.order_repo.order_model.status
+        return status
+
+    def create_order(self,info_list):
