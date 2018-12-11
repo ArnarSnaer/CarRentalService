@@ -10,7 +10,7 @@ class Car_services(object):
         created_car = self.car_repo.Car(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
         return created_car
 
-    def create_car_from_list(self, car_list):
+    def create_car_from_list(self, car_list): #Frá streng? afh er split()??
         car_info = car_list.split(",")
         created_car = self.car_repo.Car(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
         return created_car

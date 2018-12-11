@@ -1,5 +1,5 @@
-from client_services import Client_ser
-from client import Client
+from services.client_services import Client_ser
+from models.client_model import Client
 '''þetta UI hefur back option, hægt að hafa það með eða eyða því'''
 class Client_ui():
     def __init__(self):

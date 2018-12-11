@@ -1,9 +1,9 @@
-from class_client import Client
-from class_creditcard import Creditcard
+from models.client_model import Client
+from models.creditcard_model import Creditcard
 from datetime import datetime
-from class_car import Car
-from class_employee import Employee
-from class_payment import Payment
+from models.car_model import Car
+from models.employee import Employee #Endurskýra
+from models.payment_model import Payment
 
 class Order(object):
     def __init__(self,order_id,credit_info, date_start, date_end,car,client,employee):
@@ -41,29 +41,7 @@ class Order(object):
     
     def get_base_price(self):
         return self.order_payment.base_price
-
-    def calc_duration(self,date_start,date_end):
-        day1,month1,year1 = date_start.split(" ")
-        day2,month2,year2 = date_end.split(" ")
-        date1 = datetime(int(year1),int(month1),int(day1))
-        date2 = datetime(int(year2),int(month2),int(day2))
-        duration = date2 - date1
-        days = duration.days
-        return days
     
-    def add_insurance(self,price,other):
-        self.price.add_insurance(other)
-        return self.price
-    
-    def update_order(self):
-        print("What would you like to update? (Please input integer choice)")
-        print("1. Credit information\n2. Starting date\n3. Retrun date\n4. Car\n5. Employee name")
-        
-        choice = int(input(""))
-        change = input("New info is: ")
-        
-        self.info[choice-1] = change
-        return self.info
     
     def __str__(self):
         return "Order id: {}\nClient: {}\nCar: {}\nLicense plate: {}\nStarting Date: {}\nReturn date: {}\nPrice: {}\nEmployee: {}".format(self.order_id,self.client.get_name(),self.car.get_type(),self.car.get_plate(),self.date_start,self.date_end,self.total_cost,self.employee)
