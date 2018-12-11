@@ -1,4 +1,4 @@
-from models.client_model import Client
+from client import Client
 import string
 '''vantar að breyta nafni txt skjala'''
 '''villucheck fyrir alla liði'''

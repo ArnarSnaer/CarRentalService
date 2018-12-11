@@ -2,7 +2,9 @@
 # from models.client_model import Client
 from client_services import Client_ser
 from client import Client
+import string
 '''þetta UI hefur back option, hægt að hafa það með eða eyða því'''
+
 class Client_ui():
     def __init__(self):
         self.__client_ser = Client_ser()
@@ -53,7 +55,6 @@ class Client_ui():
                 self.option_4(searchword)
             elif option == "5":
                 return option
-            
     
     def option_1(self):
         fullname = input("> Fullname: ")
@@ -64,13 +65,29 @@ class Client_ui():
         license_number = input("> License number: ") 
         country = input("> Country(using Alpah-3 order): ")
         the_zip = input("> Zip: ")
-        new_client = Client(fullname, address, phone_number, birthday, license_number, country, the_zip)
-        self.__client_ser.new_client(new_client)
+        '''check if client already exists'''
+        '''nobody has the same license number'''
         
+        info_list, client_found = self.check_if_already_client(license_number)
+        if not client_found:
+            new_client = Client(fullname, address, phone_number, birthday, license_number, country, the_zip)
+            self.__client_ser.new_client(new_client)
+            info_list = [fullname, address, phone_number, birthday, license_number, country, the_zip]
+            print(info_list)
+        return info_list
+
+    def check_if_already_client(self, license_number):
+        info_list, client_found = self.__client_ser.get_client(license_number)
+        if client_found:
+            print("Client already exists")
+            print(self.my_list_format(info_list))
+        return info_list, client_found
+            
     def option_2(self, searchword):
         info_list, client_found = self.__client_ser.get_client(searchword)
         if client_found:
             print(self.my_list_format(info_list))
+            return info_list
         else:
             print("Client not found")
 
@@ -106,8 +123,20 @@ class Client_ui():
         return "Clients info as follows: \nName: {}\nAddress: {}\nPhone number: {}\nDate of birth: {}\nLicense number: {}\nCountry: {}\nZip: {}".format(a_list[self.NAME],
                                         a_list[self.ADDRESS], a_list[self.PHONE], a_list[self.BIRTHDAY], a_list[self.LICENSE_NUM], a_list[self.COUNTRY], a_list[self.THE_ZIP])
 
+    def order_menu(self):
+        clients_info = ""
+        print("Is the client already registered?  y/n: ") 
+        while clients_info == "":
+            answer = input("> ")
+            answer = answer.lower() 
+            if answer == "n":
+                clients_info = self.client_op("1")
+            elif answer == "y":
+                clients_info = self.client_op("2")
+            else:
+                print("Please input either the letter 'y' or the letter 'n'")
 
 
 
 
-Client_ui().main_menu()
+Client_ui().order_menu()

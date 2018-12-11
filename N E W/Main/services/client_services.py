@@ -1,4 +1,4 @@
-from repositories.my_client_repo import ClientRepo
+from my_client_repo import ClientRepo
 # from client import Client
 
 class Client_ser(object):
