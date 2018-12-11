@@ -1,6 +1,6 @@
 from ui.calc_ui import Calc_UI
 from ui.car_ui import Car_UI
-from ui.order_ui import order_ui
+from ui.order_ui import Order_UI
 
 def main():
     print("Welcome, User")
@@ -10,7 +10,7 @@ def main():
         print("Available sections:\n1. Order\n2. Cars\n3. Client\n4. Calculator\n5. Exit program")
         choice = input("> Choose a section: ")
         if choice == "1":
-            order_UserInterface = order_ui
+            order_UserInterface = Order_UI
             order_UserInterface
         elif choice == "2":
             car_UserInterface = Car_UI()

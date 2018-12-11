@@ -97,7 +97,7 @@ class Client_ui():
                 print("Client found, removing client")
             
     def option_4(self, searchword):
-        client_info, client_found = self.__client_ser.get_client(searchword)
+        client_found = self.__client_ser.get_client(searchword) #Tók út client_info
         if client_found:
             stay = True
             while stay:

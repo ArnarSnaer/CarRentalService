@@ -4,14 +4,17 @@ import string
 
 class Order_service(object):
     def __init__(self):
-        self.order_repo = Order_repository
+        self.order_repo = Order_repository()
+        self.order_model = self.order_repo.order_model
+        self.order_model.zip = self.generate_order_id()
+        self.Order_constructor = self.order_repo.order_constructor
 
     def add_insurance(self,ins_type):
-        self.order_repo.price.add_insurance(ins_type)
-        return self.order_repo.price
+        self.order_model.price.add_insurance(ins_type)
+        return self.order_model.price
     
     def get_status(self):
-        status = self.order_repo.order_model.status
+        status = self.order_model.get_status()
         return status
     
     def generate_order_id(self):
@@ -31,8 +34,14 @@ class Order_service(object):
         return id
 
     def create_order(self,info_list):
-        new_order = self.order_repo.order(info_list[0],info_list[1],info_list[2],info_list[3],info_list[4],info_list[5])
+        new_order = self.Order_constructor(info_list[0],info_list[1],info_list[2],info_list[3],info_list[4],info_list[5])
         return new_order
     
     def add_order(self,order):
         return self.order_repo.add_order(order)
+    
+    def remove_order(self,order):
+        return self.order_repo.remove_order(order)
+    
+    def find_order(self,keyword):
+        return self.order_repo.find_order(keyword)
