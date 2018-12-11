@@ -4,9 +4,10 @@ import os
 class Car_repository(object):
     def __init__(self):
         self.info = []
-        self.car_model = Car
+        self.car_model = Car()
 
     def add_car(self, car):
+    '''insance af bíl en ekki element af lista'''
         open_file = open("./data/vehicle.txt", "a")
 
         veh_type = car.veh_type
