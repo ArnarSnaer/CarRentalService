@@ -11,18 +11,19 @@ class Car_UI(object):
         number = 1
         for item in results:
             car_object = self.car_serv.create_car(item)
-            veh_type = self.car_repo.car_serv.Get.get_veh_type(car_object)
-            brand = self.car_repo.Car.get_brand(car_object)
-            plate = self.car_repo.Car.get_plate(car_object)
-            if self.car_repo.Car.get_status(car_object) == "True":
+            veh_type = self.car_serv.car_repo.car_model.get_veh_type(car_object)
+            brand = self.car_repo.car_model.get_brand(car_object)
+            plate = self.car_repo.car_model.get_plate(car_object)
+            if self.car_repo.car_model.get_status(car_object) == "True":
                 status = "Available."
             else:
                 status = "Unavailable."
             print("{}. Type: {} Brand: {} License plate: {} Current status: {}".format(number,veh_type, brand, plate, status))
             number += 1
         print("Complete! Here are all the results of the search.")
-        choice = int(input("Choose a car: ")
-        return results[choice-1]
+        choice = int(input("Choose a car: "))
+        index_var = choice-1
+        return results[index_var]
     
     def car_menu(self):
         choice = ""
@@ -41,7 +42,7 @@ class Car_UI(object):
                     choice = int(input("> Select a car: "))
                     chosen_car = results[choice-1]
                     created_car = self.car_serv.create_car(chosen_car)
-                    rent_status = self.car_repo.Car.get_status(created_car)
+                    rent_status = self.car_repo.car_model.get_status(created_car)
 
                     if rent_status == "False":
                         print("This car is not available for renting. Please find another.\n")
@@ -64,7 +65,7 @@ class Car_UI(object):
                     choice = int(input("> Select a car: "))
                     chosen_car = results[choice-1]
                     created_car = self.car_serv.create_car(chosen_car)
-                    rent_status = self.car_repo.Car.get_status(created_car)
+                    rent_status = self.car_repo.car_model.get_status(created_car)
 
                     if rent_status == "True":
                         print("This car is available and doesn't need returning.\n")
@@ -90,7 +91,6 @@ class Car_UI(object):
                 print(self.car_serv.get_all_cars())
             
             elif choice != "q":
-<<<<<<< HEAD
                 print("Invalid input! Please enter the number/letter in front of each operation!")
 
 
@@ -98,9 +98,6 @@ class Car_UI(object):
         print("Available car:\n")
         available_cars = self.car_serv.get_available_cars_list()
         chosen_car = self.choose_car(available_cars)
-        rented_car = self.car_repo.car_serv.create_car(chosen_car)
+        rented_car = self.car_serv.create_car(chosen_car)
         return rented_car
             
-=======
-                print("Invalid input! Please enter the number/letter in front of each operation!")
->>>>>>> 82a91b6e5b38a912da2a287cb86ff1e82b9151f9

@@ -28,11 +28,7 @@ class Order(object):
 
         self.order_payment = Payment(self.client,self.car,days_num)
         self.total_cost = self.order_payment
-<<<<<<< HEAD
-
-=======
         
->>>>>>> 4170a64e484d72f540f19a95d19bc2234f86250a
     def get_status(self):
         return self.car.status
         #Þarf að impliment-a þetta öðruvísi

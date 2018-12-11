@@ -1,7 +1,7 @@
 # from services.client_services import Client_ser
 # from models.client_model import Client
-from client_services import Client_ser
-from client import Client
+from services.client_services import Client_ser
+from models.client_model import Client
 import string
 '''þetta UI hefur back option, hægt að hafa það með eða eyða því'''
 
@@ -136,11 +136,7 @@ class Client_ui():
             else:
                 print("Please input either the letter 'y' or the letter 'n'")
 
-<<<<<<< HEAD
 
 
 
-Client_ui().order_menu()
-=======
-Client_ui().main_menu()
->>>>>>> d7d2c367178e5d8b2d6d0481a3dd87f9877e0344
+#Client_ui().order_menu()
