@@ -7,8 +7,9 @@ class Order_repository(object):
          
 
     def add_order(self,order):
+        
         open_file = open("./data/order.txt","r")
-
+        
         # self.order_id = self.Order.order_id
         # self.date_start = self.Order.date_start
         # self.date_end = self.Order.date_end
@@ -18,8 +19,8 @@ class Order_repository(object):
         # self.licence_plate = self.Order.car.plate
         # self.total_cost = self.Order.total_cost
 
-        open_file.write("{}".format(str(self.Order))
-        open_file.close
+        open_file.write("{}".format(str(self.Order)))
+        open_file.close()
 
     def remove_order(self,order_id):
         open_file = open("./data/order.txt","w")
@@ -45,8 +46,13 @@ class Order_repository(object):
     def get_all_orders(self):
         open_file = open("./data/order.txt","r")
         list_of_orders = open_file.readlines()
+        all_cars = ""
         open_file.close()
-        return list_of_orders
+        for line in list_of_orders:
+            all_cars += line
+            if line != list_of_orders[-1]:
+                all_cars += "\n"
+        return all_cars
 
     def update_order(self):
         print("What would you like to update? (Please input integer choice)")

@@ -8,9 +8,6 @@ class Order_service(object):
 
     def add_insurance(self,ins_type):
         self.order_repo.price.add_insurance(ins_type)
-<<<<<<< HEAD
-        return self.order_repo.price   
-=======
         return self.order_repo.price
     
     def get_status(self):
@@ -21,17 +18,21 @@ class Order_service(object):
         id_list = self.order_repo.check_order_id()
         letters = string.ascii_uppercase.split()
         go_again = True
-        while go_again
+        while go_again:
             id = ""
             for _ in range(2):
                 num = random.randint(0,26)
                 id += letters[num]
-            for _ in range(3)
+            for _ in range(3):
                 num_2 = random.randint(0,9)
-                id += str(num2)
+                id += str(num_2)
             if id not in id_list:
                 go_again = False
         return id
 
     def create_order(self,info_list):
->>>>>>> 4170a64e484d72f540f19a95d19bc2234f86250a
+        new_order = self.order_repo.order(info_list[0],info_list[1],info_list[2],info_list[3],info_list[4],info_list[5])
+        return new_order
+    
+    def add_order(self,order):
+        return self.order_repo.add_order(order)
