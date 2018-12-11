@@ -11,7 +11,7 @@ class Car_UI(object):
         number = 1
         for item in results:
             car_object = self.car_serv.create_car(item)
-            veh_type = self.car_repo.Car.get_veh_type(car_object)
+            veh_type = self.car_repo.car_serv.Get.get_veh_type(car_object)
             brand = self.car_repo.Car.get_brand(car_object)
             plate = self.car_repo.Car.get_plate(car_object)
             if self.car_repo.Car.get_status(car_object) == "True":
@@ -21,6 +21,8 @@ class Car_UI(object):
             print("{}. Type: {} Brand: {} License plate: {} Current status: {}".format(number,veh_type, brand, plate, status))
             number += 1
         print("Complete! Here are all the results of the search.")
+        choice = int(input("Choose a car: ")
+        return results[choice-1]
     
     def car_menu(self):
         choice = ""
@@ -89,3 +91,12 @@ class Car_UI(object):
             
             elif choice != "q":
                 print("Invalid input! Please enter the number/letter in front of each operation!")
+
+
+    def order_menu(self):
+        print("Available car:\n")
+        available_cars = self.car_serv.get_available_cars_list()
+        chosen_car = self.choose_car(available_cars)
+        rented_car = self.car_repo.car_serv.create_car(chosen_car)
+        return rented_car
+            
