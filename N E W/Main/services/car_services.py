@@ -92,5 +92,4 @@ class Car_services(object):
                 status = "Unavailable."
             print("{}. Type: {} Brand: {} License plate: {} Current status: {}".format(number,veh_type, brand, plate, status))
             number += 1
-        
         return results_txt

@@ -28,14 +28,17 @@ class Order(object):
 
         self.order_payment = Payment(self.client,self.car,days_num)
         self.total_cost = self.order_payment
+<<<<<<< HEAD
+
+=======
         
+>>>>>>> 4170a64e484d72f540f19a95d19bc2234f86250a
     def get_status(self):
         return self.car.status
         #Þarf að impliment-a þetta öðruvísi
     
     def get_base_price(self):
         return self.order_payment.base_price
-    
     
     def __str__(self):
         return "{},{},{},{},{},{},{}".format(self.order_id,self.client.get_name(),self.car.get_plate(),self.date_start,self.date_end,self.total_cost,self.employee)

@@ -32,8 +32,7 @@ class Employee_UI(object):
             
             else:
                 print("Please insert valid choice.")
-            
-            
+
 
     def order_menu(self):
         employee_name = input("Enter employee name: ")

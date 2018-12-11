@@ -17,7 +17,6 @@ class Payment(object):
         self.base_insurance = Insurance("base")
         self.total_price = (car.price * duration) +  self.base_insurance
     
-    
     def get_full_price(self):
         return self.total_price
     

@@ -56,6 +56,7 @@ class Car_repository(object):
             else:
                 rented_cars.append(line)
         all_cars = [avilable_cars,rented_cars]
+        
         return all_cars[choice]
 
     def get_all_cars(self):

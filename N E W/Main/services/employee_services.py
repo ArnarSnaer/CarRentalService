@@ -11,7 +11,6 @@ class Employee_services(object):
         except ValueError:
             return "> Sale not found, try again"
         
-
     def remove_sale(self,other):
         try:
             return self.employee.name.remove(other)
@@ -31,7 +30,6 @@ class Employee_services(object):
         else:
             return employee_order
         
-
 #Gunnar = Employee_services("Gunnar")
 #Gunnar_v2 = Employee_services()
 #Gunnar.add_sale("Skoda")

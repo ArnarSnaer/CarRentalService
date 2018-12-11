@@ -90,6 +90,7 @@ class Car_UI(object):
                 print(self.car_serv.get_all_cars())
             
             elif choice != "q":
+<<<<<<< HEAD
                 print("Invalid input! Please enter the number/letter in front of each operation!")
 
 
@@ -100,3 +101,6 @@ class Car_UI(object):
         rented_car = self.car_repo.car_serv.create_car(chosen_car)
         return rented_car
             
+=======
+                print("Invalid input! Please enter the number/letter in front of each operation!")
+>>>>>>> 82a91b6e5b38a912da2a287cb86ff1e82b9151f9

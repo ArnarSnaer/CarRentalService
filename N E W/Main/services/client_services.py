@@ -29,7 +29,6 @@ class Client_ser(object):
         if client_info == False:
             client_found = False
         return client_info, client_found
-        
 
     def new_client(self, client):
         if self.is_valid_client(client):
@@ -76,4 +75,3 @@ class Client_ser(object):
 # '''prófa update registration'''
 # searchword = input("Input a phone-number, address, license-number or etc.\n")
 # Client_ser().update_registration(searchword)
-
