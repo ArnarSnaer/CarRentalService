@@ -57,6 +57,7 @@ class Order_repository(object):
         return all_cars
 
     def update_order(self):
+        '''hafa print og input í service'''
         print("What would you like to update? (Please input integer choice)")
         print("1. Client\n2. Starting date\n3. Retrun date\n4. Car\n5. Employee name")
         

@@ -14,7 +14,7 @@ class Order_UI(object):
         self.client_menu = self.client_ui.order_menu
         self.employee_menu = self.employee_ui.order_menu    
 
-    def service_menu(self):
+    def order_menu(self):
         choice = ""
         while choice != "q":
             print("Current section\n1. Create new order\n2.Delete order\n3.get all orders\n4. Update order\nq. Quit")

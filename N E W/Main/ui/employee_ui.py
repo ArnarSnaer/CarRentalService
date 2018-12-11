@@ -39,5 +39,5 @@ class Employee_UI(object):
         working_employee = Employee(employee_name)
         return working_employee
         
-Gunnar = Employee_UI("Gunnar")
-Gunnar.employee_menu()
+# Gunnar = Employee_UI("Gunnar")
+# Gunnar.employee_menu()

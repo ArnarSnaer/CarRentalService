@@ -135,6 +135,8 @@ class Client_ui():
                 clients_info = self.client_op("2")
             else:
                 print("Please input either the letter 'y' or the letter 'n'")
+        '''bætt við þessari línu'''
+        return clients_info
 
 
 

@@ -5,7 +5,8 @@ class Car_services(object):
         self.car_repo = Car_repository()
         self.car_model = self.car_repo.car_model
         self.keywords = []
-        self.veh_type = self.car_model.veh_type #Finnur ekki veh_type
+        # self.veh_type = self.car_model.veh_type #Finnur ekki veh_type
+        self.veh_type = self.car_model.veh_type
 
         price_dict = {"suv": 100000, "mini": 10000, "mpv": 50000, "sport": 200000,"sedan": 75000}
         self.veh_type = self.veh_type.lower() 
@@ -16,8 +17,10 @@ class Car_services(object):
                 self.car_repo.car_model.price = value #Verð verður að tölu
 
     def create_car(self,car_info):
-        created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
-        return created_car
+        '''á þetta ekki að vera í car_repo? '''
+        # created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
+        self.car_repo.add_car(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
+        # return created_car
 
     def create_car_from_list(self, car_list): #Frá streng? afh er split()??
         car_info = car_list.split(",")
