@@ -6,7 +6,7 @@ from models.employee import Employee #Endurskýra
 from models.payment_model import Payment
 
 class Order(object):
-    def __init__(self,order_id,credit_info, date_start, date_end,car,client,employee):
+    def __init__(self,order_id, date_start, date_end,car,client,employee):
         self.order_id = order_id
         self.credit_info = credit_info
         self.date_start = date_start
@@ -21,9 +21,7 @@ class Order(object):
         self.min_duration = 1
         self.info= [self.credit_info,date_start,date_end,self.car,self.employee]
 
-        #Þetta reiknar heildarkostnað (total_price)
-        # 1. Reiknar fjölda daga sem pöntunin stendur yfir
-        # 2. Býr til payment og skilartölugildi hennar
+        #Þetta reiknar heildarkostnað (total_price) út frá tímanum sem er gefinn
         day1,month1,year1 = self.date_start.split(" ")
         day2,month2,year2 = self.date_end.split(" ")
         date1 = datetime(int(year1),int(month1),int(day1))
