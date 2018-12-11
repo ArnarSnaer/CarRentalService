@@ -3,10 +3,9 @@ from repositories.car_repo import Car_repository
 class Car_services(object):
     def __init__(self):
         self.car_repo = Car_repository()
-        self.car_model = self.car_repo.car_model
+        self.car_model = self.car_repo.car_model()
         self.keywords = []
-        # self.veh_type = self.car_model.veh_type #Finnur ekki veh_type
-        self.veh_type = self.car_model.veh_type
+        self.veh_type = self.car_model.veh_type #Finnur ekki veh_type
 
         price_dict = {"suv": 100000, "mini": 10000, "mpv": 50000, "sport": 200000,"sedan": 75000}
         self.veh_type = self.veh_type.lower() 
@@ -17,10 +16,8 @@ class Car_services(object):
                 self.car_repo.car_model.price = value #Verð verður að tölu
 
     def create_car(self,car_info):
-        '''á þetta ekki að vera í car_repo? '''
-        # created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
-        self.car_repo.add_car(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
-        # return created_car
+        created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
+        return created_car
 
     def create_car_from_list(self, car_list): #Frá streng? afh er split()??
         car_info = car_list.split(",")
@@ -39,12 +36,6 @@ class Car_services(object):
                     item += ","
                 result_str += item
             return result_str
-    
-    def create_keyword_list(self):
-        return self.keywords
-    
-    def add_keyword(self,keyword):
-        return self.keywords.append(keyword)
     
     def rent_car(self,car_object):
         car_object = str(car_object)
@@ -71,10 +62,6 @@ class Car_services(object):
         restults_str = self.list_to_formated_str(available_cars)
         return restults_str
     
-    def get_available_cars_list(self):
-        available_cars = self.car_repo.sort_cars(0)
-        return available_cars
-    
     def get_rented_cars(self):
         rented_cars = self.car_repo.sort_cars(1)
         results_str = self.list_to_formated_str(rented_cars)
@@ -96,3 +83,18 @@ class Car_services(object):
             print("{}. Type: {} Brand: {} License plate: {} Current status: {}".format(number,veh_type, brand, plate, status))
             number += 1
         return results_txt
+
+    def calculate_price(self, choice):
+        try:
+            price_dict = {"suv": 100000, "hatchback": 50000, "sedan": 50000, "sport": 200000,"mpv": 75000, "crossover": 75000, "convertible": 200000}
+            price = 0
+            choice = choice.lower()
+            print(choice)
+            for key, value in price_dict.items():
+                if choice == key:
+                    price = value
+            
+        except Exception:
+            price = 0
+
+        return price        
