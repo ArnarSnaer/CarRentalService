@@ -96,7 +96,4 @@ class Client_ui():
                                         a_list[self.ADDRESS], a_list[self.PHONE], a_list[self.BIRTHDAY], a_list[self.LICENSE_NUM], a_list[self.COUNTRY], a_list[self.THE_ZIP])
 
 
-
-
-
 Client_ui().main_menu()

@@ -6,6 +6,4 @@ class Order_service(object):
 
     def add_insurance(self,ins_type):
         self.order_repo.price.add_insurance(ins_type)
-        return self.order_repo.price
-    
-    
+        return self.order_repo.price   

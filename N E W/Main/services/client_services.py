@@ -24,7 +24,6 @@ class Client_ser(object):
         # return "Name: {}\nAddress: {}\nPhone number: {}\nBirthday: {}\nDrivers license number: 
         # {}\nCountry: {}\nZip: {}".format(self.name,self.address,self.phone,self.birthday,self.driver_num, self.country,self.zip)
         return client_info, client_found
-        
 
     def new_client(self, client):
         self.__client_repo.new_client(client)
@@ -58,4 +57,3 @@ class Client_ser(object):
 # '''prófa update registration'''
 # searchword = input("Input a phone-number, address, license-number or etc.\n")
 # Client_ser().update_registration(searchword)
-

@@ -31,7 +31,6 @@ class Order(object):
 
         self.order_payment = Payment(self.client,self.car,days_num)
         self.total_cost = self.order_payment
-        
 
     def get_status(self):
         return self.car.get_status()
@@ -39,7 +38,6 @@ class Order(object):
     
     def get_base_price(self):
         return self.order_payment.base_price
-    
     
     def __str__(self):
         return "Order id: {}\nClient: {}\nCar: {}\nLicense plate: {}\nStarting Date: {}\nReturn date: {}\nPrice: {}\nEmployee: {}".format(self.order_id,self.client.get_name(),self.car.get_type(),self.car.get_plate(),self.date_start,self.date_end,self.total_cost,self.employee)

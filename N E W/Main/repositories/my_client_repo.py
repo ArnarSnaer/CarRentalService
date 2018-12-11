@@ -89,7 +89,6 @@ class ClientRepo():
             self.new_client(client_update)
             open_file.close()
             print("Update complete!")
-                
 
         else:
             print("Client not found")
@@ -105,7 +104,6 @@ class ClientRepo():
         
         return the_client
 
-        
 
 # mysearch = ClientRepo().new_customer()
 # Jann Kounias,Seahaven 176,546-799-42066,17. Oktober,4011148563,USA,159

@@ -32,8 +32,7 @@ class Employee_UI(object):
             
             else:
                 print("Please insert valid choice.")
-            
-            
+
 
 Gunnar = Employee_UI("Gunnar")
 Gunnar.employee_menu()

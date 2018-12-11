@@ -5,5 +5,3 @@ def main():
     car_UserInterface.car_menu()
 
 main()
-
-
