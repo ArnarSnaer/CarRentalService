@@ -1,66 +1,100 @@
-from models.car_model import Car
-import os
+from repositories.car_repo import Car_repository
 
-class Car_repository():
+class Car_services(object):
     def __init__(self):
-        self.info = []
-        self.car_model = Car
+        self.car_repo = Car_repository()
+        self.car_model = self.car_repo.car_model()
+        self.keywords = []
+        self.veh_type = self.car_model.veh_type #Finnur ekki veh_type
 
-    def add_car(self, car):
-        open_file = open("./data/vehicle.txt", "a")
+        price_dict = {"suv": 100000, "mini": 10000, "mpv": 50000, "sport": 200000,"sedan": 75000}
+        self.veh_type = self.veh_type.lower() 
+        self.price = 0
+        for key, value in price_dict.items(): 
+            if key == self.veh_type in price_dict:
+                self.price = value
+                self.car_repo.car_model.price = value #Verð verður að tölu
 
-        veh_type = car.get_veh_type()
-        brand = car.get_brand()
-        plate = car.get_plate()
-        wheel_drive = car.get_wheel_drive()
-        status = car.get_status()
-        is_manual = car.get_is_manual()
-        driven = car.get_driven()
-        fuel_type = car.get_fuel_type()
-        price = car.get_price()
-        open_file.write("{},{},{},{},{},{},{},{},{}\n".format(veh_type, brand, plate, wheel_drive, status, is_manual, driven, fuel_type, price))
+    def create_car(self,car_info):
+        created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
+        return created_car
 
-        open_file.close()
+    def create_car_from_list(self, car_list): #Frá streng? afh er split()??
+        car_info = car_list.split(",")
+        created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
+        return created_car
 
-    def remove_car(self,plate):
-        open_file = open("./data/vehicle.txt", "r")
-        old_file = open_file.readlines()
-        open_file.close()
-
-        new_file = open("./data/vehicle.txt", "w")
-        for line in old_file:
-            if plate not in line:
-                new_file.write(line)
-
-        new_file.close()
-
-    def find_car(self,searchword):
-        open_file = open("./data/vehicle.txt", "r")
-        car_list = []
-        for line in open_file:
-            if searchword in line:
-                found_list = line.split(",")
-                car_list.append(found_list)
-        
-        return car_list
+    def list_to_formated_str(self,list):
+        result_str = ""
+        if len(list) == 0:
+            return "No matches!"
+        else:
+            for item in list:
+                if "\n" in item:
+                    item = item[:-1]
+                else:
+                    item += ","
+                result_str += item
+            return result_str
     
-    def sort_cars(self,choice):
-        open_file = open("./data/vehicle.txt", "r")
-        avilable_cars = []
-        rented_cars = []
-        all_cars = []
-        for line in open_file:
-            info = line.split(",")
-            if info[4] == True:
-                avilable_cars.append(line)
+    def rent_car(self,car_object):
+        car_object = str(car_object)
+        split_list = car_object.split(",")
+        if split_list[4] == "True":
+            split_list[4] = "False" # Er hægt að stytta, einhver með fleiri brain cells að laga
+        else:
+            split_list[4] = "True"
+        new_str = ""
+        for item in split_list:
+            new_str += item
+            if item == split_list[-1]:
+                new_str += "\n"
             else:
-                rented_cars.append(line)
-        all_cars = [avilable_cars,rented_cars]
-        return all_cars[choice]
+                new_str += ","
+        return new_str
+
+    def return_car(self,car_object):
+        if car_object.get_status() == False:
+            car_object.status  = True
+    
+    def get_available_cars(self):
+        available_cars = self.car_repo.sort_cars(0)
+        restults_str = self.list_to_formated_str(available_cars)
+        return restults_str
+    
+    def get_rented_cars(self):
+        rented_cars = self.car_repo.sort_cars(1)
+        results_str = self.list_to_formated_str(rented_cars)
+        return results_str
 
     def get_all_cars(self):
-        open_file = open("./data/vehicle.txt", "r")
-        list_of_cars = open_file.readlines()
-        open_file.close()
+        results_txt = ""
+        file_text = self.car_repo.get_all_cars()
+        number = 1
+        for line in file_text:
+            car = self.create_car_from_list(line)
+            veh_type = self.car_repo.car_model.get_veh_type(car)
+            brand = self.car_repo.car_model.get_brand(car)
+            plate = self.car_repo.car_model.get_plate(car)
+            if self.car_repo.car_model.get_status(car) == "True":
+                status = "Available."
+            else:
+                status = "Unavailable."
+            print("{}. Type: {} Brand: {} License plate: {} Current status: {}".format(number,veh_type, brand, plate, status))
+            number += 1
+        return results_txt
 
-        return list_of_cars
+    def calculate_price(self, choice):
+        try:
+            price_dict = {"suv": 100000, "hatchback": 50000, "sedan": 50000, "sport": 200000,"mpv": 75000, "crossover": 75000, "convertible": 200000}
+            price = 0
+            choice = choice.lower()
+            print(choice)
+            for key, value in price_dict.items():
+                if choice == key:
+                    price = value
+            
+        except Exception:
+            price = 0
+
+        return price        
