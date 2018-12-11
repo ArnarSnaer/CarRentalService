@@ -5,6 +5,15 @@ class Car_services(object):
     def __init__(self):
         self.car_repo = Car_repository()
         self.keywords = []
+        self.veh_type = self.car_repo.Car.get_veh_type()
+
+        price_dict = {"jeppi": 100000, "smábíll": 10000, "smárúta": 50000, "sportbíll": 200000,"fólksbíll": 75000}
+        self.veh_type = self.veh_type.lower() 
+        self.price = 0
+        for key, value in price_dict.items(): 
+            if key == self.veh_type in price_dict:
+                self.price = value
+                self.car_repo.Car.price = value #Verð verður að tölu
 
     def create_car(self,car_info):
         created_car = self.car_repo.Car(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])

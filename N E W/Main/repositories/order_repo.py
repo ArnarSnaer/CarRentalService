@@ -9,20 +9,16 @@ class Order_repository(object):
     def add_order(self,order):
         open_file = open("./data/orders.txt","r")
 
-        self.order_id = self.Order.order_id
-        self.credit_info = self.Order.credit_info
-        self.date_start = self.Order.date_start
-        self.date_end = self.Order.date_end
-        self.car = self.Order.car
-        self.client = self.Order.client
-        self.driver = self.Order.client.get_name()
-        self.employee = self.Order.employee.get_name()
-        self.licence_plate = self.Order.car.plate
-        self.price = self.Order.car.price
-        self.total_cost = self.Order.total_cost
-        self.min_duration = self.Order.min_duration
+        # self.order_id = self.Order.order_id
+        # self.date_start = self.Order.date_start
+        # self.date_end = self.Order.date_end
+        # self.car = self.Order.car
+        # self.driver = self.Order.client.get_name()
+        # self.employee = self.Order.employee.get_name()
+        # self.licence_plate = self.Order.car.plate
+        # self.total_cost = self.Order.total_cost
 
-        open_file.write("{},{},{},{},{},{},{},{},{},{},{},{}".format(self.order_id,self.credit_info,self.date_start,self.date_end,self.car,self.client,self.driver,self.employee,self.licence_plate,self.price,self.total_cost,self.min_duration))
+        open_file.write("{}".format(str(self.Order))
         open_file.close
 
     def remove_order(self,order_id):

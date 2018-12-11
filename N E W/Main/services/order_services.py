@@ -8,4 +8,5 @@ class Order_service(object):
         self.order_repo.price.add_insurance(ins_type)
         return self.order_repo.price
     
-    
+    def get_status(self):
+        status = sel
