@@ -4,30 +4,36 @@ from my_client_repo import ClientRepo
 class Client_ser(object):
     def __init__(self):
         self.__client_repo = ClientRepo()
+
+        self.NAME = 0
+        self.ADDRESS = 1
+        self.PHONE = 2
+        self.BIRTHDAY = 3
+        self.LICENSE_NUM = 4
+        self.COUNTRY = 5
+        self.THE_ZIP = 6
+        self.INFO = 7
     
     def update_registration(self, searchword, option):
+        updated = False
         client_info, client_found = self.get_client(searchword)
-        if client_found:
-            self.__client_repo.remove_client(searchword)
-            self.__client_repo.update_registration(client_info, option)
-
-        # # Setja villucheck seinna ef einvher reynir að skrifa inn nafnið á upplýsingarreitinum
-        # self.info[choice-1] = change
-        # return self.info
+        if client_found == True and type(client_info)==list:
+                self.__client_repo.remove_client(searchword)
+                if self.__client_repo.update_registration(client_info, option):
+                    updated = True
+        return updated
     
     def get_client(self, searchword):
         client_info = self.__client_repo.find_client(searchword)
         client_found = True
         if client_info == False:
             client_found = False
-
-        # return "Name: {}\nAddress: {}\nPhone number: {}\nBirthday: {}\nDrivers license number: 
-        # {}\nCountry: {}\nZip: {}".format(self.name,self.address,self.phone,self.birthday,self.driver_num, self.country,self.zip)
         return client_info, client_found
         
 
     def new_client(self, client):
-        self.__client_repo.new_client(client)
+        if self.is_valid_client(client):
+            self.__client_repo.new_client(client)
 
     def remove_client(self, searchword):
         '''spurning um að sleppa client_found og nota bara self.client.remove.... til að skila True'''
@@ -35,6 +41,18 @@ class Client_ser(object):
         if self.__client_repo.remove_client(searchword):
             client_found = True
         return client_found
+
+    def is_valid_client(self, client):
+        clients_info = []
+        for attr, value in client.__dict__.items():
+            clients_info.append(value) 
+
+        '''try except föll nauðsynleg'''
+        
+        return True
+        
+
+
 
 # ''' finnst mér að ætti að vera í UI en ekki í servicees og mun ég færa það yfir í UI þegar við fáum allt heila dæmið til að virka'''
 # fullname = input("Fullname: ")
