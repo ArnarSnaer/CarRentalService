@@ -151,3 +151,11 @@ class Car_UI(object):
                 print("Invalid input! Please enter the number/letter in front of each operation!\n")
 
         print("Going back to main menu...\n")
+
+
+    def order_menu(self):
+        print("Available car:\n")
+        available_cars = self.car_serv.get_available_cars_list()
+        chosen_car = self.choose_car(available_cars)
+        rented_car = self.car_serv.create_car(chosen_car)
+        return rented_car
