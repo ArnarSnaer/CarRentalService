@@ -14,16 +14,26 @@ class Client_ser(object):
         self.LICENSE_NUM = 4
         self.COUNTRY = 5
         self.THE_ZIP = 6
-        self.INFO = 7
+        # self.INFO = 7
     
-    def update_registration(self, searchword, option):
+    def update_registration(self, searchword, option, the_change):
         updated = False
+        invalidate =''
         client_info, client_found = self.get_client(searchword)
         if client_found == True and type(client_info)==list:
-                self.__client_repo.remove_client(searchword)
-                if self.__client_repo.update_registration(client_info, option):
-                    updated = True
-        return updated
+                
+                '''villuchecka vantar'''
+                client_update = self.__client_repo.change_element(client_info, option, the_change)
+                valid, invalidation = self.is_valid_client(client_update)
+                if valid:
+                    self.__client_repo.remove_client(searchword)
+                    if self.__client_repo.update_registration(client_info, option, the_change):
+                        updated = True
+                else:
+                    invalidate = invalidation
+
+                
+        return updated, invalidate
     
     def get_client(self, searchword):
         client_info = self.__client_repo.find_client(searchword)
@@ -49,8 +59,12 @@ class Client_ser(object):
 
     def is_valid_client(self, client):
         clients_info = []
-        for attr, value in client.__dict__.items():
-            clients_info.append(value) 
+        if type(client) != list:
+            for attr, value in client.__dict__.items():
+                clients_info.append(value)
+        else:
+             for element in client:
+                clients_info.append(element)
         
         valid, invalidation = self.check_input(clients_info)
         return valid, invalidation
@@ -69,7 +83,7 @@ class Client_ser(object):
             invalidation = "A license number can only contain integers not letters"
         elif not self.check_if_letters(clients_info[self.COUNTRY]):
             invalidation = "A country's Alpha 3 can only contain letters"
-        elif not self.check_if_letters(clients_info[self.THE_ZIP]):
+        elif not self.check_if_integers(clients_info[self.THE_ZIP]):
             invalidation = "A zip code can only contain integers not letters"
         else:
             valid = True
@@ -84,7 +98,7 @@ class Client_ser(object):
        
     def check_if_letters(self, variable):
         try:
-            variable = variable.split()
+            variable = list(variable)
             for letter in variable:
                 letter.lower()  
             return True
@@ -94,9 +108,10 @@ class Client_ser(object):
 
     def check_if_integers(self, variable):
         try:
-            variable = variable.split()
+            variable = list(variable)
             for integer in variable:
-                int(integer)
+                if integer != "-": 
+                    int(integer)
             return True
         except ValueError:
             return False
