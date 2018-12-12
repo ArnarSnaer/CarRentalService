@@ -2,10 +2,10 @@ from services.employee_services import Employee_services
 from models.employee import Employee
 
 class Employee_UI(object):
-    def __init__(self,name):
-        self.name = name
-        self.employee_ser = Employee_services(name)
-        self.employee = Employee(name)
+    def __init__(self):
+        self.employee_ser = Employee_services()
+        self.name = self.employee_ser.name
+        self.employee = Employee()
     
     def print_sales(self):
         print(self.employee_ser.get_sales())
