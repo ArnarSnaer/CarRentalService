@@ -16,12 +16,12 @@ class Car_services(object):
                 self.car_repo.car_model.price = value #Verð verður að tölu
 
     def create_car(self,car_info):
-        created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
+        created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7],car_info[8])
         return created_car
 
     def create_car_from_list(self, car_list): #Frá streng? afh er split()??
         car_info = car_list.split(",")
-        created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7])
+        created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7],car_info[8])
         return created_car
 
     def list_to_formated_str(self,list):
@@ -61,10 +61,6 @@ class Car_services(object):
         available_cars = self.car_repo.sort_cars(0)
         restults_str = self.list_to_formated_str(available_cars)
         return restults_str
-
-    def get_available_cars_list(self):
-        available_cars = self.car_repo.sort_cars(0)
-        return available_cars
     
     def get_rented_cars(self):
         rented_cars = self.car_repo.sort_cars(1)
@@ -75,16 +71,18 @@ class Car_services(object):
         results_txt = ""
         file_text = self.car_repo.get_all_cars()
         number = 1
-        for line in file_text:
-            car = self.create_car_from_list(line)
-            veh_type = self.car_repo.car_model.get_veh_type(car)
-            brand = self.car_repo.car_model.get_brand(car)
-            plate = self.car_repo.car_model.get_plate(car)
-            if self.car_repo.car_model.get_status(car) == "True":
+        for item in file_text:
+            car_object = self.create_car_from_list(item)
+            veh_type = self.car_repo.car_model.get_veh_type(car_object)
+            brand = self.car_repo.car_model.get_brand(car_object)
+            plate = self.car_repo.car_model.get_plate(car_object)
+            price = self.car_repo.car_model.get_price(car_object)
+            price = price[:-1]
+            if self.car_repo.car_model.get_status(car_object) == "True":
                 status = "Available."
             else:
                 status = "Unavailable."
-            print("{}. Type: {} Brand: {} License plate: {} Current status: {}".format(number,veh_type, brand, plate, status))
+            print("{:>5d}. {} Type: {:>5s}{:>5s}Brand: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Base price: {:>5s}{:<5s}Current status: {:>5s}".format(number,"|",veh_type,"", brand,"", plate,"", price,"", status))
             number += 1
         return results_txt
 
