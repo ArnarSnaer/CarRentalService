@@ -61,10 +61,15 @@ class Car_services(object):
         available_cars = self.car_repo.sort_cars(0)
         restults_str = self.list_to_formated_str(available_cars)
         return restults_str
-    
+
     def get_available_cars_list(self):
         available_cars = self.car_repo.sort_cars(0)
-        return available_cars
+        real_list = []
+        for item in available_cars:
+            item = item.split(",")
+            real_list.append(item)
+        return real_list
+
     
     def get_rented_cars(self):
         rented_cars = self.car_repo.sort_cars(1)
