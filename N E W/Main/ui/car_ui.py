@@ -159,7 +159,6 @@ class Car_UI(object):
     def order_menu(self):
         print("Available car:\n")
         available_cars = self.car_serv.get_available_cars_list()
-        print(available_cars)
         chosen_car = self.choose_car(available_cars)
-        rented_car = self.car_serv.create_car_from_list(chosen_car)
+        rented_car = self.car_serv.create_car(chosen_car)
         return rented_car
