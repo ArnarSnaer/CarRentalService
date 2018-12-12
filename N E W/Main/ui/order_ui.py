@@ -26,12 +26,18 @@ class Order_UI(object):
                 start_date = input("Starting date: ")
                 end_date = input("Return date: ")
                 chosen_car = self.car_menu(Car_UI())
+                #chosen_car = self.car_ui.order_menu(Car_UI())
+                plate = chosen_car.get_plate()
+                price = chosen_car.get_price()
                 client = self.client_menu(Client_ui())
+                name = client.get_name()
                 employee = self.employee_menu(Employee_UI())
-                info_list = [order_id,start_date,end_date,chosen_car,client,employee]
+                employee_name = employee.get_name()
+                info_list = [order_id,start_date,end_date,plate,name,employee_name, price]
+                print(info_list)
                 new_order = self.order_ser.create_order(info_list)
                 self.order_ser.add_order(new_order)
-
+                # ég held ennþá að car sé flottasti klasinn og ætti að fá 10
             elif choice == "2":
                 keyword = input("Enter the order id of the order you want to delete:\n")
                 order_list = self.order_ser.find_order(keyword)
