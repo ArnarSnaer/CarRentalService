@@ -142,8 +142,12 @@ class Client_ui():
             else:
                 print("Please input either the letter 'y' or the letter 'n'")
         '''bætt við þessari línu'''
+<<<<<<< HEAD
         return clients_info
 
 
 
 
+=======
+        return clients_info
+>>>>>>> 2421e948caee93dca82f4ef46aedc8669c556db6
