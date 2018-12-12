@@ -10,6 +10,7 @@ class Car(object):
         self.driven = driven
         self.fuel_type = fuel_type
         self.price = price
+        
     
     def __str__(self):
         return "{},{},{},{},{},{},{},{},{}".format(self.veh_type, self.brand, self.plate, self.wheel_drive, self.status, self.is_manual, self.driven, self.fuel_type, self.price)
