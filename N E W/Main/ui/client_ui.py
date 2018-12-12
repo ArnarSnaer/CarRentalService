@@ -149,14 +149,5 @@ class Client_ui():
                 print(clients_info)
             else:
                 print("Please input either the letter 'y' or the letter 'n'")
-<<<<<<< HEAD
-        '''bætt við þessari línu'''
-        return clients_info
-
-
-
-
-=======
         customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
         return customer
->>>>>>> 6dca5fe047ee661ee1a560f6888d0474ebd40074
