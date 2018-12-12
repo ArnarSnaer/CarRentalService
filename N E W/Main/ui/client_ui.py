@@ -1,7 +1,7 @@
-# from services.client_services import Client_ser
-# from models.client_model import Client
 from services.client_services import Client_ser
 from models.client_model import Client
+# from services.client_services import Client_ser
+# from models.client_model import Client
 import string
 '''þetta UI hefur back option, hægt að hafa það með eða eyða því'''
 
@@ -47,6 +47,7 @@ class Client_ui():
         else:
             print("Input a searchword, using a clients license number or phone number is recommended ")
             searchword = input("> Searchword: ")
+
             if option == "2":
                 self.option_2(searchword)
             elif option == "3":
@@ -60,7 +61,6 @@ class Client_ui():
         fullname = input("> Fullname: ")
         address = input("> Address: ")
         phone_number = input("> Phone number: ")
-        '''villu-check needed'''
         birthday = input("> Date of birth: ")
         license_number = input("> License number: ") 
         country = input("> Country(using Alpah-3 order): ")
@@ -71,11 +71,16 @@ class Client_ui():
         info_list, client_found = self.check_if_already_client(license_number)
         if not client_found:
             new_client = Client(fullname, address, phone_number, birthday, license_number, country, the_zip)
-            self.__client_ser.new_client(new_client)
-            info_list = [fullname, address, phone_number, birthday, license_number, country, the_zip]
-            print(info_list)
-        return info_list
+            valid, invalidation = self.__client_ser.new_client(new_client)
+            if valid:
+                info_list = [fullname, address, phone_number, birthday, license_number, country, the_zip]
+                print(info_list)
+                return info_list
+            elif not valid:
+                print(invalidation)
+                return None
 
+#möguleg endurtekning í gangi
     def check_if_already_client(self, license_number):
         info_list, client_found = self.__client_ser.get_client(license_number)
         if client_found:
@@ -95,6 +100,7 @@ class Client_ui():
         if self.option_2(searchword):
             if self.__client_ser.remove_client(searchword):
                 print("Client found, removing client")
+
             
     def option_4(self, searchword):
         client_found = self.__client_ser.get_client(searchword) #Tók út client_info
@@ -141,4 +147,4 @@ class Client_ui():
 
 
 
-#Client_ui().order_menu()
+Client_ui().main_menu()

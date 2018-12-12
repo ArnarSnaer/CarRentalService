@@ -1,3 +1,4 @@
+import string
 class Client(object):
     def __init__(self,name,address,phone,birthday,license_num,country,the_zip):
         self.name = name

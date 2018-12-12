@@ -1,5 +1,7 @@
 from repositories.client_repo import ClientRepo
+# from repositories.client_repo import ClientRepo
 # from client import Client
+import string
 
 class Client_ser(object):
     def __init__(self):
@@ -31,8 +33,12 @@ class Client_ser(object):
         return client_info, client_found
 
     def new_client(self, client):
-        if self.is_valid_client(client):
+        valid, invalidation = self.is_valid_client(client)
+        if valid:
             self.__client_repo.new_client(client)
+            return valid, invalidation
+        else:
+            return valid, invalidation
 
     def remove_client(self, searchword):
         '''spurning um að sleppa client_found og nota bara self.client.remove.... til að skila True'''
@@ -45,11 +51,58 @@ class Client_ser(object):
         clients_info = []
         for attr, value in client.__dict__.items():
             clients_info.append(value) 
+        
+        valid, invalidation = self.check_input(clients_info)
+        return valid, invalidation
 
-        '''try except föll nauðsynleg'''
+
+
+    def check_input(self, clients_info):
+        valid = False
+        invalidation ='' 
+
+        if not self.check_if_letters(clients_info[self.NAME]):
+            invalidation = "A name can only contain alpahabetical letters"
+        elif not self.check_if_integers(clients_info[self.PHONE]):
+            invalidation = "Phone number can only contain integers not letters"
+        elif not self.check_if_integers(clients_info[self.LICENSE_NUM]):
+            invalidation = "A license number can only contain integers not letters"
+        elif not self.check_if_letters(clients_info[self.COUNTRY]):
+            invalidation = "A country's Alpha 3 can only contain letters"
+        elif not self.check_if_letters(clients_info[self.THE_ZIP]):
+            invalidation = "A zip code can only contain integers not letters"
+        else:
+            valid = True
+            
+        clients_info[self.ADDRESS]
+       
+        clients_info[self.BIRTHDAY]
         
-        return True
+        return valid , invalidation
         
+        
+       
+    def check_if_letters(self, variable):
+        try:
+            variable = variable.split()
+            for letter in variable:
+                letter.lower()  
+            return True
+        except ValueError:
+            return False
+
+
+    def check_if_integers(self, variable):
+        try:
+            variable = variable.split()
+            for integer in variable:
+                int(integer)
+            return True
+        except ValueError:
+            return False
+ 
+    # def check_if_contain_int_and_str(self, variable):
+    #     for i in
 
 
 
