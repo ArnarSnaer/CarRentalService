@@ -24,11 +24,8 @@ class Car_UI(object):
             number += 1
         print("Complete! Here are all the results of the search.\n")
         choice = input("What car would you like to choose? (enter 'q' to quit): ")
-        if choice == "q":
-            pass
-        else:
-            choice_int = int(choice)
-            return results[choice_int-1]
+        choice_int = int(choice)
+        return results[choice_int-1]
     
     def car_menu(self):
         choice = ""
@@ -164,5 +161,5 @@ class Car_UI(object):
         available_cars = self.car_serv.get_available_cars_list()
         print(available_cars)
         chosen_car = self.choose_car(available_cars)
-        rented_car = self.car_serv.create_car(chosen_car)
+        rented_car = self.car_serv.create_car_from_list(chosen_car)
         return rented_car
