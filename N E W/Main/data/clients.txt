@@ -81,3 +81,4 @@ Han Kounias,Long Way 18,546-799-55683,28. Febuary,6049165213,Isl,148
 Teena Kounias,Litenway 127,546-799-13593,11. April,9962111536,JP,621
 Meredith Viveros-aguilera,Long Way 110,554-578-02485,5. December,6715652859,FR,574
 Lawrence Grove,Litenway 71,554-578-70400,18. January,8466011859,Isl,408
+Xefu,Rata Sum,123-4567,12 12 1998,123456789,USA,123

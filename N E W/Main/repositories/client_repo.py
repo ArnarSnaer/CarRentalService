@@ -19,7 +19,7 @@ class ClientRepo():
     
     def new_client(self, client):
         ''' þarf að implementa að það geti ekki verið hægt að bæta við einstakling sem er núþegar í listanum'''
-        open_file = open("clients.txt", "a+")
+        open_file = open("./data/clients.txt", "a+")
         fullname = client.get_name()
         address = client.get_address()
         phone = client.get_phone()
@@ -37,11 +37,11 @@ class ClientRepo():
         '''vantar að villu-checka'''
         # client_found = False
 
-        open_file = open("clients.txt", "r")
+        open_file = open("./data/clients.txt", "r")
         lines = open_file.readlines()
         open_file.close()
 
-        open_file = open("clients.txt", "w")
+        open_file = open("./data/clients.txt", "w")
         for line in lines:
             if searchword not in line:
                 open_file.write(line)
@@ -54,7 +54,7 @@ class ClientRepo():
     def find_client(self,searchword):
         # searchword = input("Input a phone-number, address, license-number or etc.\n")
         ''' Hér vantar villu-check -->'''
-        open_file = open("clients.txt", "r")
+        open_file = open("./data/clients.txt", "r")
         client_found = False
         for line in open_file:
             if searchword in line:

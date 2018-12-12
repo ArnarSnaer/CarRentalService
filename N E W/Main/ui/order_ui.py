@@ -7,13 +7,12 @@ class Order_UI(object):
     def __init__(self):
         self.order_ser = Order_service()
         self.order_repo = self.order_ser.order_repo
-        self.car_ui = Car_UI()
-        self.client_ui = Client_ui()
-        self.employee_ui = Employee_UI()
-
+        self.car_ui = Car_UI
+        self.client_ui = Client_ui
+        self.employee_ui = Employee_UI
         self.car_menu = self.car_ui.order_menu
         self.client_menu = self.client_ui.order_menu
-        self.employee_menu = self.employee_ui.order_menu 
+        self.employee_menu = self.employee_ui.order_menu  
 
     def order_menu(self):
         choice = ""
@@ -24,11 +23,11 @@ class Order_UI(object):
             if choice == "1":
                 print("Please enter the neccesery information for the order: ")
                 order_id = self.order_ser.generate_order_id()
-                start_date = ("Starting date: ")
-                end_date = ("Return date: ")
-                chosen_car = self.car_menu()
-                client = self.client_menu()
-                employee = self.employee_menu()
+                start_date = input("Starting date: ")
+                end_date = input("Return date: ")
+                chosen_car = self.car_menu(Car_UI())
+                client = self.client_menu(Client_ui())
+                employee = self.employee_menu(Employee_UI())
                 info_list = [order_id,start_date,end_date,chosen_car,client,employee]
                 new_order = self.order_ser.create_order(info_list)
                 self.order_ser.add_order(new_order)
