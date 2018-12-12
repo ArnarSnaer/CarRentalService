@@ -4,9 +4,6 @@ from ui.car_ui import Car_UI
 from ui.order_ui import Order_UI
 from ui.client_ui import Client_ui
 
-# if __name__ == '__main__':
-#     main()
-
 def main():
     print("Welcome, User")
     choice = ""

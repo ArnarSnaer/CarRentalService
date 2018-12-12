@@ -18,6 +18,9 @@ class Insurance(object):
     def __radd__(self,other):
         return int(self.price + other)
 
+    def get_price(self):
+        return self.price
+
 #tala = Insurance("t1")
 #print(tala)
 # __radd__ er add fyrir tvær gerðir af mismunandi gerðum

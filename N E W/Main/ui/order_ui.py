@@ -34,11 +34,12 @@ class Order_UI(object):
                 lic_num = client.get_license_num()
                 employee = self.employee_menu(Employee_UI())
                 employee_name = employee.get_name()
-                info_list = [order_id,start_date,end_date,plate,name,lic_num,employee_name, price]
+                date1, date2, duration, days_num = self.order_ser.find_duration(start_date, end_date)
+                print(date1, date2, duration, days_num)
+                info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, price]
                 new_order = self.order_ser.create_order(info_list)
-                print(new_order)
                 self.order_ser.add_order(new_order)
-                # ég held ennþá að car sé flottasti klasinn og ætti að fá 10
+
             elif choice == "2":
                 keyword = input("Enter the order id of the order you want to delete:\n")
                 order_list = self.order_ser.find_order(keyword)

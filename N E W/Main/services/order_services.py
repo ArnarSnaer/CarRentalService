@@ -2,7 +2,7 @@ from repositories.order_repo import Order_repository
 from services.client_services import Client_ser
 from services.employee_services import Employee_services
 from services.car_services import Car_services
-#from models.order_model import Order
+from datetime import datetime
 import random
 import string
 
@@ -41,6 +41,21 @@ class Order_service(object):
     def create_order(self,info_list):
         new_order = self.Order_constructor(info_list[0],info_list[1],info_list[2],info_list[3],info_list[4],info_list[5],info_list[6],info_list[7])
         return new_order
+
+    def find_duration(self, date_start, date_end):
+        #Þetta reiknar heildarkostnað (total_price) út frá tímanum sem er gefinn
+        day1,month1,year1 = date_start.split(" ")
+        day2,month2,year2 = date_end.split(" ")
+        date1 = datetime(int(year1),int(month1),int(day1))
+        date1 = date1.date()
+        date2 = datetime(int(year2),int(month2),int(day2))
+        date2 = date2.date()
+        duration = date2 - date1
+        days_num = duration.days
+        
+        return date1, date2, duration, days_num
+       
+# self.order_id,self.date_start,self.date_end,self.plate,self.client_name,self.licence_number,self.employee_name,self.total_cost
     
     def add_order(self,order):
         return self.order_repo.add_order(order)
