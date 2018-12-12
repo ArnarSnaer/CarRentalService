@@ -18,7 +18,7 @@ class Order_UI(object):
     def order_menu(self):
         choice = ""
         while choice != "q":
-            print("Current section\n1. Create new order\n2.Delete order\n3.get all orders\n4. Update order\nq. Quit")
+            print("Current section\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Quit")
             choice = input("What would you like to do? ").lower()
 
             if choice == "1":
@@ -51,7 +51,7 @@ class Order_UI(object):
                 print("Please enter a valid operation")
 
     def change_order(self,order_object):
-        print("1. Client\n2. Starting date\n3. Retrun date\n4. Car\n5. Employee name")
+        print("1. Client\n2. Starting date\n3. Return date\n4. Car\n5. Employee name")
         choice = input("What would you like to update? (Please input integer choice): ")
         self.old_order = order_object
 
