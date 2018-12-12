@@ -1,19 +1,15 @@
-from models.client_model import Client
 from models.insurance_model import Insurance
-from models.car_model import Car
-from models.creditcard_model import Creditcard
 
 #EKKI TILBÚIÐ
 
 class Payment(object):
-    def __init__(self,client_name,car_price,duration=1):
+    def __init__(self,client_name="",car_price="",duration=1):
         self.price = car_price
-        self.credit = Creditcard
         self.insurances = Insurance
         self.client_name = client_name
         self.insurance_list = []
         self.base_insurance = Insurance("base")
-        self.total_price = (self.price * duration) +  self.base_insurance
+        self.total_price = (self.price * duration) +  int(self.base_insurance)
     
     def get_full_price(self):
         return self.total_price

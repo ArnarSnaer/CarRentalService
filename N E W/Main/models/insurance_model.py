@@ -1,5 +1,5 @@
 class Insurance(object):
-    def __init__(self, ins_type):
+    def __init__(self, ins_type=""):
         self.ins_type = ins_type
         self.price = 0
 

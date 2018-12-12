@@ -5,10 +5,10 @@ from models.payment_model import Payment
 class Payment_ser(object):
     def __init__(self):
         self.payment = Payment()
-        self.client = self.payment.client
+        self.client_name = self.payment.client_name
         self.credit = self.payment.credit
         self.insurances = self.payment.insurances
-        self.price = self.insurances.price
+        self.price = self.insurances().price
 
     def add_insurance(self,other):
         choice = other
