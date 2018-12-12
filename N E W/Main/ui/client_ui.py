@@ -42,20 +42,22 @@ class Client_ui():
                 return False
 
     def client_op(self, option):
+        client_list = ""
         if option == "1":
-           self.option_1()
+           client_list = self.option_1()
         else:
             print("Input a searchword, using a clients license number or phone number is recommended ")
             searchword = input("> Searchword: ")
 
             if option == "2":
-                self.option_2(searchword)
+                client_list = self.option_2(searchword)
             elif option == "3":
                 self.option_3(searchword)
             elif option == "4":
                 self.option_4(searchword)
             elif option == "5":
                 return option
+        return client_list
     
     def option_1(self):
         fullname = input("> Fullname: ")
@@ -141,9 +143,24 @@ class Client_ui():
             answer = answer.lower() 
             if answer == "n":
                 clients_info = self.client_op("1")
+                print(clients_info)
             elif answer == "y":
                 clients_info = self.client_op("2")
+                print(clients_info)
             else:
                 print("Please input either the letter 'y' or the letter 'n'")
+<<<<<<< HEAD
         '''bætt við þessari línu'''
+<<<<<<< HEAD
         return clients_info
+=======
+        return clients_info
+
+
+
+
+=======
+        customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
+        return customer
+>>>>>>> 6dca5fe047ee661ee1a560f6888d0474ebd40074
+>>>>>>> a047cafe8e6bfd364f2ff09f393af31ce2c319b9

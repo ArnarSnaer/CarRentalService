@@ -23,7 +23,6 @@ def main():
         elif choice == "3":
             client_UserInterface = Client_ui()
             client_UserInterface.main_menu()
-
         elif choice == "4":
             calc_UserInterface = Calc_UI()
             calc_UserInterface.calc_menu()      
@@ -33,5 +32,4 @@ def main():
         else:
             print("Invalid input!")      
                         
-
 main()
