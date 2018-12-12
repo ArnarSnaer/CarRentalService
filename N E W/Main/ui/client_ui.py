@@ -143,8 +143,3 @@ class Client_ui():
                 print("Please input either the letter 'y' or the letter 'n'")
         '''bætt við þessari línu'''
         return clients_info
-
-
-
-
-Client_ui().main_menu()
