@@ -31,11 +31,12 @@ class Order_UI(object):
                 price = chosen_car.get_price()
                 client = self.client_menu(Client_ui())
                 name = client.get_name()
+                lic_num = client.get_license_num()
                 employee = self.employee_menu(Employee_UI())
                 employee_name = employee.get_name()
-                info_list = [order_id,start_date,end_date,plate,name,employee_name, price]
-                print(info_list)
+                info_list = [order_id,start_date,end_date,plate,name,lic_num,employee_name, price]
                 new_order = self.order_ser.create_order(info_list)
+                print(new_order)
                 self.order_ser.add_order(new_order)
                 # ég held ennþá að car sé flottasti klasinn og ætti að fá 10
             elif choice == "2":
