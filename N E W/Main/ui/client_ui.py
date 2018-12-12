@@ -151,4 +151,7 @@ class Client_ui():
                 print("Please input either the letter 'y' or the letter 'n'")
         customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
         return customer
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1589626d36a28eb9f61f885e151062110bad93b6

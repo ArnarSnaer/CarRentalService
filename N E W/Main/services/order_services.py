@@ -39,7 +39,7 @@ class Order_service(object):
         return id
 
     def create_order(self,info_list):
-        new_order = self.Order_constructor(info_list[0],info_list[1],info_list[2],info_list[3],info_list[4],info_list[5])
+        new_order = self.Order_constructor(info_list[0],info_list[1],info_list[2],info_list[3],info_list[4],info_list[5],info_list[6],info_list[7])
         return new_order
     
     def add_order(self,order):
