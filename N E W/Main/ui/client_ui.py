@@ -147,4 +147,3 @@ class Client_ui():
 
 
 
-Client_ui().main_menu()

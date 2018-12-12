@@ -1,6 +1,6 @@
 import string
 class Client(object):
-    def __init__(self,name,address,phone,birthday,license_num,country,the_zip):
+    def __init__(self="",name="",address="",phone="",birthday="",license_num="",country="",the_zip=""):
         self.name = name
         self.address = address
         self.phone = phone

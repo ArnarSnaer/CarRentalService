@@ -21,7 +21,6 @@ def main():
             car_UserInterface = Car_UI()
             car_UserInterface.car_menu()
         elif choice == "3":
-            # print("work in progress, please hold")
             client_UserInterface = Client_ui()
             client_UserInterface.main_menu()
 

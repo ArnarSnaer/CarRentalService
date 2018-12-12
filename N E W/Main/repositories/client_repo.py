@@ -54,7 +54,7 @@ class ClientRepo():
     def find_client(self,searchword):
         # searchword = input("Input a phone-number, address, license-number or etc.\n")
         ''' Hér vantar villu-check -->'''
-        open_file = open("clist.txt", "r")
+        open_file = open("clients.txt", "r")
         client_found = False
         for line in open_file:
             if searchword in line:

@@ -23,15 +23,16 @@ class Order_service(object):
     
     def generate_order_id(self):
         id_list = self.order_repo.check_order_id()
-        letters = string.ascii_uppercase.split()
+        letters = string.ascii_uppercase
+        letters_list = list(letters)
         go_again = True
         while go_again:
             id = ""
             for _ in range(2):
-                num = random.randint(0,26)
-                id += letters[num]
+                num = random.randint(0,25)
+                id += letters_list[num]
             for _ in range(3):
-                num_2 = random.randint(0,9)
+                num_2 = random.randint(0,8)
                 id += str(num_2)
             if id not in id_list:
                 go_again = False

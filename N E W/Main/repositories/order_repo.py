@@ -4,23 +4,13 @@ class Order_repository(object):
     def __init__(self):
         self.order_model = Order
         #self.order_payment = self.order_model().total_cost
-        self.info = self.order_model().info
+        #self.info = self.order_model().info
          
 
     def add_order(self,order):
         
         open_file = open("./data/order.txt","r")
-        
-        # self.order_id = self.Order.order_id
-        # self.date_start = self.Order.date_start
-        # self.date_end = self.Order.date_end
-        # self.car = self.Order.car
-        # self.driver = self.Order.client.get_name()
-        # self.employee = self.Order.employee.get_name()
-        # self.licence_plate = self.Order.car.plate
-        # self.total_cost = self.Order.total_cost
-
-        open_file.write("{}".format(str(self.order_model())))
+        open_file.write("{}".format(str(order)))
         open_file.close()
 
     def remove_order(self,order_id):
