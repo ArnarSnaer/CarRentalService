@@ -11,14 +11,14 @@ class Order_service(object):
         self.order_repo = Order_repository()
         self.order_model = self.order_repo.order_model
         self.order_model.zip = self.generate_order_id()
-        self.Order_constructor = self.order_repo.order_constructor
+        self.Order_constructor = self.order_repo.order_model
 
     def add_insurance(self,ins_type):
-        self.order_model.price.add_insurance(ins_type)
-        return self.order_model.price
+        self.order_model().price.add_insurance(ins_type)
+        return self.order_model().price
     
     def get_status(self):
-        status = self.order_model.get_status()
+        status = self.order_model().get_status()
         return status
     
     def generate_order_id(self):

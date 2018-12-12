@@ -3,7 +3,7 @@ from models.order_model import Order
 class Order_repository(object):
     def __init__(self):
         self.order_model = Order
-        self.order_payment = self.order_model().total_cost
+        #self.order_payment = self.order_model().total_cost
         self.info = self.order_model().info
          
 

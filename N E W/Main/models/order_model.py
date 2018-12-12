@@ -5,7 +5,7 @@ from models.employee import Employee #Endurskýra
 from models.payment_model import Payment
 
 class Order(object):
-    def __init__(self,order_id, date_start, date_end,car,client,employee):
+    def __init__(self,order_id="", date_start="1 1 2000", date_end="1 1 2000",car=Car(),client=Client("","","","","","",""),employee=Employee("")):
         self.order_id = order_id
         self.date_start = date_start
         self.date_end = date_end
