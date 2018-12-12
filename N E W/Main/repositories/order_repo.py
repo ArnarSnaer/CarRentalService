@@ -24,11 +24,11 @@ class Order_repository(object):
         open_file.close()
 
     def remove_order(self,order_id):
-        open_file = open("./data/order.txt","w")
+        open_file = open("./data/order.txt","r")
         old_file = open_file.readlines()
         open_file.close()
 
-        new_file = open_file("./data/orders.txt","r")
+        new_file = open_file("./data/order.txt","w")
         for line in old_file:
             if order_id not in line:
                 new_file.write(line)

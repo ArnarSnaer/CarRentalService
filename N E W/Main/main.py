@@ -1,6 +1,5 @@
 from ui.calc_ui import Calc_UI
 from ui.car_ui import Car_UI
-# from ui.order_ui import order_ui
 from ui.order_ui import Order_UI
 from ui.client_ui import Client_ui
 

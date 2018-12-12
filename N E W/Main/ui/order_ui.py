@@ -17,7 +17,7 @@ class Order_UI(object):
     def order_menu(self):
         choice = ""
         while choice != "q":
-            print("Current section\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Quit")
+            print("Current section: Orders\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Quit")
             choice = input("What would you like to do? ").lower()
 
             if choice == "1":
@@ -28,17 +28,17 @@ class Order_UI(object):
                 chosen_car = self.car_menu(Car_UI())
                 #chosen_car = self.car_ui.order_menu(Car_UI())
                 plate = chosen_car.get_plate()
-                price = chosen_car.get_price()
+                price = str(chosen_car.get_price()).strip()
                 client = self.client_menu(Client_ui())
                 name = client.get_name()
                 lic_num = client.get_license_num()
                 employee = self.employee_menu(Employee_UI())
                 employee_name = employee.get_name()
                 date1, date2, duration, days_num = self.order_ser.find_duration(start_date, end_date)
-                print(date1, date2, duration, days_num)
-                info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, price]
+                info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, int(price), days_num]
                 new_order = self.order_ser.create_order(info_list)
                 self.order_ser.add_order(new_order)
+                print("Order successfully registered into the database")
 
             elif choice == "2":
                 keyword = input("Enter the order id of the order you want to delete:\n")
