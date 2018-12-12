@@ -23,6 +23,12 @@ class Car_UI(object):
             print("{:>5d}. {} Type: {:>5s}{:>5s}Brand: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Base price: {:>5s}{:<5s}Current status: {:>5s}".format(number,"|",veh_type,"", brand,"", plate,"", price,"", status))
             number += 1
         print("Complete! Here are all the results of the search.\n")
+        choice = input("What car would you like to choose? (enter 'q' to quit): ")
+        if choice == "q":
+            pass
+        else:
+            choice_int = int(choice)
+            return results[choice_int-1]
     
     def car_menu(self):
         choice = ""
