@@ -6,16 +6,15 @@ from models.creditcard_model import Creditcard
 #EKKI TILBÚIÐ
 
 class Payment(object):
-    def __init__(self,client,car,duration=1):
-        self.price = 0
+    def __init__(self,client,car_price,duration=1):
+        self.price = car_price
         self.credit = Creditcard
         self.insurances = Insurance
-        self.base_price = car.get_price()
         self.client = client
         self.car = car
         self.insurance_list = []
         self.base_insurance = Insurance("base")
-        self.total_price = (car.price * duration) +  self.base_insurance
+        self.total_price = (self.price * duration) +  self.base_insurance
     
     def get_full_price(self):
         return self.total_price
