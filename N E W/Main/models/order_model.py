@@ -5,19 +5,18 @@ from models.employee import Employee #Endurskýra
 from models.payment_model import Payment
 
 class Order(object):
-    def __init__(self,order_id="AA111", date_start="1 1 2000", date_end="2 1 2000",car=Car(),client=Client(),employee=Employee(" ")):
+    def __init__(self,order_id="AA111", date_start="1 1 2000", date_end="2 1 2000",car = Car(),client_name = "",licence_number = "",employee_name = ""):
+        self.car = car
         self.order_id = order_id
         self.date_start = date_start
         self.date_end = date_end
-        self.car = car
-        self.client_i = client
-        self.driver = self.client_i.get_name()
-        self.employee = employee.get_name()
-        self.licence_plate = car.plate
-        self.price = car.price
-        self.total_cost = 0
+        self.plate = self.car.get_plate()
+        self.client_name = client_name
+        self.employee_name = employee_name
+        self.licence_number = licence_number
+        self.total_cost = 0 #Þarf þetta að vera payment?
         self.min_duration = 1
-        self.info = [self.order_id,self.driver,self.car.get_plate(),self.date_start,self.date_end,self.total_cost,self.employee]
+        self.info = [self.order_id,self.client_name,self.plate,self.date_start,self.date_end,self.total_cost,self.employee_name,self.total_cost]
 
         #Þetta reiknar heildarkostnað (total_price) út frá tímanum sem er gefinn
         day1,month1,year1 = self.date_start.split(" ")
@@ -27,7 +26,7 @@ class Order(object):
         duration = date2 - date1
         days_num = duration.days
 
-        self.order_payment = Payment(self.client_i,self.car,days_num)
+        self.order_payment = Payment(self.client_name,self.car,days_num)
         self.total_cost = self.order_payment
         
     def get_status(self):
@@ -38,7 +37,7 @@ class Order(object):
         return self.order_payment.base_price
     
     def __str__(self):
-        return "{},{},{},{},{},{},{}".format(self.order_id,self.driver,self.car.get_plate(),self.date_start,self.date_end,self.total_cost,self.employee)
+        return "{},{},{},{},{},{},{}".format(self.order_id,self.client_name,self.car.get_plate(),self.date_start,self.date_end,self.total_cost,self.employee_name)
     
 
 
