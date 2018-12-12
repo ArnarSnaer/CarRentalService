@@ -6,6 +6,7 @@ from ui.client_ui import Client_ui
 class Order_UI(object):
     def __init__(self):
         self.order_ser = Order_service()
+        self.order_repo = self.order_ser.order_repo
         self.car_ui = Car_UI
         self.client_ui = Client_ui
         self.employee_ui = Employee_UI
@@ -41,5 +42,39 @@ class Order_UI(object):
 
             elif choice == "3":
                 print(self.order_ser.order_repo.get_all_orders())
+            
+            elif choice == "4":
+                order_id = input("Input id of order you want to change (AAA11): ")
+                found_order = self.order_repo.find_order(order_id)
+                self.change_order(found_order)
             else:
                 print("Please enter a valid operation")
+
+    def change_order(self,order_object):
+        print("1. Client\n2. Starting date\n3. Retrun date\n4. Car\n5. Employee name")
+        choice = input("What would you like to update? (Please input integer choice): ")
+        self.old_order = order_object
+
+        if choice == "1":
+            pass #Bryta uppl. um client
+
+        elif choice == "2":
+            new_date = input("New starting date (DD/MM/YYYY):\n ")
+            new_order = self.order_ser.change_start_date(order_object,new_date)
+
+        elif choice == "3":
+            new_date = input("New return date (DD/MM/YYYY):\n ")
+            new_order = self.order_ser.change_end_date(order_object,new_date)
+
+        elif choice == "4":
+            pass #Breytir upplýsingum um bíl
+
+        elif choice == "5":
+            new_name = input("Employee name: ")
+            new_order = self.order_ser.change_employee(order_object,new_name)
+
+        else:
+            print("Invalid choice")
+
+        self.order_repo.remove_order(self.old_order)
+        self.order_repo.add_order(new_order)

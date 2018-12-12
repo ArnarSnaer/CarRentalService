@@ -1,4 +1,7 @@
 from repositories.order_repo import Order_repository
+from services.client_services import Client_ser
+from services.employee_services import Employee_services
+from services.car_services import Car_services
 #from models.order_model import Order
 import random
 import string
@@ -46,3 +49,23 @@ class Order_service(object):
     
     def find_order(self,keyword):
         return self.order_repo.find_order(keyword)
+
+    # UPDATE föll
+
+    def change_start_date(self,order_object,new_date):
+        order_object.date_start = new_date 
+        return order_object
+    
+    def change_end_date(self,order_object,new_date):
+        order_object.date_end = new_date
+        return order_object 
+
+    def change_employee(self,order_object,new_name):
+        order_object.employee.change_name(new_name)
+        return order_object
+
+    def change_client(self,order_object): #Client, starting date, return date, car, employee
+        pass #Bryta uppl. um client
+        
+    def change_car(self,order_object):
+        pass #Breytir upplýsingum um bíl

@@ -21,6 +21,12 @@ class Car_UI(object):
             print("{}. {} Type: {:>5s} Brand: {} License plate: {} Current status: {}".format(number,"|",veh_type, brand, plate, status))
             number += 1
         print("Complete! Here are all the results of the search.\n")
+        choice = input("Which car would you like to pick ('q' to Quit): ")
+        if choice == "q":
+            pass
+        else:
+            choice_int = int(choice)
+            return results[choice_int-1]
     
     def car_menu(self):
         choice = ""
@@ -148,3 +154,10 @@ class Car_UI(object):
                 print("Invalid input! Please enter the number/letter in front of each operation!\n")
 
         print("Going back to main menu...\n")
+
+    def order_menu(self):
+        print("Available car:\n")
+        available_cars = self.car_serv.get_available_cars_list()
+        chosen_car = self.choose_car(available_cars)
+        rented_car = self.car_serv.create_car(chosen_car)
+        return rented_car

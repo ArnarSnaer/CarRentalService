@@ -2,10 +2,9 @@ from models.order_model import Order
 
 class Order_repository(object):
     def __init__(self):
-        self.order_model = Order()
-        self.order_constructor = Order
-        self.order_payment = self.order_model.total_cost
-        self.info = self.order_model.info
+        self.order_model = Order
+        self.order_payment = self.order_model().total_cost
+        self.info = self.order_model().info
          
 
     def add_order(self,order):
@@ -21,7 +20,7 @@ class Order_repository(object):
         # self.licence_plate = self.Order.car.plate
         # self.total_cost = self.Order.total_cost
 
-        open_file.write("{}".format(str(self.order_model)))
+        open_file.write("{}".format(str(self.order_model())))
         open_file.close()
 
     def remove_order(self,order_id):
@@ -55,17 +54,6 @@ class Order_repository(object):
             if line != list_of_orders[-1]:
                 all_cars += "\n"
         return all_cars
-
-    def update_order(self):
-        '''hafa print og input í service'''
-        print("What would you like to update? (Please input integer choice)")
-        print("1. Client\n2. Starting date\n3. Retrun date\n4. Car\n5. Employee name")
-        
-        choice = int(input(""))
-        change = input("New info is: ")
-        
-        self.info[choice-1] = change
-        return self.info
     
     def check_order_id(self):
         open_file = open("./data/order.txt","r")

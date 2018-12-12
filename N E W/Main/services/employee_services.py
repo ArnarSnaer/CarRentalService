@@ -29,6 +29,10 @@ class Employee_services(object):
             return "> No sales"
         else:
             return employee_order
+    
+    def change_name(self,new_name):
+        self.employee.name[0] = new_name
+        return self.employee
         
 #Gunnar = Employee_services("Gunnar")
 #Gunnar_v2 = Employee_services()

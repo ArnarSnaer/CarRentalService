@@ -12,11 +12,11 @@ def main():
     choice = ""
 
     while choice != "5": 
-        print("Available sections:\n1. Order\n2. Cars\n3. Client\n4. Calculator\n5. Exit program")
+        print("Available sections:\n1. Order\n2. Cars\n3. Client\n4. Calculator\nq. Exit program")
         choice = input("> Choose a section: ")
         if choice == "1":
-            order_UserInterface = Order_UI
-            order_UserInterface
+            order_UserInterface = Order_UI()
+            order_UserInterface.order_menu()
         elif choice == "2":
             car_UserInterface = Car_UI()
             car_UserInterface.car_menu()
@@ -28,7 +28,7 @@ def main():
         elif choice == "4":
             calc_UserInterface = Calc_UI()
             calc_UserInterface.calc_menu()      
-        elif choice == "5":
+        elif choice == "q":
             print("Exiting program...")
             break
         else:
