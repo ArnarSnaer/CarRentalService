@@ -50,7 +50,7 @@ class Car_repository():
         all_cars = []
         for line in open_file:
             info = line.split(",")
-            if info[4] == True:
+            if info[4] == "True":
                 avilable_cars.append(line)
             else:
                 rented_cars.append(line)

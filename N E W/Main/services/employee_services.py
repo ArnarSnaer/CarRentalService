@@ -1,9 +1,10 @@
 from models.employee import Employee
 
 class Employee_services(object):
-    def __init__(self,name):
-        self.name = name
-        self.employee = Employee(name)
+    def __init__(self):
+        self.employee = Employee()
+        self.name = self.employee.name
+
 
     def add_sale(self,other): #Þetta færir order, gerð bílsins eða bílnumer...
         try:

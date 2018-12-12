@@ -23,6 +23,9 @@ class Car_UI(object):
             print("{:>5d}. {} Type: {:>5s}{:>5s}Brand: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Base price: {:>5s}{:<5s}Current status: {:>5s}".format(number,"|",veh_type,"", brand,"", plate,"", price,"", status))
             number += 1
         print("Complete! Here are all the results of the search.\n")
+        choice = input("What car would you like to choose? (enter 'q' to quit): ")
+        choice_int = int(choice)
+        return results[choice_int-1]
     
     def car_menu(self):
         choice = ""
@@ -156,6 +159,7 @@ class Car_UI(object):
     def order_menu(self):
         print("Available car:\n")
         available_cars = self.car_serv.get_available_cars_list()
+        print(available_cars)
         chosen_car = self.choose_car(available_cars)
-        rented_car = self.car_serv.create_car(chosen_car)
+        rented_car = self.car_serv.create_car_from_list(chosen_car)
         return rented_car
