@@ -113,8 +113,12 @@ class Client_ui():
                     stay = False
                 else:
                     if self.check_option(option, the_range):
-                        if self.__client_ser.update_registration(searchword, int(option)):
+                        the_change = input("Insert new info: ")
+                        updated, invalidation = self.__client_ser.update_registration(searchword, int(option), the_change)
+                        if updated:
                             print("Updated")
+                        else:
+                            print(invalidation)
                     else: 
                         print("Please input an integer from 1 to 8")
         else: 
@@ -145,5 +149,8 @@ class Client_ui():
         return clients_info
 
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> b4a4941e75ae44f047524efa7647a37da9c00b19

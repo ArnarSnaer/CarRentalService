@@ -15,7 +15,7 @@ class ClientRepo():
         self.LICENSE_NUM = 4
         self.COUNTRY = 5
         self.THE_ZIP = 6
-        self.INFO = 7
+        # self.INFO = 7
     
     def new_client(self, client):
         ''' þarf að implementa að það geti ekki verið hægt að bæta við einstakling sem er núþegar í listanum'''
@@ -66,33 +66,19 @@ class ClientRepo():
         else:
             return False
 
-    def update_registration(self, client_info, option):
-        # open_file = open("clist.txt", "r")
-        # the_client = ClientRepo().find_client(searchword)
-        #client_found = False
-        if type(client_info) == list:
-        #    client_found = True
-            # print("Client found")
-            # while True:
-            client_update = self.change_element(client_info, option)
-            # self.remove_client(client_info)
-            open_file = open("clients.txt", "a+")
-            client_update = Client(client_update[self.NAME], client_update[self.ADDRESS], client_update[self.PHONE], client_update[self.BIRTHDAY], client_update[self.LICENSE_NUM],
-                                        client_update[self.COUNTRY], client_update[self.THE_ZIP])
-            self.new_client(client_update)
-            open_file.close()
-            print("Update complete!")
-
-        else:
-            print("Client not found")
+    def update_registration(self, client_info, option, the_change):
+        client_update = self.change_element(client_info, option, the_change)
+        open_file = open("./data/clients.txt", "a+")
+        client_update = Client(client_update[self.NAME], client_update[self.ADDRESS], client_update[self.PHONE], client_update[self.BIRTHDAY], client_update[self.LICENSE_NUM],
+                                    client_update[self.COUNTRY], client_update[self.THE_ZIP])
+        self.new_client(client_update)
+        open_file.close()
+     
 
 
-    def change_element(self, the_client, update_choice):
+    def change_element(self, the_client, update_choice, the_change):
         '''searches in a list and changes a selected value and returns the list'''
         
-        the_change = input("Insert new info: ")
-
-        '''vantar villu-check'''
         the_client[update_choice -1] = the_change
         
         return the_client
@@ -100,17 +86,19 @@ class ClientRepo():
     def int_format(self, phone):
         my_phone = phone
         my_phone = list(my_phone)
+        if "-" not in my_phone:
         
-        result_str = ""
-        my_phone_len = len(my_phone) 
-        
-        while my_phone_len > 6:
-            for i in range(3):
-                result_str += my_phone.pop(0)
-            result_str += "-"
-            my_phone_len -= 3
-        end_str = ''.join(my_phone)
-        result_str += end_str
-        print(result_str)
-        return result_str
+            result_str = ""
+            my_phone_len = len(my_phone) 
+            
+            while my_phone_len > 6:
+                for i in range(3):
+                    result_str += my_phone.pop(0)
+                result_str += "-"
+                my_phone_len -= 3
+            end_str = ''.join(my_phone)
+            result_str += end_str
+            print(result_str)
+            return result_str
+        return ''.join(my_phone)
 
