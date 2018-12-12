@@ -14,19 +14,15 @@ class Car_UI(object):
             veh_type = self.car_repo.car_model.get_veh_type(car_object)
             brand = self.car_repo.car_model.get_brand(car_object)
             plate = self.car_repo.car_model.get_plate(car_object)
+            price = self.car_repo.car_model.get_price(car_object)
+            price = price[:-1]
             if self.car_repo.car_model.get_status(car_object) == "True":
                 status = "Available."
             else:
                 status = "Unavailable."
-            print("{}. {} Type: {:>5s} Brand: {} License plate: {} Current status: {}".format(number,"|",veh_type, brand, plate, status))
+            print("{:>5d}. {} Type: {:>5s}{:>5s}Brand: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Base price: {:>5s}{:<5s}Current status: {:>5s}".format(number,"|",veh_type,"", brand,"", plate,"", price,"", status))
             number += 1
         print("Complete! Here are all the results of the search.\n")
-        choice = input("Which car would you like to pick ('q' to Quit): ")
-        if choice == "q":
-            pass
-        else:
-            choice_int = int(choice)
-            return results[choice_int-1]
     
     def car_menu(self):
         choice = ""
@@ -54,15 +50,15 @@ class Car_UI(object):
                     valid_car = False
                 # Campagna, Suzuki, Ferrari, Audi, Unique
                 choose_brand = input("\nAvailable car brands:\n1. Campagna\n2. Suzuki\n3. Ferrari\n4. Audi\n5. Unique\n> Choose a brand by its name or number: ")
-                if (choose_veh_type == "Campagna") or (choose_veh_type == "1"):
+                if (choose_brand == "Campagna") or (choose_brand == "1"):
                     brand = "Campagna"
-                elif (choose_veh_type == "Suzuki") or (choose_veh_type == "2"):
+                elif (choose_brand == "Suzuki") or (choose_brand == "2"):
                     brand = "Suzuki"
-                elif (choose_veh_type == "Ferrari") or (choose_veh_type == "3"):
+                elif (choose_brand == "Ferrari") or (choose_brand == "3"):
                     brand = "Ferrari"
-                elif (choose_veh_type == "Audi") or (choose_veh_type == "4"):
+                elif (choose_brand == "Audi") or (choose_brand == "4"):
                     brand = "Audi"
-                elif (choose_veh_type == "Unique") or (choose_veh_type == "5"):
+                elif (choose_brand == "Unique") or (choose_brand == "5"):
                     brand = "Unique"    
                 else:
                     print("Failed")
@@ -126,7 +122,8 @@ class Car_UI(object):
                 # self.veh_type, self.brand, self.plate, self.wheel_drive, self.status, self.is_manual, self.driven, self.fuel_type, self.price
 
             elif choice == "2":
-                searchword = input("\n> Insert information as search word; Vehicle type, Brand, License plate, etc\nPlease only enter a single item:  ")
+                print("Searching for a specific car.\nYou can search for vehicle type, brand and license plate by their name")
+                searchword = input("> Please only enter a single item:  ")
                 results = self.car_repo.find_car(searchword)
                 if len(results) == 0:
                     print("No results for this search word.\n")
@@ -154,10 +151,3 @@ class Car_UI(object):
                 print("Invalid input! Please enter the number/letter in front of each operation!\n")
 
         print("Going back to main menu...\n")
-
-    def order_menu(self):
-        print("Available car:\n")
-        available_cars = self.car_serv.get_available_cars_list()
-        chosen_car = self.choose_car(available_cars)
-        rented_car = self.car_serv.create_car(chosen_car)
-        return rented_car
