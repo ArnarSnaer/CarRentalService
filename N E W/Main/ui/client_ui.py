@@ -60,6 +60,7 @@ class Client_ui():
         return client_list
     
     def option_1(self):
+        #vantar kannski while loop
         fullname = input("> Fullname: ")
         address = input("> Address: ")
         phone_number = input("> Phone number: ")
@@ -69,11 +70,10 @@ class Client_ui():
         the_zip = input("> Zip: ")
         '''check if client already exists'''
         '''nobody has the same license number'''
-        
+        new_client = Client(fullname, address, phone_number, birthday, license_number, country, the_zip)
+        valid, invalidation = self.__client_ser.new_client(new_client)
         info_list, client_found = self.check_if_already_client(license_number)
         if not client_found:
-            new_client = Client(fullname, address, phone_number, birthday, license_number, country, the_zip)
-            valid, invalidation = self.__client_ser.new_client(new_client)
             if valid:
                 info_list = [fullname, address, phone_number, birthday, license_number, country, the_zip]
                 print(info_list)
@@ -145,16 +145,17 @@ class Client_ui():
             answer = answer.lower() 
             if answer == "n":
                 clients_info = self.client_op("1")
+                customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
+
             elif answer == "y":
-                print("Would you like to\n1. Get client's current info\n2. Change client's current info")
-                answer = input("> ")
-                if answer == "1":
-                    clients_info = self.client_op("2")
-                elif answer == "2":
-                    clients_info = self.client_op("4")
+                clients_info = self.client_op("2")
+                customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
+
             elif answer == "q":
-                break
+                clients_info = "QUIT"
+                customer = "q"
+                print("Client not chosen, aborting order")
             else:
-                print("Please input either the letter 'y' or the letter 'n'")
-        customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
+                print("Please input either the letter 'y','n' or the letter 'q'")
+        
         return customer

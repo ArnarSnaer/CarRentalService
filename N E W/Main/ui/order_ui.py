@@ -27,10 +27,13 @@ class Order_UI(object):
                 end_date = input("Return date: ")
                 chosen_car = self.car_menu(Car_UI())
                 client = self.client_menu(Client_ui())
-                employee = self.employee_menu(Employee_UI())
-                info_list = [order_id,start_date,end_date,chosen_car,client,employee]
-                new_order = self.order_ser.create_order(info_list)
-                self.order_ser.add_order(new_order)
+                if client == "q":
+                    choice = "q"
+                else:
+                    employee = self.employee_menu(Employee_UI())
+                    info_list = [order_id,start_date,end_date,chosen_car,client,employee]
+                    new_order = self.order_ser.create_order(info_list)
+                    self.order_ser.add_order(new_order)
 
             elif choice == "2":
                 keyword = input("Enter the order id of the order you want to delete:\n")
