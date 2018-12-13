@@ -94,6 +94,7 @@ class Client_ui():
             return info_list
         else:
             print("Client not found")
+            return None
 
     def option_3(self, searchword):
         if self.option_2(searchword):
@@ -146,14 +147,17 @@ class Client_ui():
 
             elif answer == "y":
                 clients_info = self.client_op("2")
-                customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
-
-                # print("Would you like to\n1. Get client's current info\n2. Change client's current info")
-                # answer = input("> ")
-                # if answer == "1":
-                # clients_info = self.client_op("2")
-                # elif answer == "2":
-                #    clients_info = self.client_op("4")
+                while clients_info == None:
+                    print("Input '1' to try again or 'q' to back")
+                    answer = input("> ")
+                    if answer == '1':
+                        clients_info = self.client_op("2")
+                    elif answer == 'q' or answer =='Q':
+                        clients_info = "QUIT"
+                        customer = "q"
+                        print("Client not chosen, aborting order")
+                if clients_info != None and customer !='q':
+                    customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
             elif answer == "q":
                 clients_info = "QUIT"
                 customer = "q"

@@ -24,21 +24,6 @@ class Order_UI(object):
             if choice == "1":
                 print("Please enter the neccesery information for the order: ")
                 order_id = self.order_ser.generate_order_id()
-                start_date = input("Starting date: ")
-                end_date = input("Return date: ")
-                chosen_car = self.car_menu(Car_UI())
-                if chosen_car == None:
-                    choice = "q"
-                    break
-                client = self.client_menu(Client_ui())
-                if client == "q":
-                    choice = "q"
-                else:
-                    employee = self.employee_menu(Employee_UI())
-                    info_list = [order_id,start_date,end_date,chosen_car,client,employee]
-                    new_order = self.order_ser.create_order(info_list)
-                    self.order_ser.add_order(new_order)
-                date1, date2, _, days_num = self.order_ser.find_duration(start_date, end_date)
                 start_date = input("Starting date (DD MM YYYY): ")
                 end_date = input("Return date (DD MM YYYY): ")
                 try:
@@ -49,11 +34,17 @@ class Order_UI(object):
                 check_validity, explanation = self.order_ser.date_isvalid(date1, date2, days_num)
                 if check_validity == True:
                     chosen_car = self.car_menu(Car_UI())
+                    if chosen_car == None:
+                        choice = "q"
+                        break
                     plate = chosen_car.get_plate()
                     base_price = str(chosen_car.get_price()).strip()
                     order_conflict = self.order_ser.check_conflict(date1, date2, plate)
                     if order_conflict == True:
                         client = self.client_menu(Client_ui())
+                        if client == "q":
+                            choice = "q"
+                            break
                         name = client.name
                         lic_num = client.license_num
                         employee = self.employee_menu(Employee_UI())
