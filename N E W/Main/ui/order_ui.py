@@ -158,7 +158,7 @@ class Order_UI(object):
                 chosen_ins_list = chosen_ins.split(" ")
                 for ins in chosen_ins_list:
                     insurance_code = "t" + ins
-                    ins_int = int(ins) - 1
+                    #ins_int = int(ins) - 1
                 try:
                     self.order_ser.add_insurance(insurance_code)
                     go_again = False

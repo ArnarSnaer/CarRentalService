@@ -22,6 +22,7 @@ class Order_service(object):
 
     def add_insurance(self,ins_type):
         added_cost = self.insurance(ins_type)
+        print("AAAAAAAA: ", added_cost)
         self.total_cost = self.total_cost + added_cost
         self.total_insurance += added_cost
         return self.total_cost
