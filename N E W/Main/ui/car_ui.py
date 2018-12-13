@@ -8,7 +8,7 @@ class Car_UI(object):
         self.keywords = []
     
     def choose_car(self,results):
-        number = 1
+        counter = 1
         for item in results:
             car_object = self.car_serv.create_car(item)
             veh_type = self.car_repo.car_model.get_veh_type(car_object)
@@ -20,18 +20,29 @@ class Car_UI(object):
                 status = "Available."
             else:
                 status = "Unavailable."
-            print("{:>5d}. {} Type: {:>5s}{:>5s}Brand: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Base price: {:>5s}{:<5s}Current status: {:>5s}".format(number,"|",veh_type,"", brand,"", plate,"", price,"", status))
-            number += 1
-        print("Complete! Here are all the results of the search.\n")
-        choice = input("What car would you like to choose? (enter 'q' to quit): ")
-        choice_int = int(choice)
-        return results[choice_int-1]
-    
+            print("{:>5d}. {} Type: {:>5s}{:>5s}Brand: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Base price: {:>5s}{:<5s}Current status: {:>5s}".format(counter,"|",veh_type,"", brand,"", plate,"", price,"", status))
+        
+            counter += 1
+
+        quit = False
+        while not quit:
+            print("Complete! Here are all the results of the search.\n")
+            choice = input("What car would you like to choose? (enter 'q' to quit): ")
+            if choice == 'q':
+                quit = True
+                print("Car not chosen aborting order") 
+                return None
+            elif  int(choice) in range(counter+1):    
+                choice_int = int(choice)
+                return results[choice_int-1]
+            else:
+                print("Please input a valid integer")
+        
     def car_menu(self):
         choice = ""
 
         while choice != "q":
-            print("\nCurrent section: Cars\n1. Add a new car into the database\n2. Remove a car from the database\n3. Search car database\n4. See all cars in the current database\n5. See all available cars\n6. See all unavailable cars\nq. Quit")
+            print("\nCurrent section: Cars\n1. Add a new car into the database\n2. Remove a car from the database\n3. Search car database\n4. See all cars in the current database\n5. See all available cars\n6. See all unavailable cars\nq. Back")
             choice = input("> What would you like to do? ").lower()
             # {"suv": 100000, "mini": 10000, "mpv": 50000, "sport": 200000,"sedan": 75000}
             if choice == "1":
@@ -185,5 +196,9 @@ class Car_UI(object):
         print("Available car(s):\n")
         available_cars = self.car_serv.get_available_cars_list()
         chosen_car = self.choose_car(available_cars)
-        rented_car = self.car_serv.create_car(chosen_car)
+        '''ragnar'''
+        if chosen_car == None:
+            return None
+        else:
+            rented_car = self.car_serv.create_car(chosen_car)
         return rented_car

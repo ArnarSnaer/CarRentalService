@@ -7,7 +7,7 @@ class Payment_UI(object):
     def payment_menu(self):
         choice = ""
         while choice != "q":
-            print("Current section:\n1. Add insurance\n2. Remove insurance\n3. Print insurance prices\nq. Quit")
+            print("Current section:\n1. Add insurance\n2. Remove insurance\n3. Print insurance prices\nq. Back")
             choice = ("> What would you like to do? enter 'q' to quit.")
         
             if choice == "1":

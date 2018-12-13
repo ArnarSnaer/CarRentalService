@@ -27,6 +27,9 @@ class Order_UI(object):
                 start_date = input("Starting date: ")
                 end_date = input("Return date: ")
                 chosen_car = self.car_menu(Car_UI())
+                if chosen_car == None:
+                    choice = "q"
+                    break
                 client = self.client_menu(Client_ui())
                 if client == "q":
                     choice = "q"
