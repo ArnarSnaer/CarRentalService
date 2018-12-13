@@ -19,13 +19,20 @@ class Order_service(object):
         self.Order_constructor = self.order_repo.order_model
         self.total_insurance = self.order_model().get_total_ins_cost()
         self.total_cost = self.order_model().total_cost
+        self.payment_ser = Payment_ser()
 
     def add_insurance(self,ins_type):
-        added_cost = self.insurance(ins_type)
-        print("AAAAAAAA: ", added_cost)
-        self.total_cost = self.total_cost + added_cost
-        self.total_insurance += added_cost
+        #added_cost = self.insurance(ins_type)
+        print(self.total_cost)
+        self.payment_ser.self.total_cost.add_insurance(ins_type)
+        print(self.total_cost)
         return self.total_cost
+    
+        # added_cost = self.insurance(ins_type)
+        # print("AAAAAAAA: ", added_cost)
+        # self.total_cost = self.total_cost + added_cost
+        # self.total_insurance += added_cost
+        # return self.total_cost
     
     def get_status(self):
         plate = self.order_model().get_plate()

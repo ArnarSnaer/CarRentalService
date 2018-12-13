@@ -9,6 +9,7 @@ class Payment_ser(object):
         self.insurance = Insurance
         self.client_name = self.payment.client_name
         self.price = self.insurance().get_price()
+        self.total_price = self.payment.total_price
 
     def add_insurance(self,other):
         choice = other
