@@ -27,21 +27,31 @@ class Order_UI(object):
                 order_id = self.order_ser.generate_order_id()
                 start_date = input("Starting date: ")
                 end_date = input("Return date: ")
-                chosen_car = self.car_menu(Car_UI())
-                plate = chosen_car.get_plate()
-                price = str(chosen_car.get_price()).strip()
-                client = self.client_menu(Client_ui())
-                name = client.get_name()
-                lic_num = client.get_license_num()
-                employee = self.employee_menu(Employee_UI())
-                employee_name = employee.get_name()
-                date1, date2, duration, days_num = self.order_ser.find_duration(start_date, end_date)
-                info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, int(price), days_num]
-                new_order = self.order_ser.create_order(info_list)
-                self.order_ser.add_order(new_order)
-                self.add_insurances_menu(new_order)
-                self.print_order(new_order)
-                print("Order successfully registered into the database")
+                date1, date2, _, days_num = self.order_ser.find_duration(start_date, end_date)
+                check_validity, explanation = self.order_ser.date_isvalid(date1, date2, days_num)
+                if check_validity == True:
+                    chosen_car = self.car_menu(Car_UI())
+                    plate = chosen_car.get_plate()
+                    price = str(chosen_car.get_price()).strip()
+                    order_conflict = self.order_ser.check_conflict(date1, date2, plate)
+                    if order_conflict == True:
+                        client = self.client_menu(Client_ui())
+                        name = client.get_name()
+                        lic_num = client.get_license_num()
+                        employee = self.employee_menu(Employee_UI())
+                        employee_name = employee.get_name()
+                        info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, int(price), days_num]
+                        new_order = self.order_ser.create_order(info_list)
+                        self.order_ser.add_order(new_order)
+                        self.add_insurances_menu(new_order)
+                        self.print_order(new_order)
+                        print("Order successfully registered into the database")
+                    else:
+                        print("This car is already reserved during the dates input. Please find another car.")
+                        print("")
+                else:
+                    print(explanation)
+                    print("")
 
             elif choice == "2":
                 order_list = []
@@ -135,11 +145,7 @@ class Order_UI(object):
             choice = input("> Would you like additional insurances (y/n): ").lower()
             if choice == "y":
                 print("Available insurances:")
-<<<<<<< HEAD
                 for index_num in range(len(self.price_list)):
-=======
-                for index_num in range (len(self.price_list)):
->>>>>>> 475857cf9f8b8873262f98f107ba5c1b2bbb0822
                     print("{}. {}: {}isk".format(index_num+1, self.title_list[index_num], self.price_list[index_num]))
                 chosen_ins = input("> Choose an insurance to add, you can choose multiple insurances separated by a space:\n")
                 chosen_ins_list = chosen_ins.split(" ")

@@ -2,7 +2,7 @@ from repositories.order_repo import Order_repository
 from services.client_services import Client_ser
 from services.employee_services import Employee_services
 from services.car_services import Car_services
-from datetime import datetime
+import datetime
 import random
 import string
 
@@ -50,15 +50,50 @@ class Order_service(object):
         #Þetta reiknar heildarkostnað (total_price) út frá tímanum sem er gefinn
         day1,month1,year1 = date_start.split(" ")
         day2,month2,year2 = date_end.split(" ")
-        date1 = datetime(int(year1),int(month1),int(day1))
+        date1 = datetime.datetime(int(year1),int(month1),int(day1))
         date1 = date1.date()
-        date2 = datetime(int(year2),int(month2),int(day2))
+        date2 = datetime.datetime(int(year2),int(month2),int(day2))
         date2 = date2.date()
         duration = date2 - date1
         days_num = duration.days
         
         return date1, date2, duration, days_num
-       
+
+    def date_isvalid(self, date_start, date_end, days_num):
+        valid_date = True
+        error_message = ""
+        today_date = datetime.datetime.now()
+        # First check if input dates are valid
+        if date_start < today_date.date():
+            error_message = "Starting date is invalid. (Below today's date)"
+            valid_date = False
+
+        if days_num < 1:
+            error_message = "Return date is invalid. (Below starting date)."
+            valid_date = False
+
+        return valid_date, error_message
+
+    def check_conflict(self, date_start, date_end, car_plate): # check if dates conflict with other orders
+        get_order_list = self.order_repo.get_all_orders()
+        print(get_order_list)
+        no_conflict = True
+        for line in get_order_list:
+            # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
+            print(line)            
+            _,start, end, plate, _, _, _, _ = line.split(',')
+
+            if car_plate == plate:
+                while date_start != end:
+                    current_date = start 
+                    while current_date != date_end:
+                        if current_date == date_start:
+                            no_conflict = False
+                        current_date += datetime.timedelta(days = 1)
+                    date_start += datetime.timedelta(days = 1)
+        
+        return no_conflict
+
 # self.order_id,self.date_start,self.date_end,self.plate,self.client_name,self.licence_number,self.employee_name,self.total_cost
     
     def add_order(self,order):

@@ -17,12 +17,6 @@ class Payment(object):
         self.total_price = self.price * self.duration +  self.base_insurance
         return self.total_price
     
-    def get_insurance_title_list(self):
-        return self.insurances.get_title_list()
-
-    def get_insurance_cost_list(self):
-        return self.insurances.get_price_list()
-    
     def __str__(self):
         return "{}".format(str(self.total_price))
     
