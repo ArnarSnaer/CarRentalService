@@ -31,7 +31,7 @@ class Car_UI(object):
         choice = ""
 
         while choice != "q":
-            print("\nCurrent section: Cars\n1. Add a new car into the database\n2. Remove a car from the database\n3. Search car database\n4. See all cars in the current database\nq. Quit")
+            print("\nCurrent section: Cars\n1. Add a new car into the database\n2. Remove a car from the database\n3. Search car database\n4. See all cars in the current database\n5. See all available cars\n6. See all unavailable cars\nq. Quit")
             choice = input("> What would you like to do? ").lower()
             # {"suv": 100000, "mini": 10000, "mpv": 50000, "sport": 200000,"sedan": 75000}
             if choice == "1":
@@ -149,6 +149,12 @@ class Car_UI(object):
 
             elif choice == "4":
                 print(self.car_serv.get_all_cars())
+
+            elif choice == "5":
+                print(self.car_serv.all_available_cars())
+            
+            elif choice == "6":
+                print(self.car_serv.all_unavailable_cars())
             
             elif choice != "q":
                 print("Invalid input! Please enter the number/letter in front of each operation!\n")

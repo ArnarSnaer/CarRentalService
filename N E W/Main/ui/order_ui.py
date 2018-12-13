@@ -2,7 +2,6 @@ from services.order_services import Order_service
 from ui.car_ui import Car_UI
 from ui.employee_ui import Employee_UI
 from ui.client_ui import Client_ui
-from models.order_model import Order
 
 class Order_UI(object):
     def __init__(self):
@@ -10,16 +9,16 @@ class Order_UI(object):
         self.order_repo = self.order_ser.order_repo
         self.car_ui = Car_UI
         self.car_repo = self.car_ui().car_repo
-        self.client_ui = Client_ui
+        self.client_ui = Client_ui()
         self.employee_ui = Employee_UI
         self.car_menu = self.car_ui.order_menu
-        self.client_menu = self.client_ui.order_menu
+        # self.client_menu = self.client_ui
         self.employee_menu = self.employee_ui.order_menu  
 
     def order_menu(self):
         choice = ""
         while choice != "q":
-            print("Current section: Orders\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Quit")
+            print("Current section\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Quit")
             choice = input("What would you like to do? ").lower()
 
             if choice == "1":
@@ -54,15 +53,10 @@ class Order_UI(object):
                     print("")
 
             elif choice == "2":
-                order_list = []
-                while order_list == []:
-                    keyword = input("Enter the order id of the order you want to delete:\n")
-                    order_list = self.order_ser.find_order(keyword)
-                    if len(order_list) == 0:
-                        print("No results found, please try again.")
+                keyword = input("Enter the order id of the order you want to delete:\n")
+                order_list = self.order_ser.find_order(keyword)
                 found_order = order_list[0]
-                order_id = found_order[0]
-                self.order_ser.remove_order(order_id)
+                self.order_ser.remove_order(found_order)
                 print("Order removed.\n")
 
             elif choice == "3":
@@ -80,8 +74,10 @@ class Order_UI(object):
         choice = input("What would you like to update? (Please input integer choice): ")
         self.old_order = order_object
 
+        
         if choice == "1":
-            pass #Bryta uppl. um client
+            new_client = self.client_ui.order_menu()
+            # is_already_client = input("Is the")
 
         elif choice == "2":
             new_date = input("New starting date (DD/MM/YYYY):\n ")
@@ -90,9 +86,12 @@ class Order_UI(object):
         elif choice == "3":
             new_date = input("New return date (DD/MM/YYYY):\n ")
             new_order = self.order_ser.change_end_date(order_object,new_date)
+            
 
         elif choice == "4":
-            pass #Breytir upplýsingum um bíl
+            current_car = input("Enter licence plate of currnet car ")
+            new_car = input("Enter licence plate of new car ")
+            pass #Breytir bíl í pöntun
 
         elif choice == "5":
             new_name = input("Employee name: ")
@@ -121,27 +120,29 @@ class Order_UI(object):
         self.date_end = self.order_obj.get_date_end()
 
         self.base_insurance = self.order_obj.get_base_insurance()
-        self.insurance_price = self.order_obj.get_insurance_price()
+        self.insurance_price = self.order_obj.get_total_ins_cost()
         self.insurance_list = self.order_obj.order_payment.insurance_list
         self.total_cost = self.order_obj.get_total_cost()
+        self.base_price = self.order_obj.order_payment.get_base_price()
 
-
+        print("-"*86)
+        print("RECEIPT:")
         print("Order id: {}\nEmployee: {}\n\nStarting date: {}\nReturn date: {}\n".format(self.order_id,self.employee_name,self.date_start,self.date_end))
-        print("Car brand: {}\nCar type: {}\nCar plate: {}\n\nClient: {}\nDriver licence number: {}".format(self.car_brand,self.car_type,self.plate,self.client_name,self.licence_num))
+        print("Car brand: {}\nCar type: {}\nCar plate: {}\n\nClient: {}\nDriver licence number: {}\n".format(self.car_brand,self.car_type,self.plate,self.client_name,self.licence_num))
         if len(self.insurance_list) != 0:
-            print("Insurances")
+            print("Insurances:\n")
             for line in self.insurance_list:
                 print(line)
-        print("Base insurance: {}\nAdditional insurance cost: {}\nTotal price: {}\n".format(self.base_insurance,self.insurance_price,self.total_cost))
-    
+        print("Base insurance: {}\nAdditional insurance cost: {}\nRent cost: {}\nTotal price: {}\n".format(self.base_insurance,self.insurance_price,self.base_price,self.total_cost))
+        print("-"*86)
 
     def add_insurances_menu(self,order):
         self.order_cost = order
-        self.price_list = self.order_cost.get_insurance_price_list() 
+        self.price_list = self.order_cost.get_insurance_price_list()
         self.title_list = self.order_cost.get_insurance_title_list()
 
-        choice = ""
-        while choice != "y" or choice != "n":
+        go_again = True
+        while go_again:
             choice = input("> Would you like additional insurances (y/n): ").lower()
             if choice == "y":
                 print("Available insurances:")
@@ -150,16 +151,19 @@ class Order_UI(object):
                 chosen_ins = input("> Choose an insurance to add, you can choose multiple insurances separated by a space:\n")
                 chosen_ins_list = chosen_ins.split(" ")
                 for ins in chosen_ins_list:
-                    ins_int = int(ins)
-                    insurance_code = "t" + str(ins_int-1)
-
+                    insurance_code = "t" + ins
+                    ins_int = int(ins) - 1
                 try:
                     self.order_ser.add_insurance(insurance_code)
+                    go_again = False
                 except ValueError:
                     print("Chosen insurance does not exist.")
 
+                except ValueError:
+                    print("NOPE")
+
 
             elif choice == "n":
-                pass
+                continue
             else:
                 print("Invalid input. Please try again.")
