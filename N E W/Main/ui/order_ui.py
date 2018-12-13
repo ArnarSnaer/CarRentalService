@@ -2,15 +2,18 @@ from services.order_services import Order_service
 from ui.car_ui import Car_UI
 from ui.employee_ui import Employee_UI
 from ui.client_ui import Client_ui
-from models.order_model import Order
 
 class Order_UI(object):
     def __init__(self):
         self.order_ser = Order_service()
         self.order_repo = self.order_ser.order_repo
         self.car_ui = Car_UI
+<<<<<<< HEAD
         self.car_repo = self.car_ui().car_repo
         self.client_ui = Client_ui()
+=======
+        self.client_ui = Client_ui
+>>>>>>> 945686592a7e20dae196338ec75d30fcb34d6e8e
         self.employee_ui = Employee_UI
         self.car_menu = self.car_ui.order_menu
         # self.client_menu = self.client_ui
@@ -19,7 +22,7 @@ class Order_UI(object):
     def order_menu(self):
         choice = ""
         while choice != "q":
-            print("Current section: Orders\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Quit")
+            print("Current section\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Quit")
             choice = input("What would you like to do? ").lower()
 
             if choice == "1":
@@ -28,30 +31,26 @@ class Order_UI(object):
                 start_date = input("Starting date: ")
                 end_date = input("Return date: ")
                 chosen_car = self.car_menu(Car_UI())
+<<<<<<< HEAD
                 #chosen_car = self.car_ui.order_menu(Car_UI())
                 plate = chosen_car.get_plate()
                 price = str(chosen_car.get_price()).strip()
                 client = self.client_ui.order_menu()
                 name = client.get_name()
                 lic_num = client.get_license_num()
+=======
+                client = self.client_menu(Client_ui())
+>>>>>>> 945686592a7e20dae196338ec75d30fcb34d6e8e
                 employee = self.employee_menu(Employee_UI())
-                employee_name = employee.get_name()
-                date1, date2, duration, days_num = self.order_ser.find_duration(start_date, end_date)
-                info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, int(price), days_num]
+                info_list = [order_id,start_date,end_date,chosen_car,client,employee]
                 new_order = self.order_ser.create_order(info_list)
                 self.order_ser.add_order(new_order)
-                print("Order successfully registered into the database")
 
             elif choice == "2":
-                order_list = []
-                while order_list == []:
-                    keyword = input("Enter the order id of the order you want to delete:\n")
-                    order_list = self.order_ser.find_order(keyword)
-                    if len(order_list) == 0:
-                        print("No results found, please try again.")
+                keyword = input("Enter the order id of the order you want to delete:\n")
+                order_list = self.order_ser.find_order(keyword)
                 found_order = order_list[0]
-                order_id = found_order[0]
-                self.order_ser.remove_order(order_id)
+                self.order_ser.remove_order(found_order)
                 print("Order removed.\n")
 
             elif choice == "3":
@@ -84,7 +83,9 @@ class Order_UI(object):
             
 
         elif choice == "4":
-            pass #Breytir upplýsingum um bíl
+            current_car = input("Enter licence plate of currnet car ")
+            new_car = input("Enter licence plate of new car ")
+            pass #Breytir bíl í pöntun
 
         elif choice == "5":
             new_name = input("Employee name: ")
@@ -127,7 +128,7 @@ class Order_UI(object):
         print("Base insurance: {}\nAdditional insurance cost: {}\nTotal price: {}\n".format(self.base_insurance,self.insurance_price,self.total_cost))
     
 
-    def add_insurances(self,order):
+    def add_insurances_menu(self,order):
         self.order_cost = order
         self.price_list = self.order_cost.get_insurance_price_list() 
         self.title_list = self.order_cost.get_insurance_title_list()
@@ -137,12 +138,26 @@ class Order_UI(object):
             choice = input("> Would you like additional insurances (y/n): ").lower()
             if choice == "y":
                 print("Available insurances:")
+<<<<<<< HEAD
                 for index_num in range (len(self.price_list)):
                     print("{}. {}: {}isk".format(index_num+1, self.title_list[index_num], self.price_list[index_num]))
                 chosen_ins = input("> Choose an insurance to add:\n")
                 insurance_code = "t" + chosen_ins
+=======
+                for index_num in range(len(self.price_list)):
+                #for index_num in range(len(self.price_list)):
+                    print("{}. {}: {}isk".format(index_num+1, self.title_list[index_num], self.price_list[index_num]))
+                chosen_ins = input("> Choose an insurance to add, you can choose multiple insurances separated by a space:\n")
+                chosen_ins_list = chosen_ins.split(" ")
+                for ins in chosen_ins_list:
+                    ins_int = int(ins)
+                    insurance_code = "t" + str(ins_int-1)
+
+>>>>>>> 945686592a7e20dae196338ec75d30fcb34d6e8e
                 try:
-                    self.order_cost.add_insurances(insurance_code)
+                    self.order_ser.add_insurance(insurance_code)
+                except ValueError:
+                    print("Chosen insurance does not exist.")
 
                 except ValueError:
                     print("NOPE")
