@@ -87,7 +87,6 @@ class Order_service(object):
         no_conflict = True
         for line in get_order_list:
             # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
-            print(line)
             _, start, end, plate, _, _, _, _ = line.split(',')
             order_start = datetime.datetime.strptime(start, '%Y-%m-%d')
             order_end = datetime.datetime.strptime(end, '%Y-%m-%d')
@@ -96,15 +95,44 @@ class Order_service(object):
                 while date_start != date_end:
                     current_date = order_start 
                     while current_date != order_end:
-                        print(current_date)
                         if current_date.date() == date_start:
-                            print("Conflict!")
                             no_conflict = False
                         current_date += datetime.timedelta(days = 1)
                     date_start += datetime.timedelta(days = 1)
         
         return no_conflict
 
+    def find_base_price_with_duration(self, base, days):
+        total_price = base * days + 12000
+        return total_price
+
+    def add_insurance_to_price(self):
+        insurance_price = 0
+        applied_insurances = []
+        chosen_ins = ""
+        choice = ""
+        while True:
+            print("Add insurances to car, or type 'q' to continue\n1. Water Damage insurance: 10'000 ISK\n2. CASCO insurance: 20'000 ISK\n3. Some other insurance: 5'000 ISK")
+            choice = input("> Enter choice here:")
+            if (choice == "1" or "Water Damage Insurance") and ("1" not in applied_insurances):
+                insurance_price += 10000
+                applied_insurances.append("1")
+                chosen_ins += "Water Damage Insurance"
+            elif (choice == "2" or "CASCO insurance") and ("2" not in applied_insurances):
+                insurance_price += 20000
+                applied_insurances.append("2")
+                chosen_ins += "CASCO insurance"
+            elif (choice == "3" or "Some other insurance") and ("3" not in applied_insurances):
+                insurance_price += 5000
+                applied_insurances.append("3")
+                chosen_ins += "Some other insurance"
+            elif choice == "q":
+                break
+            else:
+                print("Invalid input/insurance already chosen")
+        
+        return insurance_price, chosen_ins
+# 12000,10000,20000,5000
 # self.order_id,self.date_start,self.date_end,self.plate,self.client_name,self.licence_number,self.employee_name,self.total_cost
     
     def add_order(self,order):

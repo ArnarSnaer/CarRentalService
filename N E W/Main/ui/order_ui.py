@@ -39,11 +39,18 @@ class Order_UI(object):
                     new_order = self.order_ser.create_order(info_list)
                     self.order_ser.add_order(new_order)
                 date1, date2, _, days_num = self.order_ser.find_duration(start_date, end_date)
+                start_date = input("Starting date (DD MM YYYY): ")
+                end_date = input("Return date (DD MM YYYY): ")
+                try:
+                    date1, date2, _, days_num = self.order_ser.find_duration(start_date, end_date)
+                except Exception:
+                    print("Incorrect date input! Cancelling order and going back to main menu...")
+                    break
                 check_validity, explanation = self.order_ser.date_isvalid(date1, date2, days_num)
                 if check_validity == True:
                     chosen_car = self.car_menu(Car_UI())
                     plate = chosen_car.get_plate()
-                    price = str(chosen_car.get_price()).strip()
+                    base_price = str(chosen_car.get_price()).strip()
                     order_conflict = self.order_ser.check_conflict(date1, date2, plate)
                     if order_conflict == True:
                         client = self.client_menu(Client_ui())
@@ -51,11 +58,13 @@ class Order_UI(object):
                         lic_num = client.license_num
                         employee = self.employee_menu(Employee_UI())
                         employee_name = employee.get_name()
-                        info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, int(price), days_num]
+                        price_duration = self.order_ser.find_base_price_with_duration(int(base_price), days_num)
+                        insurance_price, insurance_list = self.order_ser.add_insurance_to_price()
+                        final_price = price_duration + insurance_price
+                        info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, int(final_price), days_num]
                         new_order = self.order_ser.create_order(info_list)
                         self.order_ser.add_order(new_order)
-                        self.add_insurances_menu(new_order)
-                        self.print_order(new_order)
+                        self.print_order(new_order,insurance_price,final_price,insurance_list)
                         print("Order successfully registered into the database")
                     else:
                         print("This car is already reserved during the dates input. Please find another car.")
@@ -112,7 +121,7 @@ class Order_UI(object):
         self.order_repo.remove_order(self.old_order)
         self.order_repo.add_order(new_order)
     
-    def print_order(self,order_object):
+    def print_order(self,order_object, insurance_price, total_price, insurance_list):
         self.order_obj = order_object
         self.order_id = self.order_obj.get_order_id()
         self.employee_name = self.order_obj.get_employee_name()
@@ -128,21 +137,20 @@ class Order_UI(object):
         self.date_start = self.order_obj.get_date_start()
         self.date_end = self.order_obj.get_date_end()
 
-        self.base_insurance = self.order_obj.get_base_insurance()
-        self.insurance_price = self.order_obj.get_total_ins_cost()
-        self.insurance_list = self.order_obj.order_payment.insurance_list
-        self.total_cost = self.order_obj.get_total_cost()
-        self.base_price = self.order_obj.order_payment.get_base_price()
+        self.base_insurance = "12000"
+        self.insurance_price = insurance_price
+        self.insurance_list = insurance_list
+        self.total_cost = total_price
 
         print("-"*86)
         print("RECEIPT:")
         print("Order id: {}\nEmployee: {}\n\nStarting date: {}\nReturn date: {}\n".format(self.order_id,self.employee_name,self.date_start,self.date_end))
         print("Car brand: {}\nCar type: {}\nCar plate: {}\n\nClient: {}\nDriver licence number: {}\n".format(self.car_brand,self.car_type,self.plate,self.client_name,self.licence_num))
-        if len(self.insurance_list) != 0:
-            print("Insurances:\n")
-            for line in self.insurance_list:
-                print(line)
-        print("Base insurance: {}\nAdditional insurance cost: {}\nRent cost: {}\nTotal price: {}\n".format(self.base_insurance,self.insurance_price,self.base_price,self.total_cost))
+        if insurance_list == "":
+            print("No additional insurances")
+        else:
+            print(insurance_list)
+        print("Base insurance: {}\nAdditional insurance cost: {}\n\nTotal price: {}\n".format(self.base_insurance,self.insurance_price,self.total_cost))
         print("-"*86)
 
     def add_insurances_menu(self,order):
@@ -170,7 +178,6 @@ class Order_UI(object):
 
                 except ValueError:
                     print("NOPE")
-
 
             elif choice == "n":
                 continue
