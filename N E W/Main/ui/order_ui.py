@@ -40,6 +40,8 @@ class Order_UI(object):
                 info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, int(price), days_num]
                 new_order = self.order_ser.create_order(info_list)
                 self.order_ser.add_order(new_order)
+                self.add_insurances_menu(new_order)
+                self.print_order(new_order)
                 print("Order successfully registered into the database")
 
             elif choice == "2":
@@ -124,7 +126,7 @@ class Order_UI(object):
         print("Base insurance: {}\nAdditional insurance cost: {}\nTotal price: {}\n".format(self.base_insurance,self.insurance_price,self.total_cost))
     
 
-    def add_insurances(self,order):
+    def add_insurances_menu(self,order):
         self.order_cost = order
         self.price_list = self.order_cost.get_insurance_price_list() 
         self.title_list = self.order_cost.get_insurance_title_list()
@@ -134,12 +136,18 @@ class Order_UI(object):
             choice = input("> Would you like additional insurances (y/n): ").lower()
             if choice == "y":
                 print("Available insurances:")
-                for index_num in range len(self.price_list):
+                for index_num in range (len(self.price_list)):
                     print("{}. {}: {}isk".format(index_num+1, self.title_list[index_num], self.price_list[index_num]))
-                chosen_ins = input("> Choose an insurance to add:\n")
-                insurance_code = t + chosen_ins
+                chosen_ins = input("> Choose an insurance to add, you can choose multiple insurances separated by a space:\n")
+                chosen_ins_list = chosen_ins.split(" ")
+                for ins in chosen_ins_list:
+                    ins_int = int(ins)
+                    insurance_code = "t" + str(ins_int-1)
+
                 try:
-                    self.order_cost.add_insurances(insurance_code)
+                    self.order_ser.add_insurance(insurance_code)
+                except ValueError:
+                    print("Chosen insurance does not exist.")
 
 
             elif choice == "n":
