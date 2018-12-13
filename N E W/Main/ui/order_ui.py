@@ -28,7 +28,6 @@ class Order_UI(object):
                 start_date = input("Starting date: ")
                 end_date = input("Return date: ")
                 chosen_car = self.car_menu(Car_UI())
-                #chosen_car = self.car_ui.order_menu(Car_UI())
                 plate = chosen_car.get_plate()
                 price = str(chosen_car.get_price()).strip()
                 client = self.client_menu(Client_ui())
@@ -134,7 +133,7 @@ class Order_UI(object):
             choice = input("> Would you like additional insurances (y/n): ").lower()
             if choice == "y":
                 print("Available insurances:")
-                for index_num in range len(self.price_list):
+                for index_num in range(len(self.price_list)):
                     print("{}. {}: {}isk".format(index_num+1, self.title_list[index_num], self.price_list[index_num]))
                 chosen_ins = input("> Choose an insurance to add:\n")
                 insurance_code = t + chosen_ins
