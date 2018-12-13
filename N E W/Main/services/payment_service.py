@@ -17,7 +17,7 @@ class Payment_ser(object):
             print("Insurances: ", self.insurance)
             self.price = int(self.price + self.insurance(choice)) #NOT CALLABLE?
             self.payment.total_price += self.price
-            self.payment.total_insurance_cost += self.price
+            self.payment.total_ins_cost += self.price
             return self.price
         else:
             return "This insurance is already applied to your order"
