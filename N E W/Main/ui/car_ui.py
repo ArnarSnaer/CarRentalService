@@ -158,7 +158,7 @@ class Car_UI(object):
                 else:
                     self.choose_car(results)
 
-            elif choice == "4" or "5" or "6":
+            elif choice == ("4" or "5" or "6"):
                 file_text = self.car_serv.car_repo.get_all_cars()
                 number = 1
                 for item in file_text:
