@@ -103,7 +103,7 @@ class Client_ui():
 
             
     def option_4(self, searchword):
-        client_found = self.__client_ser.get_client(searchword) #Tók út client_info
+        info_list, client_found = self.__client_ser.get_client(searchword) #Tók út client_info
         if client_found:
             stay = True
             while stay:
