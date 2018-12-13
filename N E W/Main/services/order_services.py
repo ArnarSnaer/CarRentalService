@@ -17,15 +17,7 @@ class Order_service(object):
         self.order_model = self.order_repo.order_model
         self.order_model.zip = self.generate_order_id()
         self.Order_constructor = self.order_repo.order_model
-        self.total_insurance = self.order_model().get_total_ins_cost()
         self.total_cost = self.order_model().total_cost
-
-    def add_insurance(self,ins_type):
-        added_cost = self.insurance(ins_type)
-        print("AAAAAAAA: ", added_cost)
-        self.total_cost = self.total_cost + added_cost
-        self.total_insurance += added_cost
-        return self.total_cost
     
     def get_status(self):
         plate = self.order_model().get_plate()
@@ -51,7 +43,7 @@ class Order_service(object):
         return id
 
     def create_order(self,info_list):
-        new_order = self.Order_constructor(info_list[0],info_list[1],info_list[2],info_list[3],info_list[4],info_list[5],info_list[6],info_list[7])
+        new_order = self.Order_constructor(info_list[0],info_list[1],info_list[2],info_list[3],info_list[4],info_list[5],info_list[6],info_list[7], info_list[8])
         return new_order
 
     def find_duration(self, date_start, date_end):
@@ -112,26 +104,50 @@ class Order_service(object):
         chosen_ins = ""
         choice = ""
         while True:
+            print("Current chosen insurances: {}".format(applied_insurances))
             print("Add insurances to car, or type 'q' to continue\n1. Water Damage insurance: 10'000 ISK\n2. CASCO insurance: 20'000 ISK\n3. Some other insurance: 5'000 ISK")
-            choice = input("> Enter choice here:")
-            if (choice == "1" or "Water Damage Insurance") and ("1" not in applied_insurances):
-                insurance_price += 10000
-                applied_insurances.append("1")
-                chosen_ins += "Water Damage Insurance"
-            elif (choice == "2" or "CASCO insurance") and ("2" not in applied_insurances):
-                insurance_price += 20000
-                applied_insurances.append("2")
-                chosen_ins += "CASCO insurance"
-            elif (choice == "3" or "Some other insurance") and ("3" not in applied_insurances):
-                insurance_price += 5000
-                applied_insurances.append("3")
-                chosen_ins += "Some other insurance"
-            elif choice == "q":
-                break
+            choice = input("> Enter choice here: ")
+            if choice == ("1" or "Water Damage Insurance"):
+                    if "1" in applied_insurances:
+                            print("Already registered")
+                    else:
+                            insurance_price += 10000
+                            applied_insurances.append("1")
+                            chosen_ins += "Water Damage Insurance,"
+            if choice == ("2" or "CASCO insurance"):
+                    if "2" in applied_insurances:
+                            print("Already registered")
+                    else:
+                            insurance_price += 20000
+                            applied_insurances.append("2")
+                            chosen_ins += "CASCO insurance,"
+            if choice == ("3" or "Some other insurance"):
+                    if "3" in applied_insurances:
+                            print("Already registered")
+                    else:
+                            insurance_price += 5000
+                            applied_insurances.append("3")
+                            chosen_ins += "Some other insurance,"
+            if choice == ("q" or "Q"):
+                    break
             else:
-                print("Invalid input/insurance already chosen")
-        
-        return insurance_price, chosen_ins
+                    print("Invalid input/insurance already chosen")
+
+        return insurance_price, chosen_ins[:-1]
+
+    def change_car_status(self, plate):
+        result = self.car_repo.find_car(plate)
+        real_list = result[0]
+        pos = real_list[4]
+        if pos == "True":
+            status = "False"
+        elif pos == "False":
+            status = "True"
+        real_list[4] = status
+        changed_car_status = self.car_serv.create_car(real_list)
+        self.car_repo.remove_car(plate)
+        self.car_repo.add_car(changed_car_status)
+
 # 12000,10000,20000,5000
 # self.order_id,self.date_start,self.date_end,self.plate,self.client_name,self.licence_number,self.employee_name,self.total_cost
     
@@ -149,7 +165,6 @@ class Order_service(object):
     def change_client(self,order_object): #Client, starting date, return date, car, employee
         pass #Bryta uppl. um client
 
-
     def change_start_date(self,order_object,new_date):
         order_object.date_start = new_date 
         return order_object
@@ -164,6 +179,3 @@ class Order_service(object):
     def change_employee(self,order_object,new_name):
         order_object.employee.change_name(new_name)
         return order_object
-
-    def get_total_ins_cost(self):
-        return self.total_insurance
