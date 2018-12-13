@@ -73,6 +73,7 @@ class ClientRepo():
                                     client_update[self.COUNTRY], client_update[self.THE_ZIP])
         self.new_client(client_update)
         open_file.close()
+        return client_update
      
 
 
