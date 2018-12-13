@@ -70,7 +70,6 @@ Gonzalo Soto-ramirez,Seahaven 55,546-799-35246,3. November,3605456484,DL,178
 Gary Sade,Long Way 273,546-799-13862,23. September,7511708855,JP,345
 Cortney Hastings,Long Way 25,546-799-15596,19. Febuary,6563710463,DL,657
 Miyoko Viveros-aguilera,Long Way 258,546-799-55117,11. March,8827580391,Isl,173
-Kandis Wallace,Seahaven 62,554-578-40960,30. August,1479628182,Isl,302
 Bell Hastings,Long Way 2,555-632-58811,7. April,9354400479,FR,526
 Delilah Kounias,Seahaven 18,546-799-58016,7. April,5595320479,JP,352
 Bell Sade,Seahaven 75,554-578-63079,23. April,6185733025,Isl,612
@@ -81,7 +80,6 @@ Jann Paarlberg,Litenway 236,546-799-63412,10. Febuary,9175989193,DL,942
 Han Kounias,Long Way 18,546-799-55683,28. Febuary,6049165213,Isl,148
 Teena Kounias,Litenway 127,546-799-13593,11. April,9962111536,JP,621
 Meredith Viveros-aguilera,Long Way 110,554-578-02485,5. December,6715652859,FR,574
-Lawrence Grove,Litenway 71,554-578-70400,18. January,8466011859,Isl,408
 Xefu,Rata Sum,123-4567,12 12 1998,123456789,USA,123
 =======
 Ragnar,Litenway 236,546-799-63412,10. Febuary,9175989193,DL,942
@@ -91,3 +89,7 @@ Bitch Lasagna,Hallgrímskirkja 12,588-5522,1 1 1999,341343124132,USA,123
 >>>>>>> 823c13d80acf878d507affe751eb45ea5ac926ca
 Gunnar,Í þessu forriti,123-4567,SKIPTIR EKKI MÁLI,1234567890,USA,123
 >>>>>>> a047cafe8e6bfd364f2ff09f393af31ce2c319b9
+Ragnarprufa,Litenway 71,554-578-70400,18. January,8466011859,Isl,408
+
+PRUFA,Seahaven 62,554-578-40960,30. August,1479628182,Isl,302
+

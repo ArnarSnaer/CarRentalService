@@ -72,20 +72,27 @@ class Order_service(object):
 
     # UPDATE föll
 
+    def change_client(self,order_object): #Client, starting date, return date, car, employee
+        pass #Bryta uppl. um client
+
+
     def change_start_date(self,order_object,new_date):
-        order_object.date_start = new_date 
-        return order_object
+        pass
+        
+        # order_object.date_start = new_date 
+        # return order_object
     
     def change_end_date(self,order_object,new_date):
         order_object.date_end = new_date
         return order_object 
 
+    def change_car(self,order_object):
+        pass #Breytir upplýsingum um bíl
+    
     def change_employee(self,order_object,new_name):
         order_object.employee.change_name(new_name)
         return order_object
 
-    def change_client(self,order_object): #Client, starting date, return date, car, employee
-        pass #Bryta uppl. um client
+    
         
-    def change_car(self,order_object):
-        pass #Breytir upplýsingum um bíl
+    

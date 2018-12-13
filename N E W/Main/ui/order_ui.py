@@ -10,10 +10,10 @@ class Order_UI(object):
         self.order_repo = self.order_ser.order_repo
         self.car_ui = Car_UI
         self.car_repo = self.car_ui().car_repo
-        self.client_ui = Client_ui
+        self.client_ui = Client_ui()
         self.employee_ui = Employee_UI
         self.car_menu = self.car_ui.order_menu
-        self.client_menu = self.client_ui.order_menu
+        # self.client_menu = self.client_ui
         self.employee_menu = self.employee_ui.order_menu  
 
     def order_menu(self):
@@ -31,7 +31,7 @@ class Order_UI(object):
                 #chosen_car = self.car_ui.order_menu(Car_UI())
                 plate = chosen_car.get_plate()
                 price = str(chosen_car.get_price()).strip()
-                client = self.client_menu(Client_ui())
+                client = self.client_ui.order_menu()
                 name = client.get_name()
                 lic_num = client.get_license_num()
                 employee = self.employee_menu(Employee_UI())
@@ -69,8 +69,10 @@ class Order_UI(object):
         choice = input("What would you like to update? (Please input integer choice): ")
         self.old_order = order_object
 
+        
         if choice == "1":
-            pass #Bryta uppl. um client
+            new_client = self.client_ui.order_menu()
+            # is_already_client = input("Is the")
 
         elif choice == "2":
             new_date = input("New starting date (DD/MM/YYYY):\n ")
@@ -79,6 +81,7 @@ class Order_UI(object):
         elif choice == "3":
             new_date = input("New return date (DD/MM/YYYY):\n ")
             new_order = self.order_ser.change_end_date(order_object,new_date)
+            
 
         elif choice == "4":
             pass #Breytir upplýsingum um bíl
@@ -134,15 +137,18 @@ class Order_UI(object):
             choice = input("> Would you like additional insurances (y/n): ").lower()
             if choice == "y":
                 print("Available insurances:")
-                for index_num in range len(self.price_list):
+                for index_num in range (len(self.price_list)):
                     print("{}. {}: {}isk".format(index_num+1, self.title_list[index_num], self.price_list[index_num]))
                 chosen_ins = input("> Choose an insurance to add:\n")
-                insurance_code = t + chosen_ins
+                insurance_code = "t" + chosen_ins
                 try:
                     self.order_cost.add_insurances(insurance_code)
 
+                except ValueError:
+                    print("NOPE")
+
 
             elif choice == "n":
-                pass
+                continue
             else:
                 print("Invalid input. Please try again.")

@@ -19,6 +19,7 @@ class Client_ser(object):
     def update_registration(self, searchword, option, the_change):
         updated = False
         invalidate =''
+        updated_client = []
         client_info, client_found = self.get_client(searchword)
         if client_found == True and type(client_info)==list:
                 
@@ -27,13 +28,14 @@ class Client_ser(object):
                 valid, invalidation = self.is_valid_client(client_update)
                 if valid:
                     self.__client_repo.remove_client(searchword)
-                    if self.__client_repo.update_registration(client_info, option, the_change):
-                        updated = True
+                    # spurninga að taka þetta if statement
+                    updated_client = self.__client_repo.update_registration(client_info, option, the_change)
+                    updated = True
                 else:
                     invalidate = invalidation
 
                 
-        return updated, invalidate
+        return updated, invalidate, updated_client
     
     def get_client(self, searchword):
         client_info = self.__client_repo.find_client(searchword)
@@ -110,7 +112,7 @@ class Client_ser(object):
         try:
             variable = list(variable)
             for integer in variable:
-                if integer != "-": 
+                if integer != "-" and integer != "\n" : 
                     int(integer)
             return True
         except ValueError:
