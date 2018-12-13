@@ -28,7 +28,7 @@ class Order_repository(object):
         old_file = open_file.readlines()
         open_file.close()
 
-        new_file = open_file("./data/order.txt","w")
+        new_file = open("./data/order.txt","w")
         for line in old_file:
             if order_id not in line:
                 new_file.write(line)
@@ -39,6 +39,7 @@ class Order_repository(object):
         open_file = open("./data/order.txt","r")
         order_list = []
         for line in open_file:
+            print(line)
             if searchword in line:
                 found_list = line.split(",")
                 order_list.append(found_list)
