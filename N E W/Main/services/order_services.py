@@ -122,10 +122,8 @@ class Order_service(object):
 
 
     def change_start_date(self,order_object,new_date):
-        pass
-        
-        # order_object.date_start = new_date 
-        # return order_object
+        order_object.date_start = new_date 
+        return order_object
     
     def change_end_date(self,order_object,new_date):
         order_object.date_end = new_date

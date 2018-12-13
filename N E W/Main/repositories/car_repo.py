@@ -61,6 +61,5 @@ class Car_repository():
         open_file = open("./data/vehicle.txt", "r")
         list_of_cars = open_file.readlines()
         open_file.close()
-        print(list_of_cars)
 
         return list_of_cars

@@ -74,10 +74,8 @@ class Order_UI(object):
         choice = input("What would you like to update? (Please input integer choice): ")
         self.old_order = order_object
 
-        
         if choice == "1":
-            new_client = self.client_ui.order_menu()
-            # is_already_client = input("Is the")
+            pass #Bryta uppl. um client
 
         elif choice == "2":
             new_date = input("New starting date (DD/MM/YYYY):\n ")
@@ -86,7 +84,6 @@ class Order_UI(object):
         elif choice == "3":
             new_date = input("New return date (DD/MM/YYYY):\n ")
             new_order = self.order_ser.change_end_date(order_object,new_date)
-            
 
         elif choice == "4":
             current_car = input("Enter licence plate of currnet car ")
