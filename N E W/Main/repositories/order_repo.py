@@ -36,7 +36,6 @@ class Order_repository(object):
         open_file = open("./data/order.txt","r")
         order_list = []
         for line in open_file:
-            print(line)
             if searchword in line:
                 found_list = line.split(",")
                 order_list.append(found_list)
