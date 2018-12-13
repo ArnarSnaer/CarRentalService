@@ -65,11 +65,17 @@ class Order_UI(object):
                 check_validity, explanation = self.order_ser.date_isvalid(date1, date2, days_num)
                 if check_validity == True:
                     chosen_car = self.car_menu(Car_UI())
+                    if chosen_car == None:
+                        choice = "q"
+                        break
                     plate = chosen_car.get_plate()
                     base_price = str(chosen_car.get_price()).strip()
                     order_conflict = self.order_ser.check_conflict(date1, date2, plate)
                     if order_conflict == True:
                         client = self.client_menu(Client_ui())
+                        if client == "q":
+                            choice = "q"
+                            break
                         name = client.name
                         lic_num = client.license_num
                         employee = self.employee_menu(Employee_UI())

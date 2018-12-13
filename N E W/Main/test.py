@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+
+
 def add_insurance_to_price():
         insurance_price = 0
         applied_insurances = []
@@ -39,5 +40,3 @@ def add_insurance_to_price():
 
 test1, test2 = add_insurance_to_price()
 print(test1, test2)
-=======
->>>>>>> 542ab7d022644be23545c7f97e3d0463e23c84b6
