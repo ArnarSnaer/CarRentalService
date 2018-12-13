@@ -83,18 +83,21 @@ class Order_service(object):
 
     def check_conflict(self, date_start, date_end, car_plate): # check if dates conflict with other orders
         get_order_list = self.order_repo.get_all_orders()
-        print(get_order_list)
         no_conflict = True
         for line in get_order_list:
             # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
-            print(line)            
-            _,start, end, plate, _, _, _, _ = line.split(',')
-
+            print(line)
+            _, start, end, plate, _, _, _, _ = line.split(',')
+            order_start = datetime.datetime.strptime(start, '%Y-%m-%d')
+            order_end = datetime.datetime.strptime(end, '%Y-%m-%d')
+            # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
             if car_plate == plate:
-                while date_start != end:
-                    current_date = start 
-                    while current_date != date_end:
-                        if current_date == date_start:
+                while date_start != date_end:
+                    current_date = order_start 
+                    while current_date != order_end:
+                        print(current_date)
+                        if current_date.date() == date_start:
+                            print("Conflict!")
                             no_conflict = False
                         current_date += datetime.timedelta(days = 1)
                     date_start += datetime.timedelta(days = 1)

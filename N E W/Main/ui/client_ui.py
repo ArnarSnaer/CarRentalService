@@ -143,12 +143,12 @@ class Client_ui():
             if answer == "n":
                 clients_info = self.client_op("1")
             elif answer == "y":
-                print("Would you like to\n1. Get client's current info\n2. Change client's current info")
-                answer = input("> ")
-                if answer == "1":
-                    clients_info = self.client_op("2")
-                elif answer == "2":
-                    clients_info = self.client_op("4")
+                # print("Would you like to\n1. Get client's current info\n2. Change client's current info")
+                # answer = input("> ")
+                # if answer == "1":
+                clients_info = self.client_op("2")
+                # elif answer == "2":
+                #    clients_info = self.client_op("4")
             elif answer == "q":
                 break
             else:

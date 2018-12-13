@@ -9,10 +9,10 @@ class Order_UI(object):
         self.order_repo = self.order_ser.order_repo
         self.car_ui = Car_UI
         self.car_repo = self.car_ui().car_repo
-        self.client_ui = Client_ui()
+        self.client_ui = Client_ui
         self.employee_ui = Employee_UI
         self.car_menu = self.car_ui.order_menu
-        # self.client_menu = self.client_ui
+        self.client_menu = self.client_ui.order_menu
         self.employee_menu = self.employee_ui.order_menu  
 
     def order_menu(self):
@@ -35,8 +35,8 @@ class Order_UI(object):
                     order_conflict = self.order_ser.check_conflict(date1, date2, plate)
                     if order_conflict == True:
                         client = self.client_menu(Client_ui())
-                        name = client.get_name()
-                        lic_num = client.get_license_num()
+                        name = client.name
+                        lic_num = client.license_num
                         employee = self.employee_menu(Employee_UI())
                         employee_name = employee.get_name()
                         info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, int(price), days_num]

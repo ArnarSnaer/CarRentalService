@@ -7,7 +7,7 @@ from models.order_model import Order
 def main():
     print("Welcome, User")
     choice = ""
-    
+    # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
     while choice != "5": 
         print("Available sections:\n1. Order\n2. Cars\n3. Client\n4. Calculator\nq. Exit program")
         choice = input("> Choose a section: ")
