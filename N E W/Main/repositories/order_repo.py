@@ -3,9 +3,6 @@ from models.order_model import Order
 class Order_repository(object):
     def __init__(self):
         self.order_model = Order
-        #self.order_payment = self.order_model().total_cost
-        #self.info = self.order_model().info
-         
 
     def add_order(self,order_model):
         open_file = open("./data/order.txt","a+")
@@ -48,13 +45,7 @@ class Order_repository(object):
     def get_all_orders(self):
         open_file = open("./data/order.txt","r")
         list_of_orders = open_file.readlines()
-        all_cars = ""
-        open_file.close()
-        for line in list_of_orders:
-            all_cars += line
-            if line != list_of_orders[-1]:
-                all_cars += "\n"
-        return all_cars
+        return list_of_orders
     
     def check_order_id(self):
         open_file = open("./data/order.txt","r")

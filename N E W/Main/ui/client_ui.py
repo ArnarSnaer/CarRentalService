@@ -1,9 +1,6 @@
 from services.client_services import Client_ser
 from models.client_model import Client
-# from services.client_services import Client_ser
-# from models.client_model import Client
 import string
-'''þetta UI hefur back option, hægt að hafa það með eða eyða því'''
 
 class Client_ui():
     def __init__(self):
@@ -22,16 +19,16 @@ class Client_ui():
     def main_menu(self):
         stay = True
         while stay:
-            print("1. Create a new client\n2. See client full imformation\n3. Remove a client\n4. Update client's information\n5. Back")
+            print("1. Create a new client\n2. See client full imformation\n3. Remove a client\n4. Update client's information\nq. Back")
             option = input("> Input an option: ")
             the_range = range(1,6)
-            if option == "5" :
+            if option == "q" or option =="Q" :
                 stay = False
             else:
                 if self.check_option(option, the_range):
                     self.client_op(option)
                 else:
-                    print("Please input an integer from 1 to 5")
+                    print("Invalid input")
     
     def check_option(self, option, the_range):
             try: 
@@ -151,6 +148,12 @@ class Client_ui():
                 clients_info = self.client_op("2")
                 customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
 
+                # print("Would you like to\n1. Get client's current info\n2. Change client's current info")
+                # answer = input("> ")
+                # if answer == "1":
+                # clients_info = self.client_op("2")
+                # elif answer == "2":
+                #    clients_info = self.client_op("4")
             elif answer == "q":
                 clients_info = "QUIT"
                 customer = "q"

@@ -4,7 +4,7 @@ from services.employee_services import Employee_services
 from services.car_services import Car_services
 from services.payment_service import Payment_ser
 from models.insurance_model import Insurance
-from datetime import datetime
+import datetime
 import random
 import string
 
@@ -57,15 +57,53 @@ class Order_service(object):
         #Þetta reiknar heildarkostnað (total_price) út frá tímanum sem er gefinn
         day1,month1,year1 = date_start.split(" ")
         day2,month2,year2 = date_end.split(" ")
-        date1 = datetime(int(year1),int(month1),int(day1))
+        date1 = datetime.datetime(int(year1),int(month1),int(day1))
         date1 = date1.date()
-        date2 = datetime(int(year2),int(month2),int(day2))
+        date2 = datetime.datetime(int(year2),int(month2),int(day2))
         date2 = date2.date()
         duration = date2 - date1
         days_num = duration.days
         
         return date1, date2, duration, days_num
-       
+
+    def date_isvalid(self, date_start, date_end, days_num):
+        valid_date = True
+        error_message = ""
+        today_date = datetime.datetime.now()
+        # First check if input dates are valid
+        if date_start < today_date.date():
+            error_message = "Starting date is invalid. (Below today's date)"
+            valid_date = False
+
+        if days_num < 1:
+            error_message = "Return date is invalid. (Below starting date)."
+            valid_date = False
+
+        return valid_date, error_message
+
+    def check_conflict(self, date_start, date_end, car_plate): # check if dates conflict with other orders
+        get_order_list = self.order_repo.get_all_orders()
+        no_conflict = True
+        for line in get_order_list:
+            # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
+            print(line)
+            _, start, end, plate, _, _, _, _ = line.split(',')
+            order_start = datetime.datetime.strptime(start, '%Y-%m-%d')
+            order_end = datetime.datetime.strptime(end, '%Y-%m-%d')
+            # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
+            if car_plate == plate:
+                while date_start != date_end:
+                    current_date = order_start 
+                    while current_date != order_end:
+                        print(current_date)
+                        if current_date.date() == date_start:
+                            print("Conflict!")
+                            no_conflict = False
+                        current_date += datetime.timedelta(days = 1)
+                    date_start += datetime.timedelta(days = 1)
+        
+        return no_conflict
+
 # self.order_id,self.date_start,self.date_end,self.plate,self.client_name,self.licence_number,self.employee_name,self.total_cost
     
     def add_order(self,order):
@@ -84,10 +122,8 @@ class Order_service(object):
 
 
     def change_start_date(self,order_object,new_date):
-        pass
-        
-        # order_object.date_start = new_date 
-        # return order_object
+        order_object.date_start = new_date 
+        return order_object
     
     def change_end_date(self,order_object,new_date):
         order_object.date_end = new_date
@@ -100,6 +136,5 @@ class Order_service(object):
         order_object.employee.change_name(new_name)
         return order_object
 
-    
-        
-    
+    def get_total_ins_cost(self):
+        return self.total_insurance

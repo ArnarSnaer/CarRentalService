@@ -8,6 +8,7 @@ class Order_UI(object):
         self.order_ser = Order_service()
         self.order_repo = self.order_ser.order_repo
         self.car_ui = Car_UI
+        self.car_repo = self.car_ui().car_repo
         self.client_ui = Client_ui
         self.employee_ui = Employee_UI
         self.car_menu = self.car_ui.order_menu
@@ -34,6 +35,31 @@ class Order_UI(object):
                     info_list = [order_id,start_date,end_date,chosen_car,client,employee]
                     new_order = self.order_ser.create_order(info_list)
                     self.order_ser.add_order(new_order)
+                date1, date2, _, days_num = self.order_ser.find_duration(start_date, end_date)
+                check_validity, explanation = self.order_ser.date_isvalid(date1, date2, days_num)
+                if check_validity == True:
+                    chosen_car = self.car_menu(Car_UI())
+                    plate = chosen_car.get_plate()
+                    price = str(chosen_car.get_price()).strip()
+                    order_conflict = self.order_ser.check_conflict(date1, date2, plate)
+                    if order_conflict == True:
+                        client = self.client_menu(Client_ui())
+                        name = client.name
+                        lic_num = client.license_num
+                        employee = self.employee_menu(Employee_UI())
+                        employee_name = employee.get_name()
+                        info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, int(price), days_num]
+                        new_order = self.order_ser.create_order(info_list)
+                        self.order_ser.add_order(new_order)
+                        self.add_insurances_menu(new_order)
+                        self.print_order(new_order)
+                        print("Order successfully registered into the database")
+                    else:
+                        print("This car is already reserved during the dates input. Please find another car.")
+                        print("")
+                else:
+                    print(explanation)
+                    print("")
 
             elif choice == "2":
                 keyword = input("Enter the order id of the order you want to delete:\n")
@@ -82,3 +108,68 @@ class Order_UI(object):
 
         self.order_repo.remove_order(self.old_order)
         self.order_repo.add_order(new_order)
+    
+    def print_order(self,order_object):
+        self.order_obj = order_object
+        self.order_id = self.order_obj.get_order_id()
+        self.employee_name = self.order_obj.get_employee_name()
+
+        self.plate = self.order_obj.get_plate()
+        self.car_list = self.car_repo.find_car(self.plate)
+        self.car = self.car_list[0]
+        self.car_type = self.car[0]
+        self.car_brand = self.car[1]
+
+        self.client_name = self.order_obj.get_client_name()
+        self.licence_num = self.order_obj.get_license_number()
+        self.date_start = self.order_obj.get_date_start()
+        self.date_end = self.order_obj.get_date_end()
+
+        self.base_insurance = self.order_obj.get_base_insurance()
+        self.insurance_price = self.order_obj.get_total_ins_cost()
+        self.insurance_list = self.order_obj.order_payment.insurance_list
+        self.total_cost = self.order_obj.get_total_cost()
+        self.base_price = self.order_obj.order_payment.get_base_price()
+
+        print("-"*86)
+        print("RECEIPT:")
+        print("Order id: {}\nEmployee: {}\n\nStarting date: {}\nReturn date: {}\n".format(self.order_id,self.employee_name,self.date_start,self.date_end))
+        print("Car brand: {}\nCar type: {}\nCar plate: {}\n\nClient: {}\nDriver licence number: {}\n".format(self.car_brand,self.car_type,self.plate,self.client_name,self.licence_num))
+        if len(self.insurance_list) != 0:
+            print("Insurances:\n")
+            for line in self.insurance_list:
+                print(line)
+        print("Base insurance: {}\nAdditional insurance cost: {}\nRent cost: {}\nTotal price: {}\n".format(self.base_insurance,self.insurance_price,self.base_price,self.total_cost))
+        print("-"*86)
+
+    def add_insurances_menu(self,order):
+        self.order_cost = order
+        self.price_list = self.order_cost.get_insurance_price_list()
+        self.title_list = self.order_cost.get_insurance_title_list()
+
+        go_again = True
+        while go_again:
+            choice = input("> Would you like additional insurances (y/n): ").lower()
+            if choice == "y":
+                print("Available insurances:")
+                for index_num in range(len(self.price_list)):
+                    print("{}. {}: {}isk".format(index_num+1, self.title_list[index_num], self.price_list[index_num]))
+                chosen_ins = input("> Choose an insurance to add, you can choose multiple insurances separated by a space:\n")
+                chosen_ins_list = chosen_ins.split(" ")
+                for ins in chosen_ins_list:
+                    insurance_code = "t" + ins
+                    ins_int = int(ins) - 1
+                try:
+                    self.order_ser.add_insurance(insurance_code)
+                    go_again = False
+                except ValueError:
+                    print("Chosen insurance does not exist.")
+
+                except ValueError:
+                    print("NOPE")
+
+
+            elif choice == "n":
+                continue
+            else:
+                print("Invalid input. Please try again.")
