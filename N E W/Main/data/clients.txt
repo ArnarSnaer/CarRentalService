@@ -75,21 +75,3 @@ Delilah Kounias,Seahaven 18,546-799-58016,7. April,5595320479,JP,352
 Bell Sade,Seahaven 75,554-578-63079,23. April,6185733025,Isl,612
 Gonzalo Gwynne,Long Way 291,554-578-12695,12. November,7177367026,USA,145
 Reiko Swett,Seahaven 139,555-632-34513,20. November,2869734018,Isl,321
-<<<<<<< HEAD
-Jann Paarlberg,Litenway 236,546-799-63412,10. Febuary,9175989193,DL,942
-Han Kounias,Long Way 18,546-799-55683,28. Febuary,6049165213,Isl,148
-Teena Kounias,Litenway 127,546-799-13593,11. April,9962111536,JP,621
-Meredith Viveros-aguilera,Long Way 110,554-578-02485,5. December,6715652859,FR,574
-Xefu,Rata Sum,123-4567,12 12 1998,123456789,USA,123
-=======
-Ragnar,Litenway 236,546-799-63412,10. Febuary,9175989193,DL,942
-<<<<<<< HEAD
-Bitch Lasagna,Hallgr�mskirkja 12,588-5522,1 1 1999,341343124132,USA,123
-=======
->>>>>>> 823c13d80acf878d507affe751eb45ea5ac926ca
-Gunnar,� �essu forriti,123-4567,SKIPTIR EKKI M�LI,1234567890,USA,123
->>>>>>> a047cafe8e6bfd364f2ff09f393af31ce2c319b9
-Ragnarprufa,Litenway 71,554-578-70400,18. January,8466011859,Isl,408
-
-PRUFA,Seahaven 62,554-578-40960,30. August,1479628182,Isl,302
-

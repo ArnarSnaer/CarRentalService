@@ -49,7 +49,7 @@ class Order_UI(object):
                         info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, int(final_price), days_num]
                         new_order = self.order_ser.create_order(info_list)
                         self.order_ser.add_order(new_order)
-                        self.print_order(new_order,insurance_price,final_price,insurance_list)
+                        self.print_order(new_order,base_price,insurance_price,final_price,insurance_list)
                         print("Order successfully registered into the database")
                     else:
                         print("This car is already reserved during the dates input. Please find another car.")
@@ -106,7 +106,7 @@ class Order_UI(object):
         self.order_repo.remove_order(self.old_order)
         self.order_repo.add_order(new_order)
     
-    def print_order(self,order_object, insurance_price, total_price, insurance_list):
+    def print_order(self,order_object, base_price, insurance_price, total_price, insurance_list):
         self.order_obj = order_object
         self.order_id = self.order_obj.get_order_id()
         self.employee_name = self.order_obj.get_employee_name()
@@ -134,37 +134,6 @@ class Order_UI(object):
         if insurance_list == "":
             print("No additional insurances")
         else:
-            print(insurance_list)
-        print("Base insurance: {}\nAdditional insurance cost: {}\n\nTotal price: {}\n".format(self.base_insurance,self.insurance_price,self.total_cost))
+            print("Chosen insurances: {}".format(insurance_list))
+        print("Base insurance: {}\nBase car price: {}\nAdditional insurance cost: {}\n\nTotal price: {}\n".format(self.base_insurance,base_price,self.insurance_price,self.total_cost))
         print("-"*86)
-
-    def add_insurances_menu(self,order):
-        self.order_cost = order
-        self.price_list = self.order_cost.get_insurance_price_list()
-        self.title_list = self.order_cost.get_insurance_title_list()
-
-        go_again = True
-        while go_again:
-            choice = input("> Would you like additional insurances (y/n): ").lower()
-            if choice == "y":
-                print("Available insurances:")
-                for index_num in range(len(self.price_list)):
-                    print("{}. {}: {}isk".format(index_num+1, self.title_list[index_num], self.price_list[index_num]))
-                chosen_ins = input("> Choose an insurance to add, you can choose multiple insurances separated by a space:\n")
-                chosen_ins_list = chosen_ins.split(" ")
-                for ins in chosen_ins_list:
-                    insurance_code = "t" + ins
-                    #ins_int = int(ins) - 1
-                try:
-                    self.order_ser.add_insurance(insurance_code)
-                    go_again = False
-                except ValueError:
-                    print("Chosen insurance does not exist.")
-
-                except ValueError:
-                    print("NOPE")
-
-            elif choice == "n":
-                continue
-            else:
-                print("Invalid input. Please try again.")
