@@ -2,6 +2,8 @@ from repositories.order_repo import Order_repository
 from services.client_services import Client_ser
 from services.employee_services import Employee_services
 from services.car_services import Car_services
+from services.payment_service import Payment_ser
+from models.insurance_model import Insurance
 from datetime import datetime
 import random
 import string
@@ -10,14 +12,19 @@ class Order_service(object):
     def __init__(self):
         self.order_repo = Order_repository()
         self.car_serv = Car_services()
+        self.insurance = Insurance
         self.car_repo = self.car_serv.car_repo
         self.order_model = self.order_repo.order_model
         self.order_model.zip = self.generate_order_id()
         self.Order_constructor = self.order_repo.order_model
+        self.total_insurance = self.order_model().get_total_ins_cost()
+        self.total_cost = self.order_model().total_cost
 
     def add_insurance(self,ins_type):
-        self.order_model().total_cost.add_insurance(ins_type)
-        return self.order_model().total_cost
+        added_cost = self.insurance(ins_type)
+        self.total_cost = self.total_cost + added_cost
+        self.total_insurance += added_cost
+        return self.total_cost
     
     def get_status(self):
         plate = self.order_model().get_plate()
@@ -72,20 +79,27 @@ class Order_service(object):
 
     # UPDATE föll
 
+    def change_client(self,order_object): #Client, starting date, return date, car, employee
+        pass #Bryta uppl. um client
+
+
     def change_start_date(self,order_object,new_date):
-        order_object.date_start = new_date 
-        return order_object
+        pass
+        
+        # order_object.date_start = new_date 
+        # return order_object
     
     def change_end_date(self,order_object,new_date):
         order_object.date_end = new_date
         return order_object 
 
+    def change_car(self,order_object):
+        pass #Breytir upplýsingum um bíl
+    
     def change_employee(self,order_object,new_name):
         order_object.employee.change_name(new_name)
         return order_object
 
-    def change_client(self,order_object): #Client, starting date, return date, car, employee
-        pass #Bryta uppl. um client
+    
         
-    def change_car(self,order_object):
-        pass #Breytir upplýsingum um bíl
+    

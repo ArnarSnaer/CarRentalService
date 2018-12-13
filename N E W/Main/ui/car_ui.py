@@ -175,15 +175,6 @@ class Car_UI(object):
                             status = "Unavailable."
                             print("{:>5d}. {} Type: {:>5s}{:>5s}Brand: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Base price: {:>5s}{:<5s}Current status: {:>5s}".format(number,"|",veh_type,"", brand,"", plate,"", price,"", status))
                             number += 1
-
-            # elif choice == "4":
-            #     print(self.car_serv.all_available_cars(choice))
-
-            # elif choice == "5":
-            #     print(self.car_serv.all_available_cars(choice))
-            
-            # elif choice == "6":
-            #     print(self.car_serv.all_available_cars(choice))
             
             elif choice != "q":
                 print("Invalid input! Please enter the number/letter in front of each operation!\n")

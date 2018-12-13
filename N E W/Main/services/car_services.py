@@ -56,36 +56,6 @@ class Car_services(object):
     def return_car(self,car_object):
         if car_object.get_status() == False:
             car_object.status  = True
-    
-    # def all_available_cars(self, choice):
-    #     results_txt = ""
-    #     file_text = self.car_repo.get_all_cars()
-    #     number = 1
-    #     for item in file_text:
-    #         car_object = self.create_car_from_list(item)
-    #         veh_type = self.car_repo.car_model.get_veh_type(car_object)
-    #         brand = self.car_repo.car_model.get_brand(car_object)
-    #         plate = self.car_repo.car_model.get_plate(car_object)
-    #         price = self.car_repo.car_model.get_price(car_object)
-    #         price = price[:-1]
-    #         if choice == "4":
-    #             if self.car_repo.car_model.get_status(car_object) == "True":
-    #                 status = "Available."
-    #             else:
-    #                 status = "Unavailable."
-    #             print("{:>5d}. {} Type: {:>5s}{:>5s}Brand: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Base price: {:>5s}{:<5s}Current status: {:>5s}".format(number,"|",veh_type,"", brand,"", plate,"", price,"", status))
-    #             number += 1
-    #         elif choice == "5":
-    #             if self.car_repo.car_model.get_status(car_object) == "True":
-    #                 status = "Available."
-    #                 print("{:>5d}. {} Type: {:>5s}{:>5s}Brand: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Base price: {:>5s}{:<5s}Current status: {:>5s}".format(number,"|",veh_type,"", brand,"", plate,"", price,"", status))
-    #                 number += 1
-    #         elif choice == "6":
-    #             if self.car_repo.car_model.get_status(car_object) == "False":
-    #                 status = "Unavailable."
-    #                 print("{:>5d}. {} Type: {:>5s}{:>5s}Brand: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Base price: {:>5s}{:<5s}Current status: {:>5s}".format(number,"|",veh_type,"", brand,"", plate,"", price,"", status))
-    #                 number += 1
-    #     return results_txt
 
     def get_available_cars(self):
         available_cars = self.car_repo.sort_cars(0)

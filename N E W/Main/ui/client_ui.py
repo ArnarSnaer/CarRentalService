@@ -116,9 +116,10 @@ class Client_ui():
                 else:
                     if self.check_option(option, the_range):
                         the_change = input("Insert new info: ")
-                        updated, invalidation = self.__client_ser.update_registration(searchword, int(option), the_change)
+                        updated, invalidation, updated_client = self.__client_ser.update_registration(searchword, int(option), the_change)
                         if updated:
                             print("Updated")
+                            return updated_client
                         else:
                             print(invalidation)
                     else: 
@@ -137,14 +138,22 @@ class Client_ui():
 
     def order_menu(self):
         clients_info = ""
-        print("Is the client already registered?  y/n: ") 
+        
         while clients_info == "":
+            print("Is the client already registered?  y/n:\nInput 'Q' to quit ") 
             answer = input("> ")
             answer = answer.lower() 
             if answer == "n":
                 clients_info = self.client_op("1")
             elif answer == "y":
-                clients_info = self.client_op("2")
+                print("Would you like to\n1. Get client's current info\n2. Change client's current info")
+                answer = input("> ")
+                if answer == "1":
+                    clients_info = self.client_op("2")
+                elif answer == "2":
+                    clients_info = self.client_op("4")
+            elif answer == "q":
+                break
             else:
                 print("Please input either the letter 'y' or the letter 'n'")
         customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])

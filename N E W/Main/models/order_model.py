@@ -4,7 +4,7 @@ from models.employee import Employee #Endurskýra
 from models.payment_model import Payment
 
 class Order(object):
-    def __init__(self,order_id="AA111", date_start="1 1 2000", date_end="2 1 2000",plate = "",client_name = "",licence_number = "",employee_name = "",total_cost=0, duration=1):
+    def __init__(self,order_id="AA111", date_start="1 1 2000", date_end="2 1 2000",plate = "",client_name = "",licence_number = "",employee_name = "",car_cost=0, duration=1):
         self.order_id = order_id
         self.date_start = date_start
         self.date_end = date_end
@@ -12,15 +12,17 @@ class Order(object):
         self.client_name = client_name
         self.employee_name = employee_name
         self.licence_number = licence_number
-        self.total_cost = total_cost
+        self.car_cost = car_cost
         self.duration = duration
+        self.order_payment = Payment(self.client_name,self.car_cost, self.duration)
+        self.total_cost = self.order_payment
         self.info = [self.order_id,self.date_start,self.date_end,self.plate,self.client_name,self.licence_number,self.employee_name,self.total_cost]
-        self.order_payment = Payment(self.client_name,self.total_cost, self.duration)
+        self.total_insurance_cost = self.order_payment.get_total_ins_cost()
         self.base_insurance = self.order_payment.base_insurance
         self.insurance_price = self.order_payment.insurances.get_price()
-        self.total_cost = self.order_payment
         self.insurance_price_list = self.order_payment.get_insurance_cost_list()
         self.insurance_title_list = self.order_payment.get_insurance_title_list()
+
 
     def __str__(self):
         return "{},{},{},{},{},{},{},{}".format(self.order_id,self.date_start,self.date_end,self.plate,self.client_name,self.licence_number,self.employee_name,self.total_cost)
@@ -60,3 +62,6 @@ class Order(object):
     
     def get_insurance_title_list(self):
         return self.insurance_title_list
+
+    def get_total_ins_cost(self):
+        return self.total_insurance_cost
