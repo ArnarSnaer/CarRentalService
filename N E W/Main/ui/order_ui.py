@@ -26,6 +26,15 @@ class Order_UI(object):
                 order_id = self.order_ser.generate_order_id()
                 start_date = input("Starting date: ")
                 end_date = input("Return date: ")
+                chosen_car = self.car_menu(Car_UI())
+                client = self.client_menu(Client_ui())
+                if client == "q":
+                    choice = "q"
+                else:
+                    employee = self.employee_menu(Employee_UI())
+                    info_list = [order_id,start_date,end_date,chosen_car,client,employee]
+                    new_order = self.order_ser.create_order(info_list)
+                    self.order_ser.add_order(new_order)
                 date1, date2, _, days_num = self.order_ser.find_duration(start_date, end_date)
                 check_validity, explanation = self.order_ser.date_isvalid(date1, date2, days_num)
                 if check_validity == True:
@@ -149,7 +158,7 @@ class Order_UI(object):
                 chosen_ins_list = chosen_ins.split(" ")
                 for ins in chosen_ins_list:
                     insurance_code = "t" + ins
-                    ins_int = int(ins) - 1
+                    #ins_int = int(ins) - 1
                 try:
                     self.order_ser.add_insurance(insurance_code)
                     go_again = False
