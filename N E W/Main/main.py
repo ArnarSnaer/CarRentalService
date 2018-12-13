@@ -8,7 +8,7 @@ def main():
     print("Welcome, User")
     choice = ""
     # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
-    while choice != "5": 
+    while choice != "q" or choice!= "Q": 
         print("Available sections:\n1. Order\n2. Cars\n3. Client\n4. Calculator\nq. Exit program")
         choice = input("> Choose a section: ")
         if choice == "1":
@@ -23,7 +23,7 @@ def main():
         elif choice == "4":
             calc_UserInterface = Calc_UI()
             calc_UserInterface.calc_menu()      
-        elif choice == "q":
+        elif choice =="q" or choice=="Q":
             print("Exiting program...")
             break
         else:

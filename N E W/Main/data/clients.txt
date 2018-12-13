@@ -84,10 +84,10 @@ Xefu,Rata Sum,123-4567,12 12 1998,123456789,USA,123
 =======
 Ragnar,Litenway 236,546-799-63412,10. Febuary,9175989193,DL,942
 <<<<<<< HEAD
-Bitch Lasagna,Hallgrímskirkja 12,588-5522,1 1 1999,341343124132,USA,123
+Bitch Lasagna,Hallgrï¿½mskirkja 12,588-5522,1 1 1999,341343124132,USA,123
 =======
 >>>>>>> 823c13d80acf878d507affe751eb45ea5ac926ca
-Gunnar,Í þessu forriti,123-4567,SKIPTIR EKKI MÁLI,1234567890,USA,123
+Gunnar,ï¿½ ï¿½essu forriti,123-4567,SKIPTIR EKKI Mï¿½LI,1234567890,USA,123
 >>>>>>> a047cafe8e6bfd364f2ff09f393af31ce2c319b9
 Ragnarprufa,Litenway 71,554-578-70400,18. January,8466011859,Isl,408
 
