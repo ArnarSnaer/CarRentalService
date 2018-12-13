@@ -155,7 +155,6 @@ class Car_UI(object):
 
         print("Going back to main menu...\n")
 
-
     def order_menu(self):
         print("Available car(s):\n")
         available_cars = self.car_serv.get_available_cars_list()

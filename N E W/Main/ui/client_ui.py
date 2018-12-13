@@ -143,11 +143,13 @@ class Client_ui():
             answer = answer.lower() 
             if answer == "n":
                 clients_info = self.client_op("1")
-                print(clients_info)
             elif answer == "y":
                 clients_info = self.client_op("2")
-                print(clients_info)
             else:
                 print("Please input either the letter 'y' or the letter 'n'")
         customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
+<<<<<<< HEAD
         return customer
+=======
+        return customer
+>>>>>>> 13975dcbc91a3bfe436aa31ba4aefa5bdc2df1ac

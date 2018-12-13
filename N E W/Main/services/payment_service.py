@@ -6,7 +6,6 @@ class Payment_ser(object):
     def __init__(self):
         self.payment = Payment()
         self.client_name = self.payment.client_name
-        self.credit = self.payment.credit
         self.insurances = self.payment.insurances
         self.price = self.insurances().price
 
