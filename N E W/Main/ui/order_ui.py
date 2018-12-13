@@ -24,21 +24,6 @@ class Order_UI(object):
             if choice == "1":
                 print("Please enter the neccesery information for the order: ")
                 order_id = self.order_ser.generate_order_id()
-                start_date = input("Starting date: ")
-                end_date = input("Return date: ")
-                chosen_car = self.car_menu(Car_UI())
-                if chosen_car == None:
-                    choice = "q"
-                    break
-                client = self.client_menu(Client_ui())
-                if client == "q":
-                    choice = "q"
-                else:
-                    employee = self.employee_menu(Employee_UI())
-                    info_list = [order_id,start_date,end_date,chosen_car,client,employee]
-                    new_order = self.order_ser.create_order(info_list)
-                    self.order_ser.add_order(new_order)
-                date1, date2, _, days_num = self.order_ser.find_duration(start_date, end_date)
                 start_date = input("Starting date (DD MM YYYY): ")
                 end_date = input("Return date (DD MM YYYY): ")
                 try:
@@ -61,10 +46,13 @@ class Order_UI(object):
                         price_duration = self.order_ser.find_base_price_with_duration(int(base_price), days_num)
                         insurance_price, insurance_list = self.order_ser.add_insurance_to_price()
                         final_price = price_duration + insurance_price
+                        print("This still work?")
                         info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, int(final_price), days_num]
+                        print(info_list)
                         new_order = self.order_ser.create_order(info_list)
                         self.order_ser.add_order(new_order)
                         self.print_order(new_order,base_price,insurance_price,final_price,insurance_list)
+                        self.order_ser.change_car_status(plate)
                         print("Order successfully registered into the database")
                     else:
                         print("This car is already reserved during the dates input. Please find another car.")

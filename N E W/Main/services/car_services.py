@@ -89,7 +89,3 @@ class Car_services(object):
             price = 0
 
         return price
-
-    def get_status(self):
-        return self.car_model.get_status()
-

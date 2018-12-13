@@ -43,7 +43,7 @@ class Order_service(object):
         return id
 
     def create_order(self,info_list):
-        new_order = self.Order_constructor(info_list[0],info_list[1],info_list[2],info_list[3],info_list[4],info_list[5],info_list[6],info_list[7])
+        new_order = self.Order_constructor(info_list[0],info_list[1],info_list[2],info_list[3],info_list[4],info_list[5],info_list[6],info_list[7], info_list[8])
         return new_order
 
     def find_duration(self, date_start, date_end):
@@ -134,6 +134,19 @@ class Order_service(object):
                     print("Invalid input/insurance already chosen")
 
         return insurance_price, chosen_ins[:-1]
+
+    def change_car_status(self, plate):
+        result = self.car_repo.find_car(plate)
+        real_list = result[0]
+        pos = real_list[4]
+        if pos == "True":
+            status = "False"
+        elif pos == "False":
+            status = "True"
+        real_list[4] = status
+        changed_car_status = self.car_serv.create_car(real_list)
+        self.car_repo.remove_car(plate)
+        self.car_repo.add_car(changed_car_status)
 
 # 12000,10000,20000,5000
 # self.order_id,self.date_start,self.date_end,self.plate,self.client_name,self.licence_number,self.employee_name,self.total_cost
