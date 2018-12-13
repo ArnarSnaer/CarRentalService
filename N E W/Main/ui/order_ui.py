@@ -112,27 +112,29 @@ class Order_UI(object):
         self.date_end = self.order_obj.get_date_end()
 
         self.base_insurance = self.order_obj.get_base_insurance()
-        self.insurance_price = self.order_obj.get_insurance_price()
+        self.insurance_price = self.order_obj.get_total_ins_cost()
         self.insurance_list = self.order_obj.order_payment.insurance_list
         self.total_cost = self.order_obj.get_total_cost()
+        self.base_price = self.order_obj.order_payment.get_base_price()
 
-
+        print("-"*86)
+        print("RECEIPT:")
         print("Order id: {}\nEmployee: {}\n\nStarting date: {}\nReturn date: {}\n".format(self.order_id,self.employee_name,self.date_start,self.date_end))
-        print("Car brand: {}\nCar type: {}\nCar plate: {}\n\nClient: {}\nDriver licence number: {}".format(self.car_brand,self.car_type,self.plate,self.client_name,self.licence_num))
+        print("Car brand: {}\nCar type: {}\nCar plate: {}\n\nClient: {}\nDriver licence number: {}\n".format(self.car_brand,self.car_type,self.plate,self.client_name,self.licence_num))
         if len(self.insurance_list) != 0:
-            print("Insurances")
+            print("Insurances:\n")
             for line in self.insurance_list:
                 print(line)
-        print("Base insurance: {}\nAdditional insurance cost: {}\nTotal price: {}\n".format(self.base_insurance,self.insurance_price,self.total_cost))
-    
+        print("Base insurance: {}\nAdditional insurance cost: {}\nRent cost: {}\nTotal price: {}\n".format(self.base_insurance,self.insurance_price,self.base_price,self.total_cost))
+        print("-"*86)
 
     def add_insurances_menu(self,order):
         self.order_cost = order
-        self.price_list = self.order_cost.get_insurance_price_list() 
+        self.price_list = self.order_cost.get_insurance_price_list()
         self.title_list = self.order_cost.get_insurance_title_list()
 
-        choice = ""
-        while choice != "y" or choice != "n":
+        go_again = True
+        while go_again:
             choice = input("> Would you like additional insurances (y/n): ").lower()
             if choice == "y":
                 print("Available insurances:")
@@ -141,11 +143,11 @@ class Order_UI(object):
                 chosen_ins = input("> Choose an insurance to add, you can choose multiple insurances separated by a space:\n")
                 chosen_ins_list = chosen_ins.split(" ")
                 for ins in chosen_ins_list:
-                    ins_int = int(ins)
-                    insurance_code = "t" + str(ins_int-1)
-
+                    insurance_code = "t" + ins
+                    ins_int = int(ins) - 1
                 try:
                     self.order_ser.add_insurance(insurance_code)
+                    go_again = False
                 except ValueError:
                     print("Chosen insurance does not exist.")
 
