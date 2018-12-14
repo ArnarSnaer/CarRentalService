@@ -106,7 +106,9 @@ class Order_UI(object):
                 keyword = self.choose_order()
                 order_list = self.order_ser.find_order(keyword)
                 found_id = order_list[0][0]
+                found_plate = order_list[0][3]
                 self.order_ser.remove_order(found_id)
+                self.order_ser.change_car_status(found_plate)
                 print("Order removed.\n")
 
             elif choice == "3":

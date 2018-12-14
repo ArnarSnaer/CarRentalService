@@ -40,7 +40,6 @@ class Car_UI(object):
         
     def car_menu(self):
         choice = ""
-        os.system('cls')
 
         while choice != "q":
             print("\nCurrent section: Cars\n1. Add a new car into the database\n2. Remove a car from the database\n3. Search car database\n4. See all cars in the current database\n5. See all available cars\n6. See all unavailable cars\nq. Back")
@@ -50,6 +49,7 @@ class Car_UI(object):
                 valid_car = True
                 print("New car will be added into the database.\n")
                 choose_veh_type = input("Available vehicle types:\n1. Sedan\n2. SUV\n3. MPV\n4. Mini\n5. Sport\n> Choose a type by its name or number: ")
+                os.system('cls')
                 if (choose_veh_type == "Sedan") or (choose_veh_type == "1"):
                     veh_type = "Sedan"
                 elif (choose_veh_type == "SUV") or (choose_veh_type == "2"):
@@ -62,6 +62,7 @@ class Car_UI(object):
                     veh_type = "Sport"          
                 else:
                     print("Failed")
+                    break
                     valid_car = False
                 # Campagna, Suzuki, Ferrari, Audi, Unique
                 choose_brand = input("\nAvailable car brands:\n1. Campagna\n2. Suzuki\n3. Ferrari\n4. Audi\n5. Unique\n> Choose a brand by its name or number: ")
@@ -193,7 +194,6 @@ class Car_UI(object):
         print("Available car(s):\n")
         available_cars = self.car_serv.get_available_cars_list()
         chosen_car = self.choose_car(available_cars)
-        '''ragnar'''
         if chosen_car == None:
             return None
         else:
