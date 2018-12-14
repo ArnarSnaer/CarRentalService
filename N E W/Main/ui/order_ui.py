@@ -184,12 +184,10 @@ class Order_UI(object):
                 print("Please enter a valid operation")
 
     def update_order(self,nested_order_info):
-        print(nested_order_info)
         print("1. Client\n2. Starting date\n3. Return date\n4. Car")
         choice = input("What would you like to update? (Please input integer choice): ")
         order_info = nested_order_info[0]
         old_order = order_info
-        print(old_order)
 
         if choice == "1":
             client_info_list = Client_ui().client_op("4")
@@ -219,11 +217,6 @@ class Order_UI(object):
                     print("Invalid date inserted, example of date 1 1 2000")
             else:
                 print("Invalid date inserted, example of date 1 1 2000")
-
-        elif choice == "4":
-            current_car = input("Enter licence plate of current car ")
-            new_car = input("Enter licence plate of new car ")
-            pass #Breytir bíl í pöntun
         else:
             print("Invalid choice")
 

@@ -240,13 +240,6 @@ class Order_service(object):
         else:
             date_updated = None
         return date_updated
-    
-    def change_car(self,order_object):
-        pass #Breytir upplýsingum um bíl
-    
-    def change_employee(self,order_object,new_name):
-        order_object.employee.change_name(new_name)
-        return order_object
 
     def check_date_format(self, a_string):
         try:
