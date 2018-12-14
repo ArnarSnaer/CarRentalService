@@ -4,10 +4,9 @@ from ui.order_ui import Order_UI
 from ui.client_ui import Client_ui
 from models.order_model import Order
 
-def main(): # The default main menu of the program. This is where it starts and where it goes if a 'quit' option is selected (usually)
+def main(): 
     print("Welcome, User\n","-"*86)
     choice = ""
-    # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
     while choice != "q" or choice!= "Q": 
         print("Available sections:\n1. Order\n2. Cars\n3. Client\n4. Calculator\nq. Exit program")
         choice = input("> Choose a section: ")
