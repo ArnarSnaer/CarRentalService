@@ -28,6 +28,8 @@ class Car_repository():
 
         new_file = open("./data/vehicle.txt", "w")
         for line in old_file:
+            if line == "\n":
+                new_file.write("")
             if plate not in line:
                 new_file.write(line)
 
