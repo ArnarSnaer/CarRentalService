@@ -122,42 +122,50 @@ class Order_UI(object):
                     counter += 1
             
             elif choice == "4":
-                order_id = input("Input id of order you want to change (AAA11): ")
-                found_order = self.order_repo.find_order(order_id)
-                self.change_order(found_order)
+                client_not_found = True
+                while client_not_found:
+                    order_id = input("Input id of order you want to change (ABC12): ")
+                    found_order = self.order_repo.find_order(order_id)
+                    if type(found_order) == list:
+                        client_not_found = False
+                        nested_order_info = found_order
+                        self.update_order(nested_order_info)
             else:
                 print("Please enter a valid operation")
 
-    def change_order(self,order_object):
-        print("1. Client\n2. Starting date\n3. Return date\n4. Car\n5. Employee name")
+    def update_order(self,nested_order_info):
+        print("1. Client\n2. Starting date\n3. Return date\n4. Car")
         choice = input("What would you like to update? (Please input integer choice): ")
-        self.old_order = order_object
+        order_info = nested_order_info[0]
+        old_order = order_info
+        print(old_order)
 
+    
         if choice == "1":
-            pass #Bryta uppl. um client
+            '''ljótt'''
+            client_info_list = Client_ui().client_op("4")
+            self.order_ser.change_client(client_info_list, old_order)
+
+            '''fer inni client_ui og gerir option4, læt option4 returna lista eða stakinu sem var breytt'''
+            '''býr til nýtt order með nýju uppls. og eyðir því gamla'''
 
         elif choice == "2":
             new_date = input("New starting date (DD/MM/YYYY):\n ")
-            new_order = self.order_ser.change_start_date(order_object,new_date)
+            new_order = self.order_ser.change_start_date(old_order,new_date)
 
         elif choice == "3":
             new_date = input("New return date (DD/MM/YYYY):\n ")
-            new_order = self.order_ser.change_end_date(order_object,new_date)
+            new_order = self.order_ser.change_end_date(old_order,new_date)
 
         elif choice == "4":
             current_car = input("Enter licence plate of currnet car ")
             new_car = input("Enter licence plate of new car ")
             pass #Breytir bíl í pöntun
-
-        elif choice == "5":
-            new_name = input("Employee name: ")
-            new_order = self.order_ser.change_employee(order_object,new_name)
-
         else:
             print("Invalid choice")
 
-        self.order_repo.remove_order(self.old_order)
-        self.order_repo.add_order(new_order)
+        # self.order_repo.remove_order(self.old_order)
+        # self.order_repo.add_order(new_order)
     
     def print_order(self,order_object, base_price, insurance_price, total_price, insurance_list):
         self.order_obj = order_object
@@ -190,3 +198,5 @@ class Order_UI(object):
             print("Chosen insurances: {}".format(insurance_list))
         print("Base insurance: {}\nBase car price: {}\nAdditional insurance cost: {}\n\nTotal price: {}\n".format(self.base_insurance,base_price,self.insurance_price,self.total_cost))
         print("-"*86)
+
+

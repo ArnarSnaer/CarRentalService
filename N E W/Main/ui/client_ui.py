@@ -51,7 +51,7 @@ class Client_ui():
             elif option == "3":
                 self.option_3(searchword)
             elif option == "4":
-                self.option_4(searchword)
+                client_list = self.option_4(searchword)
             elif option == "5":
                 return option
         return client_list
@@ -62,7 +62,7 @@ class Client_ui():
         address = input("> Address: ")
         phone_number = input("> Phone number: ")
         birthday = input("> Date of birth: ")
-        license_number = input("> License number: ") 
+        license_number = input("> Drivers license number (10 integers): ") 
         country = input("> Country(using Alpah-3 order): ")
         the_zip = input("> Zip: ")
         '''check if client already exists'''
@@ -103,11 +103,13 @@ class Client_ui():
 
             
     def option_4(self, searchword):
-        client_found = self.__client_ser.get_client(searchword) #Tók út client_info
+        '''ehv bilað'''
+        info_list, client_found = self.__client_ser.get_client(searchword) #Tók út client_info
         if client_found:
             stay = True
             while stay:
                 the_range = range(1,9)
+                print(info_list)
                 option = self.option_4_main_menu()
                 if option == "8":
                     stay = False
@@ -117,6 +119,7 @@ class Client_ui():
                         updated, invalidation, updated_client = self.__client_ser.update_registration(searchword, int(option), the_change)
                         if updated:
                             print("Updated")
+                            print(updated_client)
                             return updated_client
                         else:
                             print(invalidation)
@@ -124,6 +127,7 @@ class Client_ui():
                         print("Please input an integer from 1 to 8")
         else: 
             print("Client not found")
+            return None
 
     def option_4_main_menu(self):
         print("What would you like to update?\n1. Name\n2. Address\n3. Phone number\n4. Birthday\n5. Drivers license number\n6. Country\n7. Zip\n8. Quit")

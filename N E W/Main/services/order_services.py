@@ -18,6 +18,32 @@ class Order_service(object):
         self.order_model.zip = self.generate_order_id()
         self.Order_constructor = self.order_repo.order_model
         self.total_cost = self.order_model().total_cost
+        self.payment_ser = Payment_ser()
+
+        # self.order_model = Order
+
+        self.ORDER_ID = 0
+        self.DATE_START = 1
+        self.DATE_END = 2
+        self.PLATE = 3
+        self.CLIENT_NAME = 4
+        self.Order_LICENSE_NUM = 5
+        self.EMPLOYEE_NAME = 6
+        self.TOTAL_COST = 7
+
+        self.NAME = 0
+        self.ADDRESS = 1
+        self.PHONE = 2
+        self.BIRTHDAY = 3
+        self.LICENSE_NUM = 4
+        self.COUNTRY = 5
+        self.THE_ZIP = 6
+    
+        # added_cost = self.insurance(ins_type)
+        # print("AAAAAAAA: ", added_cost)
+        # self.total_cost = self.total_cost + added_cost
+        # self.total_insurance += added_cost
+        # return self.total_cost
     
     def get_status(self):
         plate = self.order_model().get_plate()
@@ -165,8 +191,16 @@ class Order_service(object):
 
     # UPDATE föll
 
-    def change_client(self,order_object): #Client, starting date, return date, car, employee
-        pass #Bryta uppl. um client
+    def change_client(self, client_info_list, old_order):
+        new_name = client_info_list[self.NAME]
+        new_license_num = client_info_list[self.LICENSE_NUM]
+        name_position = self.CLIENT_NAME
+        license_position = self.Order_LICENSE_NUM
+        name_updated = self.order_repo.update_order(old_order, new_name, name_position)
+        license_and_name_updated = self.order_repo.update_order(name_updated, new_license_num, license_position)
+        print(license_and_name_updated)
+        return license_and_name_updated
+        
 
     def change_start_date(self,order_object,new_date):
         order_object.date_start = new_date 

@@ -3,6 +3,22 @@ from models.order_model import Order
 class Order_repository(object):
     def __init__(self):
         self.order_model = Order
+        self.ORDER_ID = 0
+        self.DATE_START = 1
+        self.DATE_END = 2
+        self.PLATE = 3
+        self.CLIENT_NAME = 4
+        self.LICENSE_NUM = 5
+        self.EMPLOYEE_NAME = 6
+        self.TOTAL_COST = 7
+
+        self.NAME = 0
+        self.ADDRESS = 1
+        self.PHONE = 2
+        self.BIRTHDAY = 3
+        self.LICENSE_NUMBER = 4
+        self.COUNTRY = 5
+        self.THE_ZIP = 6
 
     def add_order(self,order_model):
         open_file = open("./data/order.txt","a+")
@@ -39,6 +55,8 @@ class Order_repository(object):
             if searchword in line:
                 found_list = line.split(",")
                 order_list.append(found_list)
+                
+        print(order_list)
         return order_list
     
     def get_all_orders(self):
@@ -53,3 +71,22 @@ class Order_repository(object):
             info_list = line.split(",")
             id_list.append(info_list[0])
         return id_list
+
+
+    def update_order(self, old_order, new_element, position):
+        '''virkar, indexin eru vitlaus, og vantar að eyða skjalinu áður en ég bæti því inn'''
+        order_updated = self.change_element(old_order, new_element, position)
+        open_file = open("./data/order.txt", "a+")
+        order_updated_instance = Order(order_updated[self.ORDER_ID], order_updated[self.DATE_START], order_updated[self.DATE_END], order_updated[self.PLATE], 
+                                order_updated[self.CLIENT_NAME], order_updated[self.LICENSE_NUM],order_updated[self.EMPLOYEE_NAME], order_updated[self.TOTAL_COST])
+        self.add_order(order_updated_instance)
+        open_file.close()
+        return order_updated
+
+
+    def change_element(self, old_order, new_element, position):
+        '''searches in a list and changes a selected value and returns the list'''
+        
+        old_order[position] = new_element
+        order_updated = old_order
+        return order_updated

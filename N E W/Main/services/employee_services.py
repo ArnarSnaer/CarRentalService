@@ -34,11 +34,3 @@ class Employee_services(object):
     def change_name(self,new_name):
         self.employee.name[0] = new_name
         return self.employee
-        
-#Gunnar = Employee_services("Gunnar")
-#Gunnar_v2 = Employee_services()
-#Gunnar.add_sale("Skoda")
-#Gunnar.add_sale("Ferrari")
-#Gunnar.add_sale("Toyota")
-#Gunnar.remove_sale("Ferrari")
-#print(Gunnar.get_sales())

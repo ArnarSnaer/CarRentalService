@@ -11,7 +11,6 @@ Corrine Sade,Seahaven 206,546-799-34857,9. September,8249626247,DK,524
 Josette Viveros-aguilera,Long Way 214,555-632-81371,3. May,5328129444,DL,222
 Corrine Casarez,Long Way 125,554-578-19291,1. September,5054937612,FR,467
 Darrin Wallace,Litenway 26,555-632-38931,17. November,1033976326,FR,155
-Reiko Spaventa,Litenway 48,555-632-75789,27. March,2384357483,DK,426
 Marianela Moeller,Seahaven 15,555-632-22821,19. Febuary,7394760343,DK,462
 Marcy Swett,Litenway 170,555-632-20937,0. November,9281318350,Isl,928
 Vernita Zani,Litenway 298,554-578-99049,7. April,9286328610,USA,689
@@ -32,9 +31,7 @@ Dorcas Zani,Long Way 42,555-632-31330,1. November,7961411788,DK,373
 Lawrence Pinch,Litenway 47,555-632-00058,20. September,2461198785,DL,175
 Marcy Hastings,Long Way 28,546-799-43542,3. January,5870210383,JP,203
 Josette Paarlberg,Seahaven 23,554-578-80772,27. Febuary,4674272476,JP,376
-Reiko Faciana,Long Way 177,546-799-29591,17. Oktober,1529365895,JP,260
 Thelma Spaventa,Seahaven 126,554-578-93353,27. March,7659263334,JP,701
-Reiko Hazenberg,Litenway 214,546-799-28248,0. April,2470532785,JP,384
 Meredith Hastings,Litenway 73,554-578-06367,29. April,2666557531,DK,682
 Josette Wallace,Seahaven 242,546-799-11899,23. December,2154119641,DK,573
 Jann Spaventa,Litenway 204,555-632-03612,20. September,3629643647,JP,782
@@ -74,4 +71,5 @@ Bell Hastings,Long Way 2,555-632-58811,7. April,9354400479,FR,526
 Delilah Kounias,Seahaven 18,546-799-58016,7. April,5595320479,JP,352
 Bell Sade,Seahaven 75,554-578-63079,23. April,6185733025,Isl,612
 Gonzalo Gwynne,Long Way 291,554-578-12695,12. November,7177367026,USA,145
-Reiko Swett,Seahaven 139,555-632-34513,20. November,2869734018,Isl,321
+Ragnarprufa,blaaaa 123,555-632-84799,20. November,1111111111,Isl,321
+Xefu,Rata Sum,123-4567,12. September,0321456789,ISL,321
