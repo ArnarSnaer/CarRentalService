@@ -175,6 +175,7 @@ class Order_UI(object):
                 print("Please enter a valid operation")
 
     def update_order(self,nested_order_info):
+        print(nested_order_info)
         print("1. Client\n2. Starting date\n3. Return date\n4. Car")
         choice = input("What would you like to update? (Please input integer choice): ")
         order_info = nested_order_info[0]
