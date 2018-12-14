@@ -83,3 +83,4 @@ Reiko Swett,Seahaven 139,555-632-34513,20. November,2869734018,Isl,321
 
 Ragnarprufa,blaaaa 123,555-632-84799,20. November,1111111111,Isl,321
 
+Bjabbjo,Gullfoss 4,581-2345,17 6 1990,1234567890,USA,123

@@ -2,6 +2,7 @@ from services.order_services import Order_service
 from ui.car_ui import Car_UI
 from ui.employee_ui import Employee_UI
 from ui.client_ui import Client_ui
+import os
 
 class Order_UI(object):
     def __init__(self):
@@ -49,14 +50,17 @@ class Order_UI(object):
     def order_menu(self):
         choice = ""
         while choice != "q":
-            print("Current section\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Quit")
+            print("Current section: Order\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Quit")
             choice = input("> What would you like to do? ").lower()
+            os.system('cls')
+
 
             if choice == "1":
                 print("Please enter the neccesery information for the order: ")
                 order_id = self.order_ser.generate_order_id()
                 start_date = input("Starting date (DD MM YYYY): ")
                 end_date = input("Return date (DD MM YYYY): ")
+                print("\n")
                 try:
                     date1, date2, _, days_num = self.order_ser.find_duration(start_date, end_date)
                 except Exception:
@@ -161,6 +165,9 @@ class Order_UI(object):
             current_car = input("Enter licence plate of currnet car ")
             new_car = input("Enter licence plate of new car ")
             pass #Breytir bíl í pöntun
+
+
+
         else:
             print("Invalid choice")
 
