@@ -50,7 +50,7 @@ class Order_UI(object):
     def order_menu(self):
         choice = ""
         while choice != "q":
-            print("Current section: Order\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Quit")
+            print("Current section: Order\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Back")
             choice = input("> What would you like to do? ").lower()
             os.system('cls')
 
@@ -84,7 +84,9 @@ class Order_UI(object):
                         lic_num = client.license_num
                         employee = self.employee_menu(Employee_UI())
                         employee_name = employee.get_name()
+                        print("Mandatory base insurance added to order (12.000isk)")
                         price_duration = self.order_ser.find_base_price_with_duration(int(base_price), days_num)
+                        print("Current total cost (with base insurance): ", price_duration)
                         insurance_price, insurance_list = self.order_ser.add_insurance_to_price()
                         final_price = price_duration + insurance_price
                         print("This still work?")
