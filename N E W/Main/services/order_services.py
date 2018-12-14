@@ -1,8 +1,6 @@
 from repositories.order_repo import Order_repository
 from services.client_services import Client_ser
-from services.employee_services import Employee_services
 from services.car_services import Car_services
-from services.payment_service import Payment_ser
 from models.insurance_model import Insurance
 import datetime
 import random
@@ -18,7 +16,6 @@ class Order_service(object):
         self.order_model.zip = self.generate_order_id()
         self.Order_constructor = self.order_repo.order_model
         self.total_cost = self.order_model().total_cost
-        self.payment_ser = Payment_ser()
 
         # self.order_model = Order
 
