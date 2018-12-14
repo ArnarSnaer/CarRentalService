@@ -30,7 +30,7 @@ class Car_repository():
         for line in old_file:
             if line == "\n":
                 new_file.write("")
-            if plate not in line:
+            elif plate not in line:
                 new_file.write(line)
 
         new_file.close()

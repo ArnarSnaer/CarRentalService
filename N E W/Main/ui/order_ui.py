@@ -184,7 +184,7 @@ class Order_UI(object):
                 print("Invalid date inserted, example of date 1 1 2000")
 
         elif choice == "4":
-            current_car = input("Enter licence plate of currnet car ")
+            current_car = input("Enter licence plate of current car ")
             new_car = input("Enter licence plate of new car ")
             pass #Breytir bíl í pöntun
 
@@ -193,8 +193,6 @@ class Order_UI(object):
         else:
             print("Invalid choice")
 
-        # self.order_repo.remove_order(self.old_order)
-        # self.order_repo.add_order(new_order)
     
     def print_order(self,order_object, base_price, insurance_price, total_price, insurance_list):
         self.order_obj = order_object

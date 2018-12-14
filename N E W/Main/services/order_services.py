@@ -17,8 +17,6 @@ class Order_service(object):
         self.Order_constructor = self.order_repo.order_model
         self.total_cost = self.order_model().total_cost
 
-        # self.order_model = Order
-
         self.ORDER_ID = 0
         self.DATE_START = 1
         self.DATE_END = 2
@@ -99,7 +97,6 @@ class Order_service(object):
         no_conflict = True
         for line in get_order_list:
             if line != "\n":
-                # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
                 try:
                     _, start, end, plate, _, _, _, _ = line.split(',')
                 except Exception:
@@ -261,6 +258,4 @@ class Order_service(object):
                 return True
         except ValueError:
             return None
-    
-
             
