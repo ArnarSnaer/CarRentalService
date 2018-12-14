@@ -21,17 +21,20 @@ class Order_UI(object):
         print(order_list)
         counter = 1
         for item in order_list:
-            item_list = item.split(",")
-            order_object = self.order_ser.create_order(item_list)
-            order_id = self.order_repo.order_model.get_order_id(order_object)
-            license_num = self.order_repo.order_model.get_plate(order_object)
-            client = self.order_repo.order_model.get_client_name(order_object)
-            start = self.order_repo.order_model.get_date_start(order_object)
-            end = self.order_repo.order_model.get_date_end(order_object)
-            price = self.order_repo.order_model.get_total_cost(order_object)
-            price = price[:-1]
-            print("{:>5d}. {}Order ID: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Client: {:>5s} renting from {:>5s} to {:>5s} for a total of {:>5s}".format(counter,"|",order_id,"", license_num,"",client, start,end, price))
-            counter += 1
+            try:
+                item_list = item.split(",")
+                order_object = self.order_ser.create_order(item_list)
+                order_id = self.order_repo.order_model.get_order_id(order_object)
+                license_num = self.order_repo.order_model.get_plate(order_object)
+                client = self.order_repo.order_model.get_client_name(order_object)
+                start = self.order_repo.order_model.get_date_start(order_object)
+                end = self.order_repo.order_model.get_date_end(order_object)
+                price = self.order_repo.order_model.get_total_cost(order_object)
+                price = price[:-1]
+                print("{:>5d}. {}Order ID: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Client: {:>5s} renting from {:>5s} to {:>5s} for a total of {:>5s}".format(counter,"|",order_id,"", license_num,"",client, start,end, price))
+                counter += 1
+            except Exception:
+                pass
 
         quit = False
         while not quit:
@@ -53,7 +56,6 @@ class Order_UI(object):
             print("Current section: Order\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Back")
             choice = input("> What would you like to do? ").lower()
             os.system('cls')
-
 
             if choice == "1":
                 print("Please enter the neccesery information for the order: ")
@@ -117,17 +119,20 @@ class Order_UI(object):
                 counter = 1
                 order_list = self.order_ser.order_repo.get_all_orders()
                 for item in order_list:
-                    item_list = item.split(",")
-                    order_object = self.order_ser.create_order(item_list)
-                    order_id = self.order_repo.order_model.get_order_id(order_object)
-                    license_num = self.order_repo.order_model.get_plate(order_object)
-                    client = self.order_repo.order_model.get_client_name(order_object)
-                    start = self.order_repo.order_model.get_date_start(order_object)
-                    end = self.order_repo.order_model.get_date_end(order_object)
-                    price = self.order_repo.order_model.get_total_cost(order_object)
-                    price = price[:-1]
-                    print("{:>5d}. {}Order ID: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Client: {:>5s} renting from {:>5s} to {:>5s} for a total of {:>5s}".format(counter,"|",order_id,"", license_num,"",client, start,end, price))
-                    counter += 1
+                    try:
+                        item_list = item.split(",")
+                        order_object = self.order_ser.create_order(item_list)
+                        order_id = self.order_repo.order_model.get_order_id(order_object)
+                        license_num = self.order_repo.order_model.get_plate(order_object)
+                        client = self.order_repo.order_model.get_client_name(order_object)
+                        start = self.order_repo.order_model.get_date_start(order_object)
+                        end = self.order_repo.order_model.get_date_end(order_object)
+                        price = self.order_repo.order_model.get_total_cost(order_object)
+                        price = price[:-1]
+                        print("{:>5d}. {}Order ID: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Client: {:>5s} renting from {:>5s} to {:>5s} for a total of {:>5s}".format(counter,"|",order_id,"", license_num,"",client, start,end, price))
+                        counter += 1
+                    except Exception:
+                        pass
             
             elif choice == "4":
                 order_not_found = True

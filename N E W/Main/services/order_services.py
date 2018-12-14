@@ -1,8 +1,6 @@
 from repositories.order_repo import Order_repository
 from services.client_services import Client_ser
-from services.employee_services import Employee_services
 from services.car_services import Car_services
-from services.payment_service import Payment_ser
 from models.insurance_model import Insurance
 import datetime
 import random
@@ -18,7 +16,6 @@ class Order_service(object):
         self.order_model.zip = self.generate_order_id()
         self.Order_constructor = self.order_repo.order_model
         self.total_cost = self.order_model().total_cost
-        self.payment_ser = Payment_ser()
 
         # self.order_model = Order
 
@@ -108,7 +105,11 @@ class Order_service(object):
         no_conflict = True
         for line in get_order_list:
             # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
-            _, start, end, plate, _, _, _, _ = line.split(',')
+            try:
+                _, start, end, plate, _, _, _, _ = line.split(',')
+            except Exception:
+                _, start, end, plate, _, _, _, _, _ = line.split(',')
+
             order_start = datetime.datetime.strptime(start, '%Y-%m-%d')
             order_end = datetime.datetime.strptime(end, '%Y-%m-%d')
             # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
@@ -209,7 +210,6 @@ class Order_service(object):
         
         return license_and_name_updated
         
-
     def change_date(self, new_date, old_order, is_start):
         date_updated =''
         ''' is_start tells us if we are working with the start date or the end date'''
