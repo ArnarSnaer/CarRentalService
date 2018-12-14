@@ -100,7 +100,7 @@ class ClientRepo():
                 my_phone_len -= 3
             end_str = ''.join(my_phone)
             result_str += end_str
-            print(result_str)
+            #print(result_str)
             return result_str
         return ''.join(my_phone)
 

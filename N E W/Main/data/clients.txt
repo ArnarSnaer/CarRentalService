@@ -71,5 +71,3 @@ Bell Hastings,Long Way 2,555-632-58811,7. April,9354400479,FR,526
 Delilah Kounias,Seahaven 18,546-799-58016,7. April,5595320479,JP,352
 Bell Sade,Seahaven 75,554-578-63079,23. April,6185733025,Isl,612
 Gonzalo Gwynne,Long Way 291,554-578-12695,12. November,7177367026,USA,145
-Ragnarprufa,blaaaa 123,555-632-84799,20. November,1111111111,Isl,321
-Xefu,Rata Sum,123-4567,12. September,0321456789,ISL,321

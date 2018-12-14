@@ -43,6 +43,8 @@ class Order_repository(object):
 
         new_file = open("./data/order.txt","w")
         for line in old_file:
+            if line == "\n":
+                new_file.write("")
             if order_id not in line:
                 new_file.write(line)
         
@@ -56,7 +58,6 @@ class Order_repository(object):
                 found_list = line.split(",")
                 order_list.append(found_list)
                 
-        print(order_list)
         return order_list
     
     def get_all_orders(self):
@@ -79,6 +80,7 @@ class Order_repository(object):
         open_file = open("./data/order.txt", "a+")
         order_updated_instance = Order(order_updated[self.ORDER_ID], order_updated[self.DATE_START], order_updated[self.DATE_END], order_updated[self.PLATE], 
                                 order_updated[self.CLIENT_NAME], order_updated[self.LICENSE_NUM],order_updated[self.EMPLOYEE_NAME], order_updated[self.TOTAL_COST])
+        self.remove_order(old_order[self.ORDER_ID])
         self.add_order(order_updated_instance)
         open_file.close()
         return order_updated
