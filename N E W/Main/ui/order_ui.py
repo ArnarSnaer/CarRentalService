@@ -124,36 +124,38 @@ class Order_UI(object):
             elif choice == "4":
                 client_not_found = True
                 while client_not_found:
-                    order_id = input("Input id of order you want to change (ABC1): ")
+                    order_id = input("Input id of order you want to change (ABC12): ")
                     found_order = self.order_repo.find_order(order_id)
                     if type(found_order) == list:
                         client_not_found = False
-                        order_info = found_order
-                        self.update_order(order_info)
+                        nested_order_info = found_order
+                        self.update_order(nested_order_info)
             else:
                 print("Please enter a valid operation")
 
-    def update_order(self,order_info):
+    def update_order(self,nested_order_info):
         print("1. Client\n2. Starting date\n3. Return date\n4. Car")
         choice = input("What would you like to update? (Please input integer choice): ")
-        self.old_order = order_info[0]
-        print(self.old_order)
+        order_info = nested_order_info[0]
+        old_order = order_info
+        print(old_order)
 
     
         if choice == "1":
-            self.client_ui().client_op("4")
-            self.order_ser.change_client(order_info)
+            '''ljótt'''
+            client_info_list = Client_ui().client_op("4")
+            self.order_ser.change_client(client_info_list, old_order)
 
             '''fer inni client_ui og gerir option4, læt option4 returna lista eða stakinu sem var breytt'''
             '''býr til nýtt order með nýju uppls. og eyðir því gamla'''
 
         elif choice == "2":
             new_date = input("New starting date (DD/MM/YYYY):\n ")
-            new_order = self.order_ser.change_start_date(order_info,new_date)
+            new_order = self.order_ser.change_start_date(old_order,new_date)
 
         elif choice == "3":
             new_date = input("New return date (DD/MM/YYYY):\n ")
-            new_order = self.order_ser.change_end_date(order_info,new_date)
+            new_order = self.order_ser.change_end_date(old_order,new_date)
 
         elif choice == "4":
             current_car = input("Enter licence plate of currnet car ")

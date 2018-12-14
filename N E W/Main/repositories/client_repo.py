@@ -69,11 +69,12 @@ class ClientRepo():
     def update_registration(self, client_info, option, the_change):
         client_update = self.change_element(client_info, option, the_change)
         open_file = open("./data/clients.txt", "a+")
+        client_update_list = client_update
         client_update = Client(client_update[self.NAME], client_update[self.ADDRESS], client_update[self.PHONE], client_update[self.BIRTHDAY], client_update[self.LICENSE_NUM],
                                     client_update[self.COUNTRY], client_update[self.THE_ZIP])
         self.new_client(client_update)
         open_file.close()
-        return client_update
+        return client_update_list
      
 
 
