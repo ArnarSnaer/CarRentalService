@@ -126,12 +126,12 @@ class Order_UI(object):
                     counter += 1
             
             elif choice == "4":
-                client_not_found = True
-                while client_not_found:
+                order_not_found = True
+                while order_not_found:
                     order_id = input("Input id of order you want to change (ABC12): ")
                     found_order = self.order_repo.find_order(order_id)
                     if type(found_order) == list:
-                        client_not_found = False
+                        order_not_found = False
                         nested_order_info = found_order
                         self.update_order(nested_order_info)
             else:
@@ -144,22 +144,33 @@ class Order_UI(object):
         old_order = order_info
         print(old_order)
 
-    
         if choice == "1":
             '''ljótt'''
+            # client_not_found = True
+            # while client_not_found:
+            print("prufa")
             client_info_list = Client_ui().client_op("4")
-            self.order_ser.change_client(client_info_list, old_order)
+            if client_info_list != None:
+                self.order_ser.change_client(client_info_list, old_order)
+                        # client_not_found = False
 
             '''fer inni client_ui og gerir option4, læt option4 returna lista eða stakinu sem var breytt'''
             '''býr til nýtt order með nýju uppls. og eyðir því gamla'''
 
         elif choice == "2":
             new_date = input("New starting date (DD/MM/YYYY):\n ")
-            new_order = self.order_ser.change_start_date(old_order,new_date)
+            is_start = True
+            new_order = self.order_ser.change_date(new_date, old_order, is_start)
+            if new_order == None:
+                print("Invalid date inserted")
 
         elif choice == "3":
             new_date = input("New return date (DD/MM/YYYY):\n ")
-            new_order = self.order_ser.change_end_date(old_order,new_date)
+            is_start = False
+
+            new_order = self.order_ser.change_date(new_date, old_order, is_start)
+            if new_order == None:
+                print("Invalid date inserted")
 
         elif choice == "4":
             current_car = input("Enter licence plate of currnet car ")

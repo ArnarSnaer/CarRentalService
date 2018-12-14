@@ -113,14 +113,15 @@ class Order_service(object):
             order_end = datetime.datetime.strptime(end, '%Y-%m-%d')
             # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
             if car_plate == plate:
-                while date_start != date_end:
+                while (date_start != date_end):
                     current_date = order_start 
                     while current_date != order_end:
                         if current_date.date() == date_start:
                             no_conflict = False
                         current_date += datetime.timedelta(days = 1)
                     date_start += datetime.timedelta(days = 1)
-        
+        if date_start > date_end:
+            no_conflict = False
         return no_conflict
 
     def find_base_price_with_duration(self, base, days):
@@ -198,13 +199,41 @@ class Order_service(object):
         license_position = self.Order_LICENSE_NUM
         name_updated = self.order_repo.update_order(old_order, new_name, name_position)
         license_and_name_updated = self.order_repo.update_order(name_updated, new_license_num, license_position)
-        print(license_and_name_updated)
+        
         return license_and_name_updated
         
 
-    def change_start_date(self,order_object,new_date):
-        order_object.date_start = new_date 
-        return order_object
+    def change_date(self, new_date, old_order, is_start):
+        date_updated =''
+
+        if is_start:
+            start_date = new_date
+            end_date = old_order[self.DATE_END]
+            end_date = end_date.split("-")
+            end_date = ''.join([end_date[2]," ", end_date[1]," ", end_date[0]])
+            date_position = self.DATE_START
+        else:
+            end_date = new_date
+            start_date = old_order[self.DATE_START]
+            start_date = start_date.split("-")
+            start_date = ''.join([start_date[2], " ", start_date[1], " ", start_date[0]])  
+            date_position = self.DATE_START  
+        
+        car_plate = old_order[self.PLATE]
+        date1, date2, duration, days_num = self.find_duration(start_date, end_date)
+        valid_date, error_message = self.date_isvalid(date1, date2,days_num)
+            
+    
+        if valid_date:
+            no_conflict=  self.check_conflict(date1, date2, car_plate)
+            if no_conflict:
+              
+               date_updated = self.order_repo.update_order(old_order, date1, date_position)
+            else:
+                date_updated = None
+        else:
+            date_updated = None
+        return date_updated
     
     def change_end_date(self,order_object,new_date):
         order_object.date_end = new_date

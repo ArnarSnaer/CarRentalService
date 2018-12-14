@@ -142,6 +142,7 @@ class Client_ui():
 
     def order_menu(self):
         clients_info = ""
+        customer = ''
         
         while clients_info == "":
             print("\nIs the client already registered?  y/n:\nInput 'Q' to quit ") 
@@ -162,8 +163,8 @@ class Client_ui():
                         clients_info = "QUIT"
                         customer = "q"
                         print("Client not chosen, aborting order")
-                if clients_info != None and customer !='q':
-                    customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
+            if clients_info != None and customer !='q':
+                customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
             elif answer == "q":
                 clients_info = "QUIT"
                 customer = "q"
