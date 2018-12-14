@@ -235,7 +235,6 @@ class Order_service(object):
                 else:
                     date_updated = self.order_repo.update_order(old_order, date2, date_position)
             else:
-                print(no_conflict)
                 date_updated = None
         else:
             date_updated = None

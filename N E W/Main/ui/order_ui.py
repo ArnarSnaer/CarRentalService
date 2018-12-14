@@ -17,7 +17,7 @@ class Order_UI(object):
 
     def choose_order(self):
         order_list = self.order_repo.get_all_orders()
-        print(order_list)
+        # print(order_list)
         counter = 1
         for item in order_list:
             try:

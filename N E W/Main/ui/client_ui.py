@@ -31,6 +31,7 @@ class Client_ui():
                     print("Invalid input")
     
     def check_option(self, option, the_range):
+    ''' checks if the option is in range'''
             try: 
                 option = int(option)
                 if option in the_range:
@@ -39,6 +40,7 @@ class Client_ui():
                 return False
 
     def client_op(self, option):
+        ''' Goes through the options available'''
         client_list = ""
         if option == "1":
            client_list = self.option_1()
@@ -59,7 +61,7 @@ class Client_ui():
         return client_list
     
     def option_1(self):
-        #vantar kannski while loop
+        '''Creates client'''
         fullname = input("> Fullname: ")
         address = input("> Address: ")
         phone_number = input("> Phone number: ")
@@ -84,6 +86,7 @@ class Client_ui():
 
 #möguleg endurtekning í gangi
     def check_if_already_client(self, license_number):
+        '''Checks if the created client is already a client'''
         info_list, client_found = self.__client_ser.get_client(license_number)
         if client_found:
             print("License number already in use")
@@ -91,6 +94,7 @@ class Client_ui():
         return info_list, client_found
             
     def option_2(self, searchword):
+        '''Returns a clients info if he is already a client'''
         info_list, client_found = self.__client_ser.get_client(searchword)
         if client_found:
             return info_list
@@ -99,13 +103,14 @@ class Client_ui():
             return None
 
     def option_3(self, searchword):
+        '''Removes a client '''
         if self.option_2(searchword):
             if self.__client_ser.remove_client(searchword):
                 print("Client found, removing client")
 
             
     def option_4(self, searchword):
-        '''ehv bilað'''
+        '''Here you can update a client's info '''
         info_list, client_found = self.__client_ser.get_client(searchword) #Tók út client_info
         if client_found:
             stay = True
@@ -131,6 +136,7 @@ class Client_ui():
             return None
 
     def option_4_main_menu(self):
+        '''The menu for updating client's info'''
         print("Current section: Client\nWhat would you like to update?\n1. Name\n2. Address\n3. Phone number\n4. Birthday\n5. Drivers license number\n6. Country\n7. Zip\n8. Quit")
         option = input("> Input an option: ")
         return option
@@ -140,6 +146,7 @@ class Client_ui():
                                         a_list[self.ADDRESS], a_list[self.PHONE], a_list[self.BIRTHDAY], a_list[self.LICENSE_NUM], a_list[self.COUNTRY], a_list[self.THE_ZIP])
 
     def order_menu(self):
+        ''' Menu used in the Order UI'''
         clients_info = ""
         customer =''
 

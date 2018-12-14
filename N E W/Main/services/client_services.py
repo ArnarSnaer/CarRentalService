@@ -16,6 +16,8 @@ class Client_ser(object):
         self.LICENSE_LENGTH = 10
     
     def update_registration(self, searchword, option, the_change):
+        '''Here is where the update of client's info goes through
+           If the input for the update is not valid then the code will return a invalidation-string'''
         updated = False
         invalidate =''
         updated_client = []
@@ -35,6 +37,7 @@ class Client_ser(object):
         return updated, invalidate, updated_client
     
     def get_client(self, searchword):
+        '''Gets client info if the client exists'''
         client_info = self.__client_repo.find_client(searchword)
         client_found = True
         if client_info == False:
@@ -42,6 +45,7 @@ class Client_ser(object):
         return client_info, client_found
 
     def new_client(self, client):
+        '''Creates new client'''
         valid, invalidation = self.is_valid_client(client)
         if valid:
             self.__client_repo.new_client(client)
@@ -50,13 +54,15 @@ class Client_ser(object):
             return valid, invalidation
 
     def remove_client(self, searchword):
-        '''spurning um að sleppa client_found og nota bara self.client.remove.... til að skila True'''
+        '''Removes client if found in the database'''
         client_found = False
         if self.__client_repo.remove_client(searchword):
             client_found = True
         return client_found
 
     def is_valid_client(self, client):
+        '''Checks if the client has valid information, it can take both 
+        instances of client and a list containing a client's info'''
         clients_info = []
         if type(client) != list:
             for attr, value in client.__dict__.items():
