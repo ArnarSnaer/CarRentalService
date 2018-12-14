@@ -17,7 +17,7 @@ class Order(object):
 
     def __str__(self):
         return "{},{},{},{},{},{},{},{}".format(self.order_id,self.date_start,self.date_end,self.plate,self.client_name,self.licence_number,self.employee_name,self.total_cost)
-# self.order_id,self.date_start,self.date_end,self.plate,self.client_name,self.licence_number,self.employee_name,self.total_cost
+
     def get_order_id(self):
         return self.order_id
 

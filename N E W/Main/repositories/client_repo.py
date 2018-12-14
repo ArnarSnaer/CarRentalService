@@ -35,7 +35,6 @@ class ClientRepo():
        
     def remove_client(self, searchword):
         '''vantar að villu-checka'''
-        # client_found = False
 
         open_file = open("./data/clients.txt", "r")
         lines = open_file.readlines()
@@ -52,7 +51,6 @@ class ClientRepo():
         
 
     def find_client(self,searchword):
-        # searchword = input("Input a phone-number, address, license-number or etc.\n")
         ''' Hér vantar villu-check -->'''
         open_file = open("./data/clients.txt", "r")
         client_found = False
@@ -60,7 +58,6 @@ class ClientRepo():
             if searchword in line:
                 client_found = True
                 client_list = line.split(",")
-                # print(found_list)
         if client_found: 
             return client_list
         else:
@@ -100,7 +97,6 @@ class ClientRepo():
                 my_phone_len -= 3
             end_str = ''.join(my_phone)
             result_str += end_str
-            #print(result_str)
             return result_str
         return ''.join(my_phone)
 

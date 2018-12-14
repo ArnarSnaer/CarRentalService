@@ -22,7 +22,6 @@ class Car_UI(object):
                 else:
                     status = "Unavailable."
                 print("{:>5d}. {} Type: {:>5s}{:>5s}Brand: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Base price: {:>5s}{:<5s}Current status: {:>5s}".format(counter,"|",veh_type,"", brand,"", plate,"", price,"", status))
-        
                 counter += 1
             except Exception:
                 pass
@@ -153,7 +152,25 @@ class Car_UI(object):
                 if len(results) == 0:
                     print("No results for this search word.\n")
                 else:
-                    self.choose_car(results)
+                    try:
+                        car_list = self.choose_car(results)
+                        car = self.car_serv.create_car(car_list)
+                        veh_type = car.get_veh_type()
+                        brand = car.get_brand()
+                        plate = car.get_plate()
+                        wheel_drive = car.get_wheel_drive()
+                        status = car.get_status()
+                        if status == "True":
+                            status = "Available"
+                        else:
+                            status = "Unavailable"
+                        is_manual = car.get_is_manual()
+                        driven = car.get_driven()
+                        fuel_type = car.get_fuel_type()
+                        price = car.get_price()
+                        print("\nCar's information:\n\nVehicle type: {}\nBrand: {}\nCar plate: {}\nWheel Drive: {}\nCurrent status: {}\nManual: {}\nHas been driven(KM): {}\nFuel type: {}\nBase price: {}".format(veh_type,brand,plate,wheel_drive,status,is_manual,driven, fuel_type, price))
+                    except Exception:
+                        print("No car chosen.")
 
             elif (choice == "4") or (choice == "5") or (choice == "6"):
                 file_text = self.car_serv.car_repo.get_all_cars()

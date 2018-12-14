@@ -28,7 +28,3 @@ class Insurance(object):
     
     def get_title_list(self):
         return self.title_list
-
-#tala = Insurance("t1")
-#print(tala)
-# __radd__ er add fyrir tvær gerðir af mismunandi gerðum
