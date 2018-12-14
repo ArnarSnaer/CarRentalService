@@ -31,14 +31,15 @@ class Order_UI(object):
                 end = self.order_repo.order_model.get_date_end(order_object)
                 price = self.order_repo.order_model.get_total_cost(order_object)
                 price = price[:-1]
-                print("{:>5d}. {}Order ID: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Client: {:>5s} renting from {:>5s} to {:>5s} for a total of {:>5s}".format(counter,"|",order_id,"", license_num,"",client, start,end, price))
+                print("{:>5d}. {} Order ID: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Client: {:>5s} renting from {:>5s} to {:>5s} for a total of {:>5s}".format(counter,"|",order_id,"", license_num,"",client, start,end, price))
+                print("")
                 counter += 1
             except Exception:
                 pass
 
         quit = False
+        print("Complete! Here are all the results of the search.\n")
         while not quit:
-            print("Complete! Here are all the results of the search.\n")
             choice = input("> Enter the number of the order you wish to remove, or write 'q' to quit: ")
             if choice == 'q':
                 quit = True
@@ -69,13 +70,17 @@ class Order_UI(object):
                     break
                 check_validity, explanation = self.order_ser.date_isvalid(date1, date2, days_num)
                 if check_validity == True:
-                    chosen_car = self.car_menu(Car_UI())
-                    if chosen_car == None:
-                        choice = "q"
+                    try:
+                        chosen_car = self.car_menu(Car_UI())
+                        if chosen_car == None:
+                            choice = "q"
+                            break
+                        plate = chosen_car.get_plate()
+                        base_price = str(chosen_car.get_price()).strip()
+                        order_conflict = self.order_ser.check_conflict(date1, date2, plate)
+                    except Exception:
+                        print("Wrong number input when choosing a car! Going back to main menu...")
                         break
-                    plate = chosen_car.get_plate()
-                    base_price = str(chosen_car.get_price()).strip()
-                    order_conflict = self.order_ser.check_conflict(date1, date2, plate)
                     if order_conflict == True:
                         client = self.client_menu(Client_ui())
                         if client == "q":
@@ -90,7 +95,6 @@ class Order_UI(object):
                         print("Current total cost (with base insurance): ", price_duration)
                         insurance_price, insurance_list = self.order_ser.add_insurance_to_price()
                         final_price = price_duration + insurance_price
-                        print("This still work?")
                         info_list = [order_id,date1,date2,plate,name,lic_num,employee_name, int(final_price), days_num]
                         print(info_list)
                         new_order = self.order_ser.create_order(info_list)
@@ -135,9 +139,29 @@ class Order_UI(object):
                         counter += 1
                     except Exception:
                         pass
+                print("")
             
             elif choice == "4":
                 order_not_found = True
+                counter = 1
+                order_list = self.order_ser.order_repo.get_all_orders()
+                for item in order_list:
+                    try:
+                        item_list = item.split(",")
+                        order_object = self.order_ser.create_order(item_list)
+                        order_id = self.order_repo.order_model.get_order_id(order_object)
+                        license_num = self.order_repo.order_model.get_plate(order_object)
+                        client = self.order_repo.order_model.get_client_name(order_object)
+                        start = self.order_repo.order_model.get_date_start(order_object)
+                        end = self.order_repo.order_model.get_date_end(order_object)
+                        price = self.order_repo.order_model.get_total_cost(order_object)
+                        price = price[:-1]
+                        print("{:>5d}. {}Order ID: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Client: {:>5s} renting from {:>5s} to {:>5s} for a total of {:>5s}".format(counter,"|",order_id,"", license_num,"",client, start,end, price))
+                        counter += 1
+                    except Exception:
+                        pass
+                print("")
+                
                 while order_not_found:
                     order_id = input("Input id of order you want to change (ABC12): ")
                     found_order = self.order_repo.find_order(order_id)
