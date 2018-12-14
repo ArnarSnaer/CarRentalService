@@ -92,28 +92,31 @@ class Order_service(object):
 
         return valid_date, error_message
 
-    def check_conflict(self, date_start, date_end, car_plate): # check if dates conflict with other orders
+    def check_conflict(self, date_start, date_end, car_plate, order_id): # check if dates conflict with other orders
+        original_order_id = order_id
         get_order_list = self.order_repo.get_all_orders()
         no_conflict = True
         for line in get_order_list:
             if line != "\n":
                 try:
-                    _, start, end, plate, _, _, _, _ = line.split(',')
+                    other_order_id, start, end, plate, _, _, _, _ = line.split(',')
                 except Exception:
-                    _, start, end, plate, _, _, _, _, _ = line.split(',')
+                    other_order_id, start, end, plate, _, _, _, _, _ = line.split(',')
                 
 
                 order_start = datetime.datetime.strptime(start, '%Y-%m-%d')
                 order_end = datetime.datetime.strptime(end, '%Y-%m-%d')
+                other_order_id = other_order_id
                 # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
                 if car_plate == plate:
-                    while (date_start != date_end):
-                        current_date = order_start 
-                        while current_date != order_end:
-                            if current_date.date() == date_start:
-                                no_conflict = False
-                            current_date += datetime.timedelta(days = 1)
-                        date_start += datetime.timedelta(days = 1)
+                    if original_order_id != other_order_id:
+                        while (date_start != date_end):
+                            current_date = order_start 
+                            while current_date != order_end:
+                                if current_date.date() == date_start:
+                                    no_conflict = False
+                                current_date += datetime.timedelta(days = 1)
+                            date_start += datetime.timedelta(days = 1)
         if date_start > date_end:
             no_conflict = False
         return no_conflict
@@ -212,18 +215,20 @@ class Order_service(object):
             end_date = end_date.split("-")
             end_date = ''.join([end_date[2]," ", end_date[1]," ", end_date[0]])
             date_position = self.DATE_START
+            order_id = old_order[self.ORDER_ID]
         else:
             end_date = new_date
             start_date = old_order[self.DATE_START]
             start_date = start_date.split("-")
             start_date = ''.join([start_date[2]," ", start_date[1]," ", start_date[0]])  
-            date_position = self.DATE_END  
+            date_position = self.DATE_END
+            order_id = old_order[self.ORDER_ID]
         
         car_plate = old_order[self.PLATE]
         date1, date2, duration, days_num = self.find_duration(start_date, end_date)
         valid_date, error_message = self.date_isvalid(date1, date2,days_num)
         if valid_date:
-            no_conflict=  self.check_conflict(date1, date2, car_plate)
+            no_conflict=  self.check_conflict(date1, date2, car_plate, order_id)
             if no_conflict:
                 if is_start:
                     date_updated = self.order_repo.update_order(old_order, date1, date_position)
