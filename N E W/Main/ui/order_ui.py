@@ -2,7 +2,6 @@ from services.order_services import Order_service
 from ui.car_ui import Car_UI
 from ui.employee_ui import Employee_UI
 from ui.client_ui import Client_ui
-import os
 
 class Order_UI(object):
     def __init__(self):
@@ -185,6 +184,7 @@ class Order_UI(object):
                 print("Please enter a valid operation")
 
     def update_order(self,nested_order_info):
+        print(nested_order_info)
         print("1. Client\n2. Starting date\n3. Return date\n4. Car")
         choice = input("What would you like to update? (Please input integer choice): ")
         order_info = nested_order_info[0]
