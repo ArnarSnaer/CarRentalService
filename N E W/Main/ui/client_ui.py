@@ -71,9 +71,9 @@ class Client_ui():
         '''check if client already exists'''
         '''nobody has the same license number'''
         new_client = Client(fullname, address, phone_number, birthday, license_number, country, the_zip)
-       
-        valid, invalidation = self.__client_ser.new_client(new_client) 
         info_list, client_found = self.check_if_already_client(license_number)
+        valid, invalidation = self.__client_ser.new_client(new_client) 
+        
         if not client_found:
             if valid:
                 info_list = [fullname, address, phone_number, birthday, license_number, country, the_zip]
