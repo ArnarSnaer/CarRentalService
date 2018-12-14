@@ -171,6 +171,8 @@ class Order_UI(object):
                         order_not_found = False
                         nested_order_info = found_order
                         self.update_order(nested_order_info)
+                    if found_order == []:
+                        print("Order not found")
             else:
                 print("Please enter a valid operation")
 
