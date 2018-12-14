@@ -49,6 +49,8 @@ class Client_ui():
 
             if option == "2":
                 client_list = self.option_2(searchword)
+                if type(client_list) == list:
+                    print(self.my_list_format(client_list))
             elif option == "3":
                 self.option_3(searchword)
             elif option == "4":
@@ -69,12 +71,13 @@ class Client_ui():
         '''check if client already exists'''
         '''nobody has the same license number'''
         new_client = Client(fullname, address, phone_number, birthday, license_number, country, the_zip)
+       
+        valid, invalidation = self.__client_ser.new_client(new_client) 
         info_list, client_found = self.check_if_already_client(license_number)
-        valid, invalidation = self.__client_ser.new_client(new_client) # SNÉRI VIÐ, PRUFA
-
         if not client_found:
             if valid:
                 info_list = [fullname, address, phone_number, birthday, license_number, country, the_zip]
+                print("Client created")
                 return info_list
             elif not valid:
                 print(invalidation)
@@ -84,14 +87,13 @@ class Client_ui():
     def check_if_already_client(self, license_number):
         info_list, client_found = self.__client_ser.get_client(license_number)
         if client_found:
-            print("Client already exists")
+            print("License number already in use")
             print(self.my_list_format(info_list))
         return info_list, client_found
             
     def option_2(self, searchword):
         info_list, client_found = self.__client_ser.get_client(searchword)
         if client_found:
-            print(self.my_list_format(info_list))
             return info_list
         else:
             print("Client not found\n")
@@ -108,6 +110,7 @@ class Client_ui():
         info_list, client_found = self.__client_ser.get_client(searchword) #Tók út client_info
         if client_found:
             stay = True
+            print("Client found")
             while stay:
                 the_range = range(1,9)
                 option = self.option_4_main_menu()
@@ -140,9 +143,9 @@ class Client_ui():
 
     def order_menu(self):
         clients_info = ""
+        customer =''
         os.system('cls')
 
-        
         while clients_info == "":
             print("\nIs the client already registered?  y/n:\nInput 'Q' to quit ") 
             answer = input("> ")
@@ -159,6 +162,7 @@ class Client_ui():
                     if answer == '1':
                         clients_info = self.client_op("2")
                     elif answer == 'q' or answer =='Q':
+                        '''ehv villa'''
                         clients_info = "QUIT"
                         customer = "q"
                         print("Client not chosen, aborting order")
