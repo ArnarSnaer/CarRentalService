@@ -39,7 +39,8 @@ class ClientRepo():
         open_file = open("./data/clients.txt", "r")
         lines = open_file.readlines()
         open_file.close()
-
+        client_found = False
+        
         open_file = open("./data/clients.txt", "w")
         for line in lines:
             if searchword not in line:
@@ -99,4 +100,3 @@ class ClientRepo():
             result_str += end_str
             return result_str
         return ''.join(my_phone)
-
