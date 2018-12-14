@@ -16,7 +16,7 @@ class Employee_UI(object):
     def employee_menu(self):
         choice = ""
         while(choice != "q"):
-            print("What would you like to do?\n1. Add sale\n2. Remove sale\n3. Get a list of all sales\nq. Quit")
+            print("What would you like to do?\n1. Add sale\n2. Remove sale\n3. Get a list of all sales\nq. Back")
             choice = input("What would you like to do? ").lower()
 
             if choice == "1":

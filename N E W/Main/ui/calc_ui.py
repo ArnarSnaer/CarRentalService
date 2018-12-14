@@ -9,7 +9,7 @@ class Calc_UI(object):
         choice = ""
 
         while choice != "q":
-            print("Current section: Calculator\n1. Find price of specific car type\nq. Quit")
+            print("Current section: Calculator\n1. Find price of specific car type\nq. Back")
             choice = input("> What would you like to do? ")
             if choice == "1":
                 veh_type = input("Which vehicle type should be chosen?\n1. SUV\n2. Sedan\n3. MPV\n> Write with the respective integer:")

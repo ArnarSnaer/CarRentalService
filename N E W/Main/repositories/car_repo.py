@@ -49,11 +49,14 @@ class Car_repository():
         rented_cars = []
         all_cars = []
         for line in open_file:
-            info = line.split(",")
-            if info[4] == "True":
-                avilable_cars.append(line)
-            else:
-                rented_cars.append(line)
+            try:
+                info = line.split(",")
+                if info[4] == "True":
+                    avilable_cars.append(line)
+                else:
+                    rented_cars.append(line)
+            except Exception:
+                pass
         all_cars = [avilable_cars,rented_cars]
         return all_cars[choice]
 

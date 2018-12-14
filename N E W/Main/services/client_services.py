@@ -24,9 +24,7 @@ class Client_ser(object):
         invalidate =''
         updated_client = []
         client_info, client_found = self.get_client(searchword)
-        if client_found == True and type(client_info)==list:
-                
-                '''villuchecka vantar'''
+        if client_found == True and type(client_info)==list:                
                 client_update = self.__client_repo.change_element(client_info, option, the_change)
                 valid, invalidation = self.is_valid_client(client_update)
                 if valid:
