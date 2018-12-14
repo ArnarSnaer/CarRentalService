@@ -50,7 +50,7 @@ class Order_UI(object):
     def order_menu(self):
         choice = ""
         while choice != "q":
-            print("Current section: Order\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Quit")
+            print("Current section: Order\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Back")
             choice = input("> What would you like to do? ").lower()
             os.system('cls')
 
@@ -84,7 +84,9 @@ class Order_UI(object):
                         lic_num = client.license_num
                         employee = self.employee_menu(Employee_UI())
                         employee_name = employee.get_name()
+                        print("Mandatory base insurance added to order (12.000isk)")
                         price_duration = self.order_ser.find_base_price_with_duration(int(base_price), days_num)
+                        print("Current total cost (with base insurance): ", price_duration)
                         insurance_price, insurance_list = self.order_ser.add_insurance_to_price()
                         final_price = price_duration + insurance_price
                         print("This still work?")
@@ -94,7 +96,7 @@ class Order_UI(object):
                         self.order_ser.add_order(new_order)
                         self.print_order(new_order,base_price,insurance_price,final_price,insurance_list)
                         self.order_ser.change_car_status(plate)
-                        print("Order successfully registered into the database")
+                        print("Order successfully registered into the database.\n")
                     else:
                         print("This car is already reserved during the dates input. Please find another car.")
                         print("")
@@ -106,6 +108,8 @@ class Order_UI(object):
                 keyword = self.choose_order()
                 order_list = self.order_ser.find_order(keyword)
                 found_id = order_list[0][0]
+                found_plate = order_list[0][3]
+                self.order_ser.change_car_status(found_plate)
                 self.order_ser.remove_order(found_id)
                 print("Order removed.\n")
 
@@ -206,7 +210,7 @@ class Order_UI(object):
         self.insurance_list = insurance_list
         self.total_cost = total_price
 
-        print("-"*86)
+        print("\n","-"*86)
         print("RECEIPT:")
         print("Order id: {}\nEmployee: {}\n\nStarting date: {}\nReturn date: {}\n".format(self.order_id,self.employee_name,self.date_start,self.date_end))
         print("Car brand: {}\nCar type: {}\nCar plate: {}\n\nClient: {}\nDriver licence number: {}\n".format(self.car_brand,self.car_type,self.plate,self.client_name,self.licence_num))
@@ -215,6 +219,6 @@ class Order_UI(object):
         else:
             print("Chosen insurances: {}".format(insurance_list))
         print("Base insurance: {}\nBase car price: {}\nAdditional insurance cost: {}\n\nTotal price: {}\n".format(self.base_insurance,base_price,self.insurance_price,self.total_cost))
-        print("-"*86)
+        print("-"*86,"\n")
 
 

@@ -1,5 +1,5 @@
 from services.car_services import Car_services
-
+import os
 class Car_UI(object):
 
     def __init__(self):
@@ -46,9 +46,8 @@ class Car_UI(object):
             choice = input("> What would you like to do? ").lower()
             # {"suv": 100000, "mini": 10000, "mpv": 50000, "sport": 200000,"sedan": 75000}
             if choice == "1":
-                valid_car = True
-                print("New car will be added into the database.\n")
-                choose_veh_type = input("Available vehicle types:\n1. Sedan\n2. SUV\n3. MPV\n4. Mini\n5. Sport\n> Choose a type by its name or number: ")
+                print("New car will be added into the database.\nOnly write the names or numbers of the options. Wrong input will result in going back to the main menu.\n")
+                choose_veh_type = input("Available vehicle types:\n1. Sedan\n2. SUV\n3. MPV\n4. Mini\n5. Sport\nAny other input will cancel the other.\n> Choose a type by its name or number: ")
                 if (choose_veh_type == "Sedan") or (choose_veh_type == "1"):
                     veh_type = "Sedan"
                 elif (choose_veh_type == "SUV") or (choose_veh_type == "2"):
@@ -60,8 +59,8 @@ class Car_UI(object):
                 elif (choose_veh_type == "Sport") or (choose_veh_type == "5"):
                     veh_type = "Sport"          
                 else:
-                    print("Failed")
-                    valid_car = False
+                    print("Wrong input, going back to main menu...\n")
+                    break
                 # Campagna, Suzuki, Ferrari, Audi, Unique
                 choose_brand = input("\nAvailable car brands:\n1. Campagna\n2. Suzuki\n3. Ferrari\n4. Audi\n5. Unique\n> Choose a brand by its name or number: ")
                 if (choose_brand == "Campagna") or (choose_brand == "1"):
@@ -75,8 +74,8 @@ class Car_UI(object):
                 elif (choose_brand == "Unique") or (choose_brand == "5"):
                     brand = "Unique"    
                 else:
-                    print("Failed")
-                    valid_car = False
+                    print("Wrong input, going back to main menu...\n")
+                    break
 
                 plate = input("\nWhat is the car plate? License plates should have 3 letters followed by 2 numbers\n> Enter car plate here: ")
 
@@ -89,8 +88,8 @@ class Car_UI(object):
                 elif (choose_wheel_drive == "3") or (choose_wheel_drive == "Rear Wheel Drive") or (choose_wheel_drive == "RWD"):
                     wheel_drive = "RWD"
                 else:
-                    print("Failed")                    
-                    valid_car = False
+                    print("Wrong input, going back to main menu...\n")
+                    break
 
                 status = "True"
 
@@ -100,17 +99,17 @@ class Car_UI(object):
                 elif (choose_is_manual.upper() == "AUTOMATIC") or (choose_is_manual == "AUTOMATIC") or (choose_is_manual == "Automatic") or (choose_is_manual == "2") or (choose_is_manual == "A"):
                     is_manual = "AUTOMATIC"
                 else:
-                    print("Failed")
-                    valid_car = False
+                    print("Wrong input, going back to main menu...\n")
+                    break
 
                 try:
-                    driven = int(input("\nHas the car been driven before?\n> Answer in integers and in KM: "))
+                    driven = int(input("\nHas the car been driven before?\n> Answer in integers and in KM (Do not answer in negatives): "))
                     if driven < 0:
-                        print("Failed")
-                        valid_car = False
+                        print("Wrong input, going back to main menu...\n")
+                        break
                 except Exception:
-                    print("Failed")
-                    valid_car = False
+                    print("Wrong input, going back to main menu...\n")
+                    break
                 
                 choose_fuel_type = input("\nAvailable fuel types:\n1. Gazolene (G)\n2. Diesel (D)\n> Answer here: ")
                 if (choose_fuel_type == "1") or (choose_fuel_type == "G") or (choose_fuel_type == "Gazolene") or (choose_fuel_type == "gazolene") or (choose_fuel_type.upper() == "GAZOLENE"):
@@ -118,21 +117,18 @@ class Car_UI(object):
                 elif (choose_fuel_type == "2" or "D") or (choose_fuel_type == "Diesel") or (choose_fuel_type == "diesel") or (choose_fuel_type.upper() == "DIESEL"):
                     fuel_type = "DIESEL"
                 else:
-                    print("Failed")
-                    valid_car = False
+                    print("Wrong input, going back to main menu...\n")
+                    break
 
-                if valid_car == True:
-                    price = self.car_serv.calculate_price(veh_type)
-                    print("\nVehicle Type: {}\nCar brand: {}\nLicense plate: {}\nWheel drive: {}\nAuto/Man: {}\nDriven: {}\nFuel type: {}\nCar Price: {}\n".format(veh_type, brand, plate, wheel_drive, is_manual, driven, fuel_type, price))
-                    confirmation = input("> Is this information correct?(Y/N)")
-                    if confirmation == "Y" or "Yes":
-                        new_car = self.car_repo.car_model(veh_type, brand, plate, wheel_drive, status, is_manual, driven, fuel_type, price)
-                        self.car_repo.add_car(new_car) # Þarf ennþá að láta gá hvort bíll sé inn í database-i, endilega laga við tækifæri
-                        print("The car has been successfully updated into the car database")
-                    elif confirmation == "N" or "No":
-                        print("Operation cancelled, going back to Cars section...\n")
-                else: 
-                    print("Something went wrong! Did you input all information correctly?\n")
+                price = self.car_serv.calculate_price(veh_type)
+                print("\nVehicle Type: {}\nCar brand: {}\nLicense plate: {}\nWheel drive: {}\nAuto/Man: {}\nDriven: {}\nFuel type: {}\nCar Price: {}\n".format(veh_type, brand, plate, wheel_drive, is_manual, driven, fuel_type, price))
+                confirmation = input("> Is this information correct?(Y/N): ")
+                if (confirmation == "Y") or (confirmation == "Yes") or (confirmation == "y"):
+                    new_car = self.car_repo.car_model(veh_type, brand, plate, wheel_drive, status, is_manual, driven, fuel_type, price)
+                    self.car_repo.add_car(new_car) # Þarf ennþá að láta gá hvort bíll sé inn í database-i, endilega laga við tækifæri
+                    print("The car has been successfully updated into the car database")
+                elif (confirmation == "N") or (confirmation == "No") or (confirmation == "n"):
+                    print("Operation cancelled, going back to Cars section...\n")
                 # self.veh_type, self.brand, self.plate, self.wheel_drive, self.status, self.is_manual, self.driven, self.fuel_type, self.price
 
             elif choice == "2":
@@ -142,13 +138,9 @@ class Car_UI(object):
                 if len(results) == 0:
                     print("No results for this search word.\n")
                 else:
-                    self.choose_car(results)
-                    choice = input("> Select car to remove (Write its license plate), or write 'C' to cancel: ")
-                    if (choice == "c") or (choice == "C"):
-                        print("Operation cancelled.")
-                    else:
-                        self.car_repo.remove_car(choice)
-                        print("Car successfully removed.")
+                    choice = self.choose_car(results)
+                    self.car_repo.remove_car(choice[2])
+                    print("Car successfully removed.")
 
             elif choice == "3":                
                 searchword = input("\n> Insert information as search word; Vehicle type, Brand, License plate, etc\nPlease only enter a single item:  ")
@@ -158,7 +150,7 @@ class Car_UI(object):
                 else:
                     self.choose_car(results)
 
-            elif choice == ("4" or "5" or "6"):
+            elif (choice == "4") or (choice == "5") or (choice == "6"):
                 file_text = self.car_serv.car_repo.get_all_cars()
                 number = 1
                 for item in file_text:
@@ -192,10 +184,10 @@ class Car_UI(object):
         print("Going back to main menu...\n")
 
     def order_menu(self):
+        os.system('cls')
         print("Available car(s):\n")
         available_cars = self.car_serv.get_available_cars_list()
         chosen_car = self.choose_car(available_cars)
-        '''ragnar'''
         if chosen_car == None:
             return None
         else:
