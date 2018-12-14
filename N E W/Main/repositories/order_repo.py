@@ -43,7 +43,9 @@ class Order_repository(object):
 
         new_file = open("./data/order.txt","w")
         for line in old_file:
-            if order_id not in line:
+            if line == "\n":
+                new_file.write("")
+            elif order_id not in line:
                 new_file.write(line)
         
         new_file.close()
@@ -52,11 +54,12 @@ class Order_repository(object):
         open_file = open("./data/order.txt","r")
         order_list = []
         for line in open_file:
-            if searchword in line:
+            if line == "\n":
+                pass
+            elif searchword in line:
                 found_list = line.split(",")
                 order_list.append(found_list)
                 
-        print(order_list)
         return order_list
     
     def get_all_orders(self):

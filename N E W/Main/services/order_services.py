@@ -1,8 +1,6 @@
 from repositories.order_repo import Order_repository
 from services.client_services import Client_ser
-from services.employee_services import Employee_services
 from services.car_services import Car_services
-from services.payment_service import Payment_ser
 from models.insurance_model import Insurance
 import datetime
 import random
@@ -18,7 +16,6 @@ class Order_service(object):
         self.order_model.zip = self.generate_order_id()
         self.Order_constructor = self.order_repo.order_model
         self.total_cost = self.order_model().total_cost
-        self.payment_ser = Payment_ser()
 
         # self.order_model = Order
 
@@ -38,13 +35,7 @@ class Order_service(object):
         self.LICENSE_NUM = 4
         self.COUNTRY = 5
         self.THE_ZIP = 6
-    
-        # added_cost = self.insurance(ins_type)
-        # print("AAAAAAAA: ", added_cost)
-        # self.total_cost = self.total_cost + added_cost
-        # self.total_insurance += added_cost
-        # return self.total_cost
-    
+
     def get_status(self):
         plate = self.order_model().get_plate()
         car_info = self.car_repo.find_car(plate)
@@ -107,19 +98,25 @@ class Order_service(object):
         get_order_list = self.order_repo.get_all_orders()
         no_conflict = True
         for line in get_order_list:
-            # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
-            _, start, end, plate, _, _, _, _ = line.split(',')
-            order_start = datetime.datetime.strptime(start, '%Y-%m-%d')
-            order_end = datetime.datetime.strptime(end, '%Y-%m-%d')
-            # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
-            if car_plate == plate:
-                while (date_start != date_end):
-                    current_date = order_start 
-                    while current_date != order_end:
-                        if current_date.date() == date_start:
-                            no_conflict = False
-                        current_date += datetime.timedelta(days = 1)
-                    date_start += datetime.timedelta(days = 1)
+            if line != "\n":
+                # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
+                try:
+                    _, start, end, plate, _, _, _, _ = line.split(',')
+                except Exception:
+                    _, start, end, plate, _, _, _, _, _ = line.split(',')
+                
+
+                order_start = datetime.datetime.strptime(start, '%Y-%m-%d')
+                order_end = datetime.datetime.strptime(end, '%Y-%m-%d')
+                # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
+                if car_plate == plate:
+                    while (date_start != date_end):
+                        current_date = order_start 
+                        while current_date != order_end:
+                            if current_date.date() == date_start:
+                                no_conflict = False
+                            current_date += datetime.timedelta(days = 1)
+                        date_start += datetime.timedelta(days = 1)
         if date_start > date_end:
             no_conflict = False
         return no_conflict
@@ -174,19 +171,19 @@ class Order_service(object):
 
     def change_car_status(self, plate):
         result = self.car_repo.find_car(plate)
-        real_list = result[0]
-        pos = real_list[4]
-        if pos == "True":
-            status = "False"
-        elif pos == "False":
-            status = "True"
-        real_list[4] = status
-        changed_car_status = self.car_serv.create_car(real_list)
-        self.car_repo.remove_car(plate)
-        self.car_repo.add_car(changed_car_status)
-
-# 12000,10000,20000,5000
-# self.order_id,self.date_start,self.date_end,self.plate,self.client_name,self.licence_number,self.employee_name,self.total_cost
+        if result != []:
+            real_list = result[0]
+            pos = real_list[4]
+            if pos == "True":
+                status = "False"
+            elif pos == "False":
+                status = "True"
+            real_list[4] = status
+            changed_car_status = self.car_serv.create_car(real_list)
+            self.car_repo.remove_car(plate)
+            self.car_repo.add_car(changed_car_status)
+        else:
+            print("Error: The car in question is no longer in the database. Removing the order...")
     
     def add_order(self,order):
         return self.order_repo.add_order(order)
@@ -209,10 +206,9 @@ class Order_service(object):
         
         return license_and_name_updated
         
-
     def change_date(self, new_date, old_order, is_start):
         date_updated =''
-
+        ''' is_start tells us if we are working with the start date or the end date'''
         if is_start:
             start_date = new_date
             end_date = old_order[self.DATE_END]
@@ -223,32 +219,48 @@ class Order_service(object):
             end_date = new_date
             start_date = old_order[self.DATE_START]
             start_date = start_date.split("-")
-            start_date = ''.join([start_date[2], " ", start_date[1], " ", start_date[0]])  
-            date_position = self.DATE_START  
+            start_date = ''.join([start_date[2]," ", start_date[1]," ", start_date[0]])  
+            date_position = self.DATE_END  
         
         car_plate = old_order[self.PLATE]
         date1, date2, duration, days_num = self.find_duration(start_date, end_date)
         valid_date, error_message = self.date_isvalid(date1, date2,days_num)
-            
-    
         if valid_date:
             no_conflict=  self.check_conflict(date1, date2, car_plate)
             if no_conflict:
-              
-               date_updated = self.order_repo.update_order(old_order, date1, date_position)
+                if is_start:
+                    date_updated = self.order_repo.update_order(old_order, date1, date_position)
+                else:
+                    date_updated = self.order_repo.update_order(old_order, date2, date_position)
             else:
+                print(no_conflict)
                 date_updated = None
         else:
             date_updated = None
         return date_updated
     
-    def change_end_date(self,order_object,new_date):
-        order_object.date_end = new_date
-        return order_object 
-
     def change_car(self,order_object):
         pass #Breytir upplýsingum um bíl
     
     def change_employee(self,order_object,new_name):
         order_object.employee.change_name(new_name)
         return order_object
+
+    def check_date_format(self, a_string):
+        try:
+            spaces = 0
+            for element, in a_string:
+                if element != " ":
+                    int(element)
+                if element == " ":
+                    spaces +=1 
+            if spaces >2 or spaces <2 :
+                return None
+            else:
+                
+                return True
+        except ValueError:
+            return None
+    
+
+            

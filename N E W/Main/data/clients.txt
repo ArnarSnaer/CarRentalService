@@ -70,5 +70,14 @@ Miyoko Viveros-aguilera,Long Way 258,546-799-55117,11. March,8827580391,Isl,173
 Bell Hastings,Long Way 2,555-632-58811,7. April,9354400479,FR,526
 Delilah Kounias,Seahaven 18,546-799-58016,7. April,5595320479,JP,352
 Bell Sade,Seahaven 75,554-578-63079,23. April,6185733025,Isl,612
+<<<<<<< HEAD
 Gonzalo Gwynne,Long Way 291,554-578-12695,12. November,7177367026,USA,145tryggvar halldórsson,Melhagi 2,693-5124,21 6 1990,5210679824,ISL,110
 Tryggvar Halldórsson,Melhagi 2,693-5124,21 6 1990,5210679824,ISL,110
+=======
+Gonzalo Gwynne,Long Way 291,554-578-12695,12. November,7177367026,USA,145
+Ragnarprufa,blaaaa 123,555-632-84799,20. November,1111111111,Isl,321
+Xefu,Rata Sum,123-4567,12. September,0321456789,ISL,321
+Bjabbjo,Gullfoss 4,581-2345,17 6 1990,1234567890,USA,123
+Gonzalo Gwynne,Long Way 291,554-578-12695,12. November,7177367026,USA,145
+
+>>>>>>> 02a0c9cf149c7266a0ec40676cfea11b5253aaf0
