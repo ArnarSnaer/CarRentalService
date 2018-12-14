@@ -45,7 +45,7 @@ class Order_repository(object):
         for line in old_file:
             if line == "\n":
                 new_file.write("")
-            if order_id not in line:
+            elif order_id not in line:
                 new_file.write(line)
         
         new_file.close()
