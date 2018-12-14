@@ -1,5 +1,6 @@
 from services.employee_services import Employee_services
 from models.employee import Employee
+import os
 
 class Employee_UI(object):
     def __init__(self):
@@ -15,6 +16,7 @@ class Employee_UI(object):
     
     def employee_menu(self):
         choice = ""
+        os.system('cls')
         while(choice != "q"):
             print("What would you like to do?\n1. Add sale\n2. Remove sale\n3. Get a list of all sales\nq. Back")
             choice = input("What would you like to do? ").lower()
@@ -35,6 +37,7 @@ class Employee_UI(object):
 
 
     def order_menu(self):
+        os.system('cls')
         employee_name = input("Enter employee name: ")
         working_employee = Employee(employee_name)
         return working_employee

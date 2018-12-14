@@ -1,6 +1,7 @@
 from services.client_services import Client_ser
 from models.client_model import Client
 import string
+import os
 
 class Client_ui():
     def __init__(self):
@@ -19,7 +20,7 @@ class Client_ui():
     def main_menu(self):
         stay = True
         while stay:
-            print("1. Create a new client\n2. See client full imformation\n3. Remove a client\n4. Update client's information\nq. Back")
+            print("Current section: Client\n1. Create a new client\n2. See client full imformation\n3. Remove a client\n4. Update client's information\nq. Back")
             option = input("> Input an option: ")
             the_range = range(1,6)
             if option == "q" or option =="Q" :
@@ -130,19 +131,22 @@ class Client_ui():
             return None
 
     def option_4_main_menu(self):
-        print("What would you like to update?\n1. Name\n2. Address\n3. Phone number\n4. Birthday\n5. Drivers license number\n6. Country\n7. Zip\n8. Quit")
+        print("Current section: Client\nWhat would you like to update?\n1. Name\n2. Address\n3. Phone number\n4. Birthday\n5. Drivers license number\n6. Country\n7. Zip\n8. Quit")
         option = input("> Input an option: ")
+        os.system('cls')
         return option
     
     def my_list_format(self, a_list):
-        return "Clients info as follows: \nName: {}\nAddress: {}\nPhone number: {}\nDate of birth: {}\nLicense number: {}\nCountry: {}\nZip: {}".format(a_list[self.NAME],
+        return "\nClients info as follows: \nName: {}\nAddress: {}\nPhone number: {}\nDate of birth: {}\nLicense number: {}\nCountry: {}\nZip: {}".format(a_list[self.NAME],
                                         a_list[self.ADDRESS], a_list[self.PHONE], a_list[self.BIRTHDAY], a_list[self.LICENSE_NUM], a_list[self.COUNTRY], a_list[self.THE_ZIP])
 
     def order_menu(self):
         clients_info = ""
+        os.system('cls')
+
         
         while clients_info == "":
-            print("Is the client already registered?  y/n:\nInput 'Q' to quit ") 
+            print("\nIs the client already registered?  y/n:\nInput 'Q' to quit ") 
             answer = input("> ")
             answer = answer.lower() 
             if answer == "n":

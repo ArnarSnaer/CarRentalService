@@ -1,5 +1,5 @@
 from services.car_services import Car_services
-
+import os
 class Car_UI(object):
 
     def __init__(self):
@@ -40,6 +40,7 @@ class Car_UI(object):
         
     def car_menu(self):
         choice = ""
+        os.system('cls')
 
         while choice != "q":
             print("\nCurrent section: Cars\n1. Add a new car into the database\n2. Remove a car from the database\n3. Search car database\n4. See all cars in the current database\n5. See all available cars\n6. See all unavailable cars\nq. Back")
@@ -188,6 +189,7 @@ class Car_UI(object):
         print("Going back to main menu...\n")
 
     def order_menu(self):
+        os.system('cls')
         print("Available car(s):\n")
         available_cars = self.car_serv.get_available_cars_list()
         chosen_car = self.choose_car(available_cars)

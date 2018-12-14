@@ -2,6 +2,7 @@ from services.order_services import Order_service
 from ui.car_ui import Car_UI
 from ui.employee_ui import Employee_UI
 from ui.client_ui import Client_ui
+import os
 
 class Order_UI(object):
     def __init__(self):
@@ -49,14 +50,17 @@ class Order_UI(object):
     def order_menu(self):
         choice = ""
         while choice != "q":
-            print("Current section\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Quit")
+            print("Current section: Order\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Quit")
             choice = input("> What would you like to do? ").lower()
+            os.system('cls')
+
 
             if choice == "1":
                 print("Please enter the neccesery information for the order: ")
                 order_id = self.order_ser.generate_order_id()
                 start_date = input("Starting date (DD MM YYYY): ")
                 end_date = input("Return date (DD MM YYYY): ")
+                print("\n")
                 try:
                     date1, date2, _, days_num = self.order_ser.find_duration(start_date, end_date)
                 except Exception:
@@ -161,6 +165,9 @@ class Order_UI(object):
             current_car = input("Enter licence plate of currnet car ")
             new_car = input("Enter licence plate of new car ")
             pass #Breytir bíl í pöntun
+
+
+
         else:
             print("Invalid choice")
 
@@ -188,7 +195,7 @@ class Order_UI(object):
         self.insurance_list = insurance_list
         self.total_cost = total_price
 
-        print("-"*86)
+        print("\n","-"*86)
         print("RECEIPT:")
         print("Order id: {}\nEmployee: {}\n\nStarting date: {}\nReturn date: {}\n".format(self.order_id,self.employee_name,self.date_start,self.date_end))
         print("Car brand: {}\nCar type: {}\nCar plate: {}\n\nClient: {}\nDriver licence number: {}\n".format(self.car_brand,self.car_type,self.plate,self.client_name,self.licence_num))
@@ -197,6 +204,6 @@ class Order_UI(object):
         else:
             print("Chosen insurances: {}".format(insurance_list))
         print("Base insurance: {}\nBase car price: {}\nAdditional insurance cost: {}\n\nTotal price: {}\n".format(self.base_insurance,base_price,self.insurance_price,self.total_cost))
-        print("-"*86)
+        print("-"*86,"\n")
 
 
