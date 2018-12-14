@@ -54,7 +54,7 @@ class Order_repository(object):
         open_file = open("./data/order.txt","r")
         order_list = []
         for line in open_file:
-            for element in line:
+            for element in line.split(","):
                 if line == "\n":
                     pass
                 elif searchword == element:
