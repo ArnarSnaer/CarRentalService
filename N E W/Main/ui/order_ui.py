@@ -157,10 +157,6 @@ class Order_UI(object):
         print(old_order)
 
         if choice == "1":
-            '''ljótt'''
-            # client_not_found = True
-            # while client_not_found:
-            print("prufa")
             client_info_list = Client_ui().client_op("4")
             if client_info_list != None:
                 self.order_ser.change_client(client_info_list, old_order)
@@ -175,9 +171,9 @@ class Order_UI(object):
             if self.order_ser.check_date_format(new_date) != None:
                 new_order = self.order_ser.change_date(new_date, old_order, is_start)
                 if new_order == None:
-                    print("Invalid date inserted")
+                    print("Invalid date inserted, example of date 1 1 2000")
             else:
-                print("Invalid date inserted")
+                print("Invalid date inserted, example of date 1 1 2000")
 
         elif choice == "3":
             new_date = input("New return date (DD/MM/YYYY):\n ")
@@ -185,9 +181,9 @@ class Order_UI(object):
             if self.order_ser.check_date_format(new_date) != None:
                 new_order = self.order_ser.change_date(new_date, old_order, is_start)
                 if new_order == None:
-                    print("Invalid date inserted")
+                    print("Invalid date inserted, example of date 1 1 2000")
             else:
-                print("Invalid date inserted")
+                print("Invalid date inserted, example of date 1 1 2000")
 
         elif choice == "4":
             current_car = input("Enter licence plate of currnet car ")

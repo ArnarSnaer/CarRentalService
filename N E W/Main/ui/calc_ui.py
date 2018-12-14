@@ -11,7 +11,7 @@ class Calc_UI(object):
         os.system('cls')
 
 
-        while choice != "q":
+        while (choice != "q") or (choice != "Q"):
             print("Current section: Calculator\n1. Find price of specific car type\nq. Back")
             choice = input("> What would you like to do? ")
             if choice == "1":
