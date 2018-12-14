@@ -2,7 +2,6 @@ from services.order_services import Order_service
 from ui.car_ui import Car_UI
 from ui.employee_ui import Employee_UI
 from ui.client_ui import Client_ui
-import os
 
 class Order_UI(object):
     def __init__(self):
@@ -55,7 +54,6 @@ class Order_UI(object):
         while choice != "q":
             print("Current section: Order\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Back")
             choice = input("> What would you like to do? ").lower()
-            os.system('cls')
 
             if choice == "1":
                 print("Please enter the neccesery information for the order: ")

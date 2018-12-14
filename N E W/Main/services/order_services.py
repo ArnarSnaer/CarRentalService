@@ -132,7 +132,7 @@ class Order_service(object):
         choice = ""
         while True:
             print("Current chosen insurances: {}".format(applied_insurances)) #Þarf að færa þetta á ui
-            print("Add insurances to car, or type 'q' to continue\n1. Water Damage insurance: 10'000 ISK\n2. CASCO insurance: 20'000 ISK\n3. Theft insurance: 5'000 ISK\n4. Collision damage insurance")
+            print("Add insurances to car, or type 'q' to continue\n1. Water Damage insurance: 10'000 ISK\n2. CASCO insurance: 20'000 ISK\n3. Theft insurance: 5'000 ISK\n4. Collision damage insurance: 15'000 ISK\n")
             choice = input("> Enter choice here: ")
             if choice == ("1" or "Water Damage Insurance"):
                     if "1" in applied_insurances:
