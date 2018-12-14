@@ -80,22 +80,28 @@ class Client_ser(object):
 
         if not self.check_if_letters(clients_info[self.NAME]):
             invalidation = "A name can only contain alpahabetical letters"
-        elif not self.check_if_integers(clients_info[self.PHONE]):
-            invalidation = "Ivalid phone number"
+            return valid, invalidation
         
+        validation, counter = self.check_if_integers(clients_info[self.PHONE])
+        if (validation == False or counter < 7):
+            invalidation = "Ivalid phone number"
+            return valid, invalidation
+            
         validation, counter = self.check_if_integers(clients_info[self.LICENSE_NUM])
-        if (validation and counter != 10) or not validation:
+        if (validation == False or counter != 10) or not validation:
             invalidation = "Invalid license number, license number must contain 10 integers from 0-9"
-        elif not self.check_if_letters(clients_info[self.COUNTRY]):
+            return valid, invalidation
+
+        if not self.check_if_letters(clients_info[self.COUNTRY]):
             invalidation = "A country's Alpha 3 can only contain letters"
-        elif not self.check_if_integers(clients_info[self.THE_ZIP]):
+            return valid, invalidation            
+        
+        validation, counter = self.check_if_integers(clients_info[self.THE_ZIP])
+        if (validation == False, counter !=3) :
             invalidation = "A zip code can only contain integers not letters"
+            return valid, invalidation
         else:
             valid = True
-            
-        clients_info[self.ADDRESS]
-       
-        clients_info[self.BIRTHDAY]
         
         return valid , invalidation
         
@@ -104,10 +110,14 @@ class Client_ser(object):
     def check_if_letters(self, variable):
         validation = False
         int_count = 0
+        letter_count = 0
         for letter in variable:
             if letter.isdigit():
                 int_count += 1
-        if int_count == 0:
+            if letter.isalpha():
+                letter_count +=1
+                
+        if (int_count == 0 and letter_count > 0):
             validation = True
             return validation
         else:

@@ -77,8 +77,12 @@ Tryggvar Halldórsson,Melhagi 2,693-5124,21 6 1990,5210679824,ISL,110
 Gonzalo Gwynne,Long Way 291,554-578-12695,12. November,7177367026,USA,145
 Ragnarprufa,blaaaa 123,555-632-84799,20. November,1111111111,Isl,321
 Xefu,Rata Sum,123-4567,12. September,0321456789,ISL,321
-Bjabbjo,Gullfoss 4,581-2345,17 6 1990,1234567890,USA,123
 Gonzalo Gwynne,Long Way 291,554-578-12695,12. November,7177367026,USA,145
 
+<<<<<<< HEAD
 >>>>>>> 02a0c9cf149c7266a0ec40676cfea11b5253aaf0
 Stephen Mark,Woodbie Road 147,590-5260,21 2 1968,5890524317,USA,865
+=======
+raggrag,Gullfoss 4,581-2345,17 6 1990,1234567890,USA,123
+
+>>>>>>> 0722ba931718182ef24a06e7ed2c6697bcedc5bf
