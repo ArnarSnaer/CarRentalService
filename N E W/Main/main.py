@@ -5,7 +5,7 @@ from ui.client_ui import Client_ui
 from models.order_model import Order
 import os
 
-def main():
+def main(): # The default main menu of the program. This is where it starts and where it goes if a 'quit' option is selected (usually)
     print("Welcome, User\n","-"*86)
     choice = ""
     # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000

@@ -1,8 +1,5 @@
 from repositories.client_repo import ClientRepo
-# from repositories.client_repo import ClientRepo
-# from client import Client
 import string
-
 
 class Client_ser(object):
     def __init__(self):
@@ -15,7 +12,6 @@ class Client_ser(object):
         self.LICENSE_NUM = 4
         self.COUNTRY = 5
         self.THE_ZIP = 6
-        # self.INFO = 7
         self.PHONELENGTH_MIN = 7
         self.LICENSE_LENGTH = 10
     
@@ -104,8 +100,7 @@ class Client_ser(object):
             valid = True
         
         return valid , invalidation
-        
-        
+           
        
     def check_if_letters(self, variable):
         validation = False
@@ -124,7 +119,6 @@ class Client_ser(object):
             return validation
 
 
-
     def check_if_integers(self, variable):
         validation = False
         try:
@@ -137,33 +131,5 @@ class Client_ser(object):
             validation = True
             return validation , counter
         except ValueError:
-            counter = 0                     #PRUFA AÐ HAFA COUNTER MEÐ EN AÐ HAFA HANN 0
+            counter = 0                     
             return validation , counter
- 
-    # def check_if_contain_int_and_str(self, variable):
-    #     for i in
-
-
-
-# ''' finnst mér að ætti að vera í UI en ekki í servicees og mun ég færa það yfir í UI þegar við fáum allt heila dæmið til að virka'''
-# fullname = input("Fullname: ")
-# address = input("Adress: ")
-# phonenumber = input("Phone number: ")
-# '''villu-check needed'''
-# birthday = input("date of birth: ")
-# licensenumber = input("License number: ") 
-# country = input("Country(using Alpah-3 order): ")
-# the_zip = input("Zip: ")
-# new_client = Client(fullname, address, phonenumber, birthday, licensenumber, country, the_zip)
-# mytry = Client_ser().new_client(new_client)
-# '''Marcy Swett,Litenway 170,555-632-20937,0. November,9281318350,Isl,928'''
-
-
-# '''prófa remove_client'''
-# searchword = input("Input a phone-number, address, license-number or etc.\n")
-# Client_ser().remove_client(searchword)
-
-
-# '''prófa update registration'''
-# searchword = input("Input a phone-number, address, license-number or etc.\n")
-# Client_ser().update_registration(searchword)
