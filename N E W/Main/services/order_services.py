@@ -104,23 +104,25 @@ class Order_service(object):
         get_order_list = self.order_repo.get_all_orders()
         no_conflict = True
         for line in get_order_list:
-            # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
-            try:
-                _, start, end, plate, _, _, _, _ = line.split(',')
-            except Exception:
-                _, start, end, plate, _, _, _, _, _ = line.split(',')
+            if line != "\n":
+                # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
+                try:
+                    _, start, end, plate, _, _, _, _ = line.split(',')
+                except Exception:
+                    _, start, end, plate, _, _, _, _, _ = line.split(',')
+                
 
-            order_start = datetime.datetime.strptime(start, '%Y-%m-%d')
-            order_end = datetime.datetime.strptime(end, '%Y-%m-%d')
-            # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
-            if car_plate == plate:
-                while (date_start != date_end):
-                    current_date = order_start 
-                    while current_date != order_end:
-                        if current_date.date() == date_start:
-                            no_conflict = False
-                        current_date += datetime.timedelta(days = 1)
-                    date_start += datetime.timedelta(days = 1)
+                order_start = datetime.datetime.strptime(start, '%Y-%m-%d')
+                order_end = datetime.datetime.strptime(end, '%Y-%m-%d')
+                # CR147,2019-06-21,2019-06-28,WS608,Xefu,123456789,Gunnar,228000
+                if car_plate == plate:
+                    while (date_start != date_end):
+                        current_date = order_start 
+                        while current_date != order_end:
+                            if current_date.date() == date_start:
+                                no_conflict = False
+                            current_date += datetime.timedelta(days = 1)
+                        date_start += datetime.timedelta(days = 1)
         if date_start > date_end:
             no_conflict = False
         return no_conflict
@@ -252,10 +254,19 @@ class Order_service(object):
 
     def check_date_format(self, a_string):
         try:
-            for element in a_string:
+            spaces = 0
+            for element, in a_string:
                 if element != " ":
                     int(element)
-            return True
+                if element == " ":
+                    spaces +=1 
+            if spaces >2 or spaces <2 :
+                return None
+            else:
+                
+                return True
         except ValueError:
             return None
+    
+
             
