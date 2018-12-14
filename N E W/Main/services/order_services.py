@@ -212,7 +212,7 @@ class Order_service(object):
 
     def change_date(self, new_date, old_order, is_start):
         date_updated =''
-
+        ''' is_start tells us if we are working with the start date or the end date'''
         if is_start:
             start_date = new_date
             end_date = old_order[self.DATE_END]
@@ -223,32 +223,39 @@ class Order_service(object):
             end_date = new_date
             start_date = old_order[self.DATE_START]
             start_date = start_date.split("-")
-            start_date = ''.join([start_date[2], " ", start_date[1], " ", start_date[0]])  
-            date_position = self.DATE_START  
+            start_date = ''.join([start_date[2]," ", start_date[1]," ", start_date[0]])  
+            date_position = self.DATE_END  
         
         car_plate = old_order[self.PLATE]
         date1, date2, duration, days_num = self.find_duration(start_date, end_date)
         valid_date, error_message = self.date_isvalid(date1, date2,days_num)
-            
-    
         if valid_date:
             no_conflict=  self.check_conflict(date1, date2, car_plate)
             if no_conflict:
-              
-               date_updated = self.order_repo.update_order(old_order, date1, date_position)
+                if is_start:
+                    date_updated = self.order_repo.update_order(old_order, date1, date_position)
+                else:
+                    date_updated = self.order_repo.update_order(old_order, date2, date_position)
             else:
+                print(no_conflict)
                 date_updated = None
         else:
             date_updated = None
         return date_updated
     
-    def change_end_date(self,order_object,new_date):
-        order_object.date_end = new_date
-        return order_object 
-
     def change_car(self,order_object):
         pass #Breytir upplýsingum um bíl
     
     def change_employee(self,order_object,new_name):
         order_object.employee.change_name(new_name)
         return order_object
+
+    def check_date_format(self, a_string):
+        try:
+            for element in a_string:
+                if element != " ":
+                    int(element)
+            return True
+        except ValueError:
+            return None
+            

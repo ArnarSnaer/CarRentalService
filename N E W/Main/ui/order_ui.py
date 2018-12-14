@@ -164,16 +164,21 @@ class Order_UI(object):
         elif choice == "2":
             new_date = input("New starting date (DD/MM/YYYY):\n ")
             is_start = True
-            new_order = self.order_ser.change_date(new_date, old_order, is_start)
-            if new_order == None:
+            if self.order_ser.check_date_format(new_date) != None:
+                new_order = self.order_ser.change_date(new_date, old_order, is_start)
+                if new_order == None:
+                    print("Invalid date inserted")
+            else:
                 print("Invalid date inserted")
 
         elif choice == "3":
             new_date = input("New return date (DD/MM/YYYY):\n ")
             is_start = False
-
-            new_order = self.order_ser.change_date(new_date, old_order, is_start)
-            if new_order == None:
+            if self.order_ser.check_date_format(new_date) != None:
+                new_order = self.order_ser.change_date(new_date, old_order, is_start)
+                if new_order == None:
+                    print("Invalid date inserted")
+            else:
                 print("Invalid date inserted")
 
         elif choice == "4":
