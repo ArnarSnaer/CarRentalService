@@ -96,7 +96,7 @@ class Order_UI(object):
                         self.order_ser.add_order(new_order)
                         self.print_order(new_order,base_price,insurance_price,final_price,insurance_list)
                         self.order_ser.change_car_status(plate)
-                        print("Order successfully registered into the database")
+                        print("Order successfully registered into the database.\n")
                     else:
                         print("This car is already reserved during the dates input. Please find another car.")
                         print("")
@@ -109,8 +109,8 @@ class Order_UI(object):
                 order_list = self.order_ser.find_order(keyword)
                 found_id = order_list[0][0]
                 found_plate = order_list[0][3]
-                self.order_ser.remove_order(found_id)
                 self.order_ser.change_car_status(found_plate)
+                self.order_ser.remove_order(found_id)
                 print("Order removed.\n")
 
             elif choice == "3":
