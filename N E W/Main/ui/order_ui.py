@@ -111,11 +111,14 @@ class Order_UI(object):
                     print("Operation aborted.\n")
                 else:
                     order_list = self.order_ser.find_order(keyword)
-                    found_id = order_list[0][0]
-                    found_plate = order_list[0][3]
-                    self.order_ser.change_car_status(found_plate)
-                    self.order_ser.remove_order(found_id)
-                    print("Order removed.\n")
+                    if order_list == []:
+                        print("Order not found")
+                    else:
+                        found_id = order_list[0][0]
+                        found_plate = order_list[0][3]
+                        self.order_ser.change_car_status(found_plate)
+                        self.order_ser.remove_order(found_id)
+                        print("Order removed.\n")
 
             elif choice == "3":
                 counter = 1
