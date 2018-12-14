@@ -76,3 +76,4 @@ Gonzalo Gwynne,Long Way 291,554-578-12695,12. November,7177367026,USA,145
 Ragnarprufa,blaaaa 123,555-632-84799,20. November,1111111111,Isl,321
 Xefu,Rata Sum,123-4567,12. September,0321456789,ISL,321
 Gonzalo Gwynne,Long Way 291,554-578-12695,12. November,7177367026,USA,145
+Stephen Mark,Goodberg ave. 174,546-7243,16 September 1965,5678249063,JPN,815
