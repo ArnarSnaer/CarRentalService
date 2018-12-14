@@ -3,6 +3,7 @@ from repositories.client_repo import ClientRepo
 # from client import Client
 import string
 
+
 class Client_ser(object):
     def __init__(self):
         self.__client_repo = ClientRepo()
@@ -15,6 +16,8 @@ class Client_ser(object):
         self.COUNTRY = 5
         self.THE_ZIP = 6
         # self.INFO = 7
+        self.PHONELENGTH_MIN = 7
+        self.LICENSE_LENGTH = 10
     
     def update_registration(self, searchword, option, the_change):
         updated = False
@@ -80,9 +83,11 @@ class Client_ser(object):
         if not self.check_if_letters(clients_info[self.NAME]):
             invalidation = "A name can only contain alpahabetical letters"
         elif not self.check_if_integers(clients_info[self.PHONE]):
-            invalidation = "Phone number can only contain integers not letters"
-        elif not self.check_if_integers(clients_info[self.LICENSE_NUM]):
-            invalidation = "A license number can only contain integers not letters"
+            invalidation = "Ivalid phone number"
+        
+        validation, counter = self.check_if_integers(clients_info[self.LICENSE_NUM])
+        if (validation and counter != 10) or not validation:
+            invalidation = "Invalid license number, license number must contain 10 integers from 0-9"
         elif not self.check_if_letters(clients_info[self.COUNTRY]):
             invalidation = "A country's Alpha 3 can only contain letters"
         elif not self.check_if_integers(clients_info[self.THE_ZIP]):
@@ -99,24 +104,30 @@ class Client_ser(object):
         
        
     def check_if_letters(self, variable):
+        validation = False
         try:
             variable = list(variable)
             for letter in variable:
                 letter.lower()  
-            return True
+            validation = True
+            return validation
         except ValueError:
-            return False
+            return validation
 
 
     def check_if_integers(self, variable):
+        validation = False
         try:
+            counter = 0
             variable = list(variable)
             for integer in variable:
                 if integer != "-" and integer != "\n" : 
                     int(integer)
-            return True
+                    counter += 1
+            validation = True
+            return validation , counter
         except ValueError:
-            return False
+            return validation
  
     # def check_if_contain_int_and_str(self, variable):
     #     for i in

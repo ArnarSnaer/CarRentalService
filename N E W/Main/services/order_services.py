@@ -24,7 +24,7 @@ class Order_service(object):
     def add_insurance(self,ins_type):
         #added_cost = self.insurance(ins_type)
         print(self.total_cost)
-        self.payment_ser.self.total_cost.add_insurance(ins_type)
+        # SKOÐA
         print(self.total_cost)
         return self.total_cost
     
