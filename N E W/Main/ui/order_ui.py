@@ -41,16 +41,21 @@ class Order_UI(object):
         print("Complete! Here are all the results of the search.\n")
         while not quit:
             choice = input("> Enter the number of the order you wish to remove, or write 'q' to quit: ")
-            if choice == 'q':
+            the_choice = self.check_input(choice, 'q')
+            if not the_choice:
+                print("Please input a valid integer") 
+            elif the_choice == 'q':
                 quit = True
-                print("Order not chosen, aborting order") 
+                print("Order not chosen, aborting") 
                 return None
-            elif int(choice) in range(counter+1):    
-                choice_int = int(choice)
-                return order_list[choice_int-1]
+            elif the_choice in range(counter+1):    
+                whole_order =  order_list[the_choice-1]
+                order_id = whole_order.split(",")
+                order_id = order_id[0] 
+                return order_id
             else:
-                print("Please input a valid integer")  
-
+                print("Please input a valid integer") 
+            
     def order_menu(self):
         choice = ""
         while choice != "q":
@@ -219,12 +224,19 @@ class Order_UI(object):
             current_car = input("Enter licence plate of current car ")
             new_car = input("Enter licence plate of new car ")
             pass #Breytir bíl í pöntun
-
-
-
         else:
             print("Invalid choice")
 
+
+    def check_input(self, a_input, quit):
+        try:
+            new_inp = int(a_input)
+            return new_inp
+        except ValueError:
+            if a_input == quit:
+                return a_input
+            else:
+                return False
     
     def print_order(self,order_object, base_price, insurance_price, total_price, insurance_list):
         self.order_obj = order_object
