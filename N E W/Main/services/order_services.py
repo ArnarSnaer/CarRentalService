@@ -35,13 +35,7 @@ class Order_service(object):
         self.LICENSE_NUM = 4
         self.COUNTRY = 5
         self.THE_ZIP = 6
-    
-        # added_cost = self.insurance(ins_type)
-        # print("AAAAAAAA: ", added_cost)
-        # self.total_cost = self.total_cost + added_cost
-        # self.total_insurance += added_cost
-        # return self.total_cost
-    
+
     def get_status(self):
         plate = self.order_model().get_plate()
         car_info = self.car_repo.find_car(plate)
@@ -179,19 +173,19 @@ class Order_service(object):
 
     def change_car_status(self, plate):
         result = self.car_repo.find_car(plate)
-        real_list = result[0]
-        pos = real_list[4]
-        if pos == "True":
-            status = "False"
-        elif pos == "False":
-            status = "True"
-        real_list[4] = status
-        changed_car_status = self.car_serv.create_car(real_list)
-        self.car_repo.remove_car(plate)
-        self.car_repo.add_car(changed_car_status)
-
-# 12000,10000,20000,5000
-# self.order_id,self.date_start,self.date_end,self.plate,self.client_name,self.licence_number,self.employee_name,self.total_cost
+        if result != []:
+            real_list = result[0]
+            pos = real_list[4]
+            if pos == "True":
+                status = "False"
+            elif pos == "False":
+                status = "True"
+            real_list[4] = status
+            changed_car_status = self.car_serv.create_car(real_list)
+            self.car_repo.remove_car(plate)
+            self.car_repo.add_car(changed_car_status)
+        else:
+            print("Error: The car in question is no longer in the database. Removing the order...")
     
     def add_order(self,order):
         return self.order_repo.add_order(order)

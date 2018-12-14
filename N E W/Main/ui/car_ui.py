@@ -186,7 +186,7 @@ class Car_UI(object):
                                 number += 1
                     except Exception:
                         pass
-            
+
             elif choice != "q":
                 print("Invalid input! Please enter the number/letter in front of each operation!\n")
 
