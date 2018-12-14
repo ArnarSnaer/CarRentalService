@@ -77,10 +77,9 @@ class Car_services(object):
 
     def calculate_price(self, choice):
         try:
-            price_dict = {"suv": 100000, "hatchback": 50000, "sedan": 50000, "sport": 200000,"mpv": 75000, "crossover": 75000, "convertible": 200000}
+            price_dict = {"suv": 100000, "mini": 50000, "sedan": 50000, "sport": 200000,"mpv": 75000}
             price = 0
             choice = choice.lower()
-            print(choice)
             for key, value in price_dict.items():
                 if choice == key:
                     price = value

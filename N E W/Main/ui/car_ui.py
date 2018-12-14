@@ -114,7 +114,7 @@ class Car_UI(object):
                 choose_fuel_type = input("\nAvailable fuel types:\n1. Gazolene (G)\n2. Diesel (D)\n> Answer here: ")
                 if (choose_fuel_type == "1") or (choose_fuel_type == "G") or (choose_fuel_type == "Gazolene") or (choose_fuel_type == "gazolene") or (choose_fuel_type.upper() == "GAZOLENE"):
                     fuel_type = "GAZOLENE"
-                elif (choose_fuel_type == "2" or "D") or (choose_fuel_type == "Diesel") or (choose_fuel_type == "diesel") or (choose_fuel_type.upper() == "DIESEL"):
+                elif (choose_fuel_type == "2") or (choose_fuel_type == "Diesel") or (choose_fuel_type == "diesel") or (choose_fuel_type.upper() == "DIESEL"): or (choose_fuel_type == "D")
                     fuel_type = "DIESEL"
                 else:
                     print("Wrong input, going back to main menu...\n")
@@ -129,6 +129,8 @@ class Car_UI(object):
                     print("The car has been successfully updated into the car database")
                 elif (confirmation == "N") or (confirmation == "No") or (confirmation == "n"):
                     print("Operation cancelled, going back to Cars section...\n")
+                else:
+                    print("Invalid input! Write either (Y/N)")
                 # self.veh_type, self.brand, self.plate, self.wheel_drive, self.status, self.is_manual, self.driven, self.fuel_type, self.price
 
             elif choice == "2":
