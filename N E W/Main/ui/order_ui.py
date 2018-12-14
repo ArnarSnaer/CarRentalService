@@ -16,6 +16,7 @@ class Order_UI(object):
         self.employee_menu = self.employee_ui.order_menu
 
     def choose_order(self):
+        ''' Prints out orders, chooses and order'''
         order_list = self.order_repo.get_all_orders()
         counter = 1
         for item in order_list:
@@ -35,6 +36,7 @@ class Order_UI(object):
                 pass
         print("")
 
+        '''Here you can remove the order'''
         quit = False
         print("Complete! Here are all the results of the search.\n")
         while not quit:
@@ -57,11 +59,13 @@ class Order_UI(object):
                 print("Please input a valid integer") 
             
     def order_menu(self):
+        ''' Gets the order menus from most classes, makes the order class work with the other classes'''
         choice = ""
         while choice != "q":
             print("\nCurrent section: Order\n1. Create new order\n2. Delete order\n3. Get all orders\n4. Update order\nq. Back")
             choice = input("> What would you like to do? ").lower()
 
+            ''' Here you create an order '''
             if choice == "1":
                 print("Please enter the neccesery information for the order: ")
                 order_id = self.order_ser.generate_order_id()
@@ -113,7 +117,8 @@ class Order_UI(object):
                 else:
                     print(explanation)
                     print("")
-
+                
+                ''' Here you can delet/remove an order '''
             elif choice == "2":
                 keyword = self.choose_order()
                 if keyword == "q":
@@ -129,6 +134,7 @@ class Order_UI(object):
                         self.order_ser.remove_order(found_id)
                         print("Order removed.\n")
 
+                ''' Here you can get all orders ''' 
             elif choice == "3":
                 counter = 1
                 order_list = self.order_ser.order_repo.get_all_orders()
@@ -149,6 +155,7 @@ class Order_UI(object):
                         pass
                 print("")
             
+                ''' Here you can update an order ''' 
             elif choice == "4":
                 order_not_found = True
                 counter = 1
@@ -184,11 +191,12 @@ class Order_UI(object):
                 print("Please enter a valid operation")
 
     def update_order(self,nested_order_info):
-        print("1. Client\n2. Starting date\n3. Return date\n4. Car")
+        print("1. Client\n2. Starting date\n3. Return date\n")
         choice = input("What would you like to update? (Please input integer choice): ")
         order_info = nested_order_info[0]
         old_order = order_info
 
+        ''' Change client ''' 
         if choice == "1":
             client_info_list = Client_ui().client_op("4")
             if client_info_list != None:
@@ -198,6 +206,7 @@ class Order_UI(object):
             '''fer inni client_ui og gerir option4, læt option4 returna lista eða stakinu sem var breytt'''
             '''býr til nýtt order með nýju uppls. og eyðir því gamla'''
 
+            ''' Change starting date '''
         elif choice == "2":
             new_date = input("New starting date (DD/MM/YYYY):\n ")
             is_start = True
@@ -208,6 +217,7 @@ class Order_UI(object):
             else:
                 print("Invalid date inserted, example of date 1 1 2000")
 
+            ''' Change ending date '''
         elif choice == "3":
             new_date = input("New return date (DD/MM/YYYY):\n ")
             is_start = False
@@ -232,6 +242,7 @@ class Order_UI(object):
                 return False
     
     def print_order(self,order_object, base_price, insurance_price, total_price, insurance_list):
+        ''' Prints out a sort of reciept for the order ''' 
         self.order_obj = order_object
         self.order_id = self.order_obj.get_order_id()
         self.employee_name = self.order_obj.get_employee_name()

@@ -2,11 +2,11 @@ from services.calc_services import Calculator_services
 import os
 
 class Calc_UI(object):
-
     def __init__(self):
         self.calc_serv = Calculator_services()
 
-    def calc_menu(self): # Calculator that shows the base price of a chosen car, with added insurances
+    def calc_menu(self): 
+        '''Calculator that shows the base price of a chosen car, with added insurances'''
         choice = ""
         os.system('cls')
 

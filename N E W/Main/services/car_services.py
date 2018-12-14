@@ -5,7 +5,17 @@ class Car_services(object):
         self.car_repo = Car_repository()
         self.car_model = self.car_repo.car_model()
         self.keywords = []
-        self.veh_type = self.car_model.veh_type #Finnur ekki veh_type
+        self.veh_type = self.car_model.veh_type 
+
+        self.VEH_TYPE = 0
+        self.BRAND = 1
+        self.PLATE = 2
+        self.WHEEL_DRIVE = 3
+        self.STATUS = 4
+        self.IS_MANUAL = 5
+        self.DRIVEN = 6
+        self.FUEL_TYPE = 7
+        self.PRICE = 8
 
         price_dict = {"suv": 100000, "mini": 10000, "mpv": 50000, "sport": 200000,"sedan": 75000}
         self.veh_type = self.veh_type.lower() 
@@ -13,15 +23,19 @@ class Car_services(object):
         for key, value in price_dict.items(): 
             if key == self.veh_type in price_dict:
                 self.price = value
-                self.car_repo.car_model.price = value #Verð verður að tölu
+                self.car_repo.car_model.price = value 
+
+        
 
     def create_car(self,car_info):
-        created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7],car_info[8])
+        created_car = self.car_repo.car_model(car_info[self.VEH_TYPE],car_info[self.BRAND],car_info[self.PLATE],car_info[self.WHEEL_DRIVE],car_info[self.STATUS],
+                                                car_info[self.IS_MANUAL],car_info[self.DRIVEN],car_info[self.FUEL_TYPE],car_info[self.PRICE])
         return created_car
 
-    def create_car_from_list(self, car_list): #Frá streng? afh er split()??
+    def create_car_from_list(self, car_list): 
         car_info = car_list.split(",")
-        created_car = self.car_repo.car_model(car_info[0],car_info[1],car_info[2],car_info[3],car_info[4],car_info[5],car_info[6],car_info[7],car_info[8])
+        created_car = self.car_repo.car_model(car_info[self.VEH_TYPE],car_info[self.BRAND],car_info[self.PLATE],car_info[self.WHEEL_DRIVE]
+                        ,car_info[self.STATUS],car_info[self.IS_MANUAL],car_info[self.DRIVEN],car_info[self.FUEL_TYPE],car_info[self.PRICE])
         return created_car
 
     def list_to_formated_str(self,list):
@@ -40,10 +54,10 @@ class Car_services(object):
     def rent_car(self,car_object):
         car_object = str(car_object)
         split_list = car_object.split(",")
-        if split_list[4] == "True":
-            split_list[4] = "False" # Er hægt að stytta, einhver með fleiri brain cells að laga
+        if split_list[self.STATUS] == "True":
+            split_list[self.STATUS] = "False" 
         else:
-            split_list[4] = "True"
+            split_list[self.STATUS] = "True"
         new_str = ""
         for item in split_list:
             new_str += item

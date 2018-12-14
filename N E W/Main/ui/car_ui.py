@@ -1,13 +1,13 @@
 from services.car_services import Car_services
 import os
 class Car_UI(object):
-
     def __init__(self):
         self.car_serv = Car_services()
         self.car_repo = self.car_serv.car_repo
         self.keywords = []
     
     def choose_car(self,results):
+        ''' This function takes in a nested list of car information and returns a specific car'''
         counter = 1
         for item in results:
             try:
@@ -41,12 +41,14 @@ class Car_UI(object):
                 print("Please input a valid integer")
         
     def car_menu(self):
+        '''A function that creates a menu for car'''
         choice = ""
 
         while choice != "q":
             print("\nCurrent section: Cars\n1. Add a new car into the database\n2. Remove a car from the database\n3. Search car database\n4. See all cars in the current database\n5. See all available cars\n6. See all unavailable cars\nq. Back")
             choice = input("> What would you like to do? ").lower()
-            # {"suv": 100000, "mini": 10000, "mpv": 50000, "sport": 200000,"sedan": 75000}
+            
+            '''When selected to add a new car to the database'''
             if choice == "1":
                 print("New car will be added into the database.\nOnly write the names or numbers of the options. Wrong input will result in going back to the main menu.\n")
                 choose_veh_type = input("Available vehicle types:\n1. Sedan\n2. SUV\n3. MPV\n4. Mini\n5. Sport\nAny other input will cancel the other.\n> Choose a type by its name or number: ")
@@ -63,7 +65,7 @@ class Car_UI(object):
                 else:
                     print("Wrong input, going back to main menu...\n")
                     break
-                # Campagna, Suzuki, Ferrari, Audi, Unique
+               
                 choose_brand = input("\nAvailable car brands:\n1. Campagna\n2. Suzuki\n3. Ferrari\n4. Audi\n5. Unique\n> Choose a brand by its name or number: ")
                 if (choose_brand == "Campagna") or (choose_brand == "1"):
                     brand = "Campagna"
@@ -127,14 +129,14 @@ class Car_UI(object):
                 confirmation = input("> Is this information correct?(Y/N): ")
                 if (confirmation == "Y") or (confirmation == "Yes") or (confirmation == "y"):
                     new_car = self.car_repo.car_model(veh_type, brand, plate, wheel_drive, status, is_manual, driven, fuel_type, price)
-                    self.car_repo.add_car(new_car) # Þarf ennþá að láta gá hvort bíll sé inn í database-i, endilega laga við tækifæri
+                    self.car_repo.add_car(new_car) 
                     print("The car has been successfully updated into the car database")
                 elif (confirmation == "N") or (confirmation == "No") or (confirmation == "n"):
                     print("Operation cancelled, going back to Cars section...\n")
                 else:
                     print("Invalid input! Write either (Y/N)")
-                # self.veh_type, self.brand, self.plate, self.wheel_drive, self.status, self.is_manual, self.driven, self.fuel_type, self.price
-
+                
+                '''When chosen to remove a car'''
             elif choice == "2":
                 print("Searching for a specific car.\nYou can search for vehicle type, brand and license plate by their name")
                 searchword = input("> Please only enter a single item:  ")
@@ -146,6 +148,7 @@ class Car_UI(object):
                     self.car_repo.remove_car(choice[2])
                     print("Car successfully removed.")
 
+                ''' When chosen to Search the car database'''
             elif choice == "3":                
                 searchword = input("\n> Insert information as search word; Vehicle type, Brand, License plate, etc\nPlease only enter a single item:  ")
                 results = self.car_repo.find_car(searchword)
@@ -171,7 +174,8 @@ class Car_UI(object):
                         print("\nCar's information:\n\nVehicle type: {}\nBrand: {}\nCar plate: {}\nWheel Drive: {}\nCurrent status: {}\nManual: {}\nHas been driven(KM): {}\nFuel type: {}\nBase price: {}".format(veh_type,brand,plate,wheel_drive,status,is_manual,driven, fuel_type, price))
                     except Exception:
                         print("No car chosen.")
-
+            
+                ''' When chosen from 4-6 '''
             elif (choice == "4") or (choice == "5") or (choice == "6"):
                 file_text = self.car_serv.car_repo.get_all_cars()
                 number = 1
@@ -183,7 +187,9 @@ class Car_UI(object):
                         plate = self.car_repo.car_model.get_plate(car_object)
                         price = self.car_repo.car_model.get_price(car_object)
                         price = price[:-1]
-
+            
+            
+                        ''' Get all cars in the database '''
                         if choice == "4":
                             if self.car_repo.car_model.get_status(car_object) == "True":
                                 status = "Available."
@@ -191,11 +197,16 @@ class Car_UI(object):
                                 status = "Unavailable."
                             print("{:>5d}. {} Type: {:>5s}{:>5s}Brand: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Base price: {:>5s}{:<5s}Current status: {:>5s}".format(number,"|",veh_type,"", brand,"", plate,"", price,"", status))
                             number += 1
+
+
+                            ''' Get all 'Available cars' '''
                         elif choice == "5":
                             if self.car_repo.car_model.get_status(car_object) == "True":
                                 status = "Available."
                                 print("{:>5d}. {} Type: {:>5s}{:>5s}Brand: {:>5s}{:>5s}License plate: {:>5s}{:>5s}Base price: {:>5s}{:<5s}Current status: {:>5s}".format(number,"|",veh_type,"", brand,"", plate,"", price,"", status))
                                 number += 1
+
+                            ''' Get all 'Unavailable cars' '''
                         elif choice == "6":
                             if self.car_repo.car_model.get_status(car_object) == "False":
                                 status = "Unavailable."
@@ -210,6 +221,7 @@ class Car_UI(object):
         print("Going back to main menu...\n")
 
     def order_menu(self):
+        '''Makes an order menu for the Order UI'''
         os.system('cls')
         print("\nAvailable car(s):\n")
         available_cars = self.car_serv.get_available_cars_list()

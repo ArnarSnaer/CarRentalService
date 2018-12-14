@@ -77,6 +77,8 @@ class Client_ser(object):
 
 
     def check_input(self, clients_info):
+        '''Checks if all the info the client has are valid, all phone-numbers must have 7 digits or more and license-numbers must contain 10 digits
+            If any of the client's information are not valid then this function returns an invalidation statement '''
         valid = False
         invalidation ='' 
 
@@ -109,6 +111,7 @@ class Client_ser(object):
            
        
     def check_if_letters(self, variable):
+        ''' Checks if the variable contains only letters'''
         validation = False
         int_count = 0
         letter_count = 0
@@ -126,6 +129,7 @@ class Client_ser(object):
 
 
     def check_if_integers(self, variable):
+        '''Checks if a variable contains only integers and returns how many they are'''
         validation = False
         try:
             counter = 0

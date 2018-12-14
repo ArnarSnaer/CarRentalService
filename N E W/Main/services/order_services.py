@@ -35,12 +35,14 @@ class Order_service(object):
         self.THE_ZIP = 6
 
     def get_status(self):
+        ''' Get the status of a car ''' 
         plate = self.order_model().get_plate()
         car_info = self.car_repo.find_car(plate)
         car = self.car_serv.create_car(car_info)
         return car.get_status()
     
     def generate_order_id(self):
+        ''' Creates an ID for an order '''
         id_list = self.order_repo.check_order_id()
         letters = string.ascii_uppercase
         letters_list = list(letters)
@@ -65,7 +67,7 @@ class Order_service(object):
         return new_order
 
     def find_duration(self, date_start, date_end):
-        #Þetta reiknar heildarkostnað (total_price) út frá tímanum sem er gefinn
+        ''' Calculates the duration of the order/rent to calculate a price ''' 
         day1,month1,year1 = date_start.split(" ")
         day2,month2,year2 = date_end.split(" ")
         date1 = datetime.datetime(int(year1),int(month1),int(day1))
@@ -78,6 +80,7 @@ class Order_service(object):
         return date1, date2, duration, days_num
 
     def date_isvalid(self, date_start, date_end, days_num):
+        ''' Checks if a date is valid ''' 
         valid_date = True
         error_message = ""
         today_date = datetime.datetime.now()
@@ -92,7 +95,8 @@ class Order_service(object):
 
         return valid_date, error_message
 
-    def check_conflict(self, date_start, date_end, car_plate, order_id): # check if dates conflict with other orders
+    def check_conflict(self, date_start, date_end, car_plate, order_id):
+        ''' checks if dates conflict within other orders, returns a true or false state'''
         original_order_id = order_id
         get_order_list = self.order_repo.get_all_orders()
         no_conflict = True
@@ -170,6 +174,7 @@ class Order_service(object):
         return insurance_price, chosen_ins[:-1]
 
     def change_car_status(self, plate):
+        ''' Changes a car's status '''
         result = self.car_repo.find_car(plate)
         if result != []:
             real_list = result[0]
@@ -194,8 +199,11 @@ class Order_service(object):
     def find_order(self,keyword):
         return self.order_repo.find_order(keyword)
 
-    # UPDATE föll
+ 
 
+    '''
+    Functions used when updating an order 
+    '''
     def change_client(self, client_info_list, old_order):
         new_name = client_info_list[self.NAME]
         new_license_num = client_info_list[self.LICENSE_NUM]

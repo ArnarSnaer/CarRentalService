@@ -1,4 +1,3 @@
-#from Order import Order
 class Employee(object):
     def __init__(self,name=""):
         self.name = []

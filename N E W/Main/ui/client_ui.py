@@ -31,7 +31,6 @@ class Client_ui():
                     print("Invalid input")
     
     def check_option(self, option, the_range):
-    ''' checks if the option is in range'''
             try: 
                 option = int(option)
                 if option in the_range:

@@ -6,6 +6,7 @@ class Car_repository():
         self.car_model = Car
 
     def add_car(self, car):
+        '''Adds a car to the database'''
         open_file = open("./data/vehicle.txt", "a")
 
         veh_type = car.get_veh_type()
@@ -22,6 +23,7 @@ class Car_repository():
         open_file.close()
 
     def remove_car(self,plate):
+        ''' Removes a car from database'''
         open_file = open("./data/vehicle.txt", "r")
         old_file = open_file.readlines()
         open_file.close()
@@ -36,6 +38,7 @@ class Car_repository():
         new_file.close()
 
     def find_car(self,searchword):
+        '''Finds a car and returns it in a list form, or returns an empty list if the car is not there'''
         open_file = open("./data/vehicle.txt", "r")
         car_list = []
         for line in open_file:

@@ -1,12 +1,10 @@
 from models.client_model import Client
 # from models.client_model import Client
 import string
-'''vantar að breyta nafni txt skjala'''
-'''villucheck fyrir alla liði'''
 
 class ClientRepo():
     def __init__(self):
-        # self.info = []
+        
         
         self.NAME = 0
         self.ADDRESS = 1
@@ -15,10 +13,9 @@ class ClientRepo():
         self.LICENSE_NUM = 4
         self.COUNTRY = 5
         self.THE_ZIP = 6
-        # self.INFO = 7
-    
+        
     def new_client(self, client):
-        ''' þarf að implementa að það geti ekki verið hægt að bæta við einstakling sem er núþegar í listanum'''
+        ''' This function writes in the new client if the client does not already exist'''
         open_file = open("./data/clients.txt", "a+")
         fullname = client.get_name()
         address = client.get_address()
@@ -34,7 +31,7 @@ class ClientRepo():
         open_file.close()
        
     def remove_client(self, searchword):
-        '''vantar að villu-checka'''
+        '''This function removes the client from the database'''
 
         open_file = open("./data/clients.txt", "r")
         lines = open_file.readlines()
@@ -52,7 +49,7 @@ class ClientRepo():
         
 
     def find_client(self,searchword):
-        ''' Hér vantar villu-check -->'''
+        ''' This function returns the client's info if he is registered in the database'''
         open_file = open("./data/clients.txt", "r")
         client_found = False
         for line in open_file:
@@ -65,6 +62,7 @@ class ClientRepo():
             return False
 
     def update_registration(self, client_info, option, the_change):
+        '''This function takes in a client's info and where and what the change should be'''
         client_update = self.change_element(client_info, option, the_change)
         open_file = open("./data/clients.txt", "a+")
         client_update_list = client_update
@@ -84,6 +82,7 @@ class ClientRepo():
         return the_client
 
     def int_format(self, phone):
+        '''Creates a special format for phone-number'''
         my_phone = phone
         my_phone = list(my_phone)
         if "-" not in my_phone:

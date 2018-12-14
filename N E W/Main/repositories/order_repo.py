@@ -78,7 +78,7 @@ class Order_repository(object):
 
 
     def update_order(self, old_order, new_element, position):
-        '''virkar, indexin eru vitlaus, og vantar að eyða skjalinu áður en ég bæti því inn'''
+        '''Takes in the old order as it is, the new element and where the new element should be placed'''
         order_updated = self.change_element(old_order, new_element, position)
         open_file = open("./data/order.txt", "a+")
         order_updated_instance = Order(order_updated[self.ORDER_ID], order_updated[self.DATE_START], order_updated[self.DATE_END], order_updated[self.PLATE], 
