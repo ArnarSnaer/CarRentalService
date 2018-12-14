@@ -142,6 +142,8 @@ class Client_ui():
 
     def order_menu(self):
         clients_info = ""
+        os.system('cls')
+
         
         while clients_info == "":
             print("\nIs the client already registered?  y/n:\nInput 'Q' to quit ") 

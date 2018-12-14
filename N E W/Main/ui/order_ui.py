@@ -195,7 +195,7 @@ class Order_UI(object):
         self.insurance_list = insurance_list
         self.total_cost = total_price
 
-        print("-"*86)
+        print("\n","-"*86)
         print("RECEIPT:")
         print("Order id: {}\nEmployee: {}\n\nStarting date: {}\nReturn date: {}\n".format(self.order_id,self.employee_name,self.date_start,self.date_end))
         print("Car brand: {}\nCar type: {}\nCar plate: {}\n\nClient: {}\nDriver licence number: {}\n".format(self.car_brand,self.car_type,self.plate,self.client_name,self.licence_num))
@@ -204,6 +204,6 @@ class Order_UI(object):
         else:
             print("Chosen insurances: {}".format(insurance_list))
         print("Base insurance: {}\nBase car price: {}\nAdditional insurance cost: {}\n\nTotal price: {}\n".format(self.base_insurance,base_price,self.insurance_price,self.total_cost))
-        print("-"*86)
+        print("-"*86,"\n")
 
 

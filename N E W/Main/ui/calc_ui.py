@@ -1,4 +1,5 @@
 from services.calc_services import Calculator_services
+import os
 
 class Calc_UI(object):
 
@@ -7,6 +8,8 @@ class Calc_UI(object):
 
     def calc_menu(self):
         choice = ""
+        os.system('cls')
+
 
         while choice != "q":
             print("Current section: Calculator\n1. Find price of specific car type\nq. Back")
