@@ -27,8 +27,8 @@ class Car_UI(object):
                 pass
 
         quit = False
+        print("Complete! Here are all the results of the search.\n")
         while not quit:
-            print("Complete! Here are all the results of the search.\n")
             choice = input("What car would you like to choose? (enter 'q' to quit): ")
             if choice == 'q':
                 quit = True
@@ -211,7 +211,7 @@ class Car_UI(object):
 
     def order_menu(self):
         os.system('cls')
-        print("Available car(s):\n")
+        print("\nAvailable car(s):\n")
         available_cars = self.car_serv.get_available_cars_list()
         chosen_car = self.choose_car(available_cars)
         if chosen_car == None:

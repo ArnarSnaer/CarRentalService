@@ -93,7 +93,7 @@ class Client_ser(object):
             return valid, invalidation            
         
         validation, counter = self.check_if_integers(clients_info[self.THE_ZIP])
-        if (validation == False, counter !=3) :
+        if (validation == False or counter !=3) :
             invalidation = "A zip code can only contain integers not letters"
             return valid, invalidation
         else:
