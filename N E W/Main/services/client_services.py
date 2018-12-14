@@ -103,14 +103,16 @@ class Client_ser(object):
        
     def check_if_letters(self, variable):
         validation = False
-        try:
-            variable = list(variable)
-            for letter in variable:
-                letter.lower()  
+        int_count = 0
+        for letter in variable:
+            if letter.isdigit():
+                int_count += 1
+        if int_count == 0:
             validation = True
             return validation
-        except ValueError:
+        else:
             return validation
+
 
 
     def check_if_integers(self, variable):
@@ -125,7 +127,8 @@ class Client_ser(object):
             validation = True
             return validation , counter
         except ValueError:
-            return validation
+            counter = 0                     #PRUFA AÐ HAFA COUNTER MEÐ EN AÐ HAFA HANN 0
+            return validation , counter
  
     # def check_if_contain_int_and_str(self, variable):
     #     for i in

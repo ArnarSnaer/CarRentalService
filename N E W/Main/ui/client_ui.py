@@ -69,12 +69,12 @@ class Client_ui():
         '''check if client already exists'''
         '''nobody has the same license number'''
         new_client = Client(fullname, address, phone_number, birthday, license_number, country, the_zip)
-        valid, invalidation = self.__client_ser.new_client(new_client)
         info_list, client_found = self.check_if_already_client(license_number)
+        valid, invalidation = self.__client_ser.new_client(new_client) # SNÉRI VIÐ, PRUFA
+
         if not client_found:
             if valid:
                 info_list = [fullname, address, phone_number, birthday, license_number, country, the_zip]
-                print(info_list)
                 return info_list
             elif not valid:
                 print(invalidation)
@@ -94,7 +94,7 @@ class Client_ui():
             print(self.my_list_format(info_list))
             return info_list
         else:
-            print("Client not found")
+            print("Client not found\n")
             return None
 
     def option_3(self, searchword):
@@ -110,7 +110,6 @@ class Client_ui():
             stay = True
             while stay:
                 the_range = range(1,9)
-                print(info_list)
                 option = self.option_4_main_menu()
                 if option == "8":
                     stay = False
@@ -119,8 +118,7 @@ class Client_ui():
                         the_change = input("Insert new info: ")
                         updated, invalidation, updated_client = self.__client_ser.update_registration(searchword, int(option), the_change)
                         if updated:
-                            print("Updated")
-                            print(updated_client)
+                            print("Updated\n")
                             return updated_client
                         else:
                             print(invalidation)
@@ -164,8 +162,8 @@ class Client_ui():
                         clients_info = "QUIT"
                         customer = "q"
                         print("Client not chosen, aborting order")
-                if clients_info != None and customer !='q':
-                    customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
+            if clients_info != None and customer !='q':
+                customer = Client(clients_info[self.NAME], clients_info[self.ADDRESS], clients_info[self.PHONE], clients_info[self.BIRTHDAY], clients_info[self.LICENSE_NUM], clients_info[self.COUNTRY], clients_info[self.THE_ZIP])
             elif answer == "q":
                 clients_info = "QUIT"
                 customer = "q"
